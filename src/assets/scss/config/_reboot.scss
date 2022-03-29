@@ -1,0 +1,58 @@
+// BASE
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea {
+  font-family: $body-font;
+  font-size: $normal-font-size;
+}
+
+body {
+  background-color: $darkWhite;
+  color: $darkGray;
+}
+
+input:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: $font-semibold;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: $darkGray;
+  &:hover {
+    text-decoration: none;
+    // color: $brown;
+    // transition: all .3s;
+  }
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
