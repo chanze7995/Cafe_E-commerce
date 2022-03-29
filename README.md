@@ -1,4 +1,4 @@
-# caffeine_cafe
+# Caffeine Cafe 電商網站
 
 ## Project setup
 ```
