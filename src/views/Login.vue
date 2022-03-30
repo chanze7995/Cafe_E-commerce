@@ -204,8 +204,21 @@
 </template>
 
 <script>
+import Button from '@/components/Button.vue'
+import { ref } from 'vue'
 export default {
-
+  name: 'Login',
+  components: {
+    Button
+  },
+  setup () {
+    const signUpBtnMsg = ref('註冊帳號')
+    const signInBtnMsg = ref('登入帳號')
+    return {
+      signUpBtnMsg,
+      signInBtnMsg
+    }
+  }
 }
 </script>
 
