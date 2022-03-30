@@ -10,7 +10,7 @@
             會員登入
           </h2>
           <div class="formInputField">
-            <Icon
+            <SvgIcon
               icon-name="user"
               icon-class="formInputField__icon"
             />
@@ -20,7 +20,7 @@
             >
           </div>
           <div class="formInputField">
-            <Icon
+            <SvgIcon
               icon-name="lock"
               icon-class="formInputField__icon"
             />
@@ -42,7 +42,7 @@
               href="#"
               class="socialMediaBtn"
             >
-              <Icon
+              <SvgIcon
                 icon-name="facebook"
                 icon-class="socialMediaBtn__icon"
               />
@@ -51,8 +51,8 @@
               href="#"
               class="socialMediaBtn"
             >
-              <Icon
-                icon-name="twitter"
+              <SvgIcon
+                icon-name="line"
                 icon-class="socialMediaBtn__icon"
               />
             </a>
@@ -60,7 +60,7 @@
               href="#"
               class="socialMediaBtn"
             >
-              <Icon
+              <SvgIcon
                 icon-name="google"
                 icon-class="socialMediaBtn__icon"
               />
@@ -69,8 +69,8 @@
               href="#"
               class="socialMediaBtn"
             >
-              <Icon
-                icon-name="linkedin"
+              <SvgIcon
+                icon-name="apple"
                 icon-class="socialMediaBtn__icon"
               />
             </a>
@@ -84,7 +84,7 @@
             註冊會員
           </h2>
           <div class="formInputField">
-            <Icon
+            <SvgIcon
               icon-name="user"
               icon-class="formInputField__icon"
             />
@@ -94,7 +94,7 @@
             >
           </div>
           <div class="formInputField">
-            <Icon
+            <SvgIcon
               icon-name="envelope"
               icon-class="formInputField__icon"
             />
@@ -104,7 +104,7 @@
             >
           </div>
           <div class="formInputField">
-            <Icon
+            <SvgIcon
               icon-name="lock"
               icon-class="formInputField__icon"
             />
@@ -126,7 +126,7 @@
               href="#"
               class="socialMediaBtn"
             >
-              <Icon
+              <SvgIcon
                 icon-name="facebook"
                 icon-class="socialMediaBtn__icon"
               />
@@ -135,8 +135,8 @@
               href="#"
               class="socialMediaBtn"
             >
-              <Icon
-                icon-name="twitter"
+              <SvgIcon
+                icon-name="line"
                 icon-class="socialMediaBtn__icon"
               />
             </a>
@@ -144,7 +144,7 @@
               href="#"
               class="socialMediaBtn"
             >
-              <Icon
+              <SvgIcon
                 icon-name="google"
                 icon-class="socialMediaBtn__icon"
               />
@@ -153,8 +153,8 @@
               href="#"
               class="socialMediaBtn"
             >
-              <Icon
-                icon-name="linkedin"
+              <SvgIcon
+                icon-name="apple"
                 icon-class="socialMediaBtn__icon"
               />
             </a>
