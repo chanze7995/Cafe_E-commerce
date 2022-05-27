@@ -2,7 +2,7 @@
   <footer>
     <div class="newsLetterContainer">
       <p>註冊我們的時事通訊以接收特別優惠、活動邀請等。</p>
-      <router-link to="/account">
+      <router-link to="/login">
         加入我們
       </router-link>
     </div>
