@@ -4,9 +4,9 @@
     @click="toggleDropdownMenu"
   >
     <div class="dropdownMenu-btn">
-      <h4 class="dropdownMenu-title">
+      <h5 class="dropdownMenu-title">
         {{ filterTitle }}
-      </h4>
+      </h5>
 
       <SvgIcon
         icon-name="chevron-down"

@@ -20,10 +20,21 @@
           @filter-items="filterProduct"
         />
       </div>
-
-      <div>hi</div>
+      <div class="product-list-header">
+        <ul class="product-menu">
+          <li class="product-menu-item">
+            全部商品
+          </li>
+          <li class="product-menu-item">
+            咖啡豆
+          </li>
+          <li class="product-menu-item">
+            沖煮設備
+          </li>
+        </ul>
+      </div>
+      <ProductList :product-data="productData" />
     </section>
-    <div>{{ productData.length }}</div>
   </div>
 </template>
 
@@ -32,13 +43,15 @@
 // import ProductExhibit from '@/components/shop/ProductExhibit.vue'
 // import ProductLightbox from '@/components/shop/ProductLightbox.vue'
 import DropdownMenu from '@/components/DropdownMenu.vue'
+import ProductList from '@/components/ProductList.vue'
 
 import { computed, reactive } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   components: {
-    DropdownMenu
+    DropdownMenu,
+    ProductList
   },
   setup () {
     // 取得商品資料
