@@ -13,7 +13,10 @@
       </div>
     </section>
     <section class="product-list-container">
-      <div class="sort-btn">
+      <div
+        class="sort-btn"
+        @click="setClickedProductInfo"
+      >
         <DropdownMenu
           dropdown-title="選擇排序"
           :dropdown-items="filterProductTitleData"
@@ -23,38 +26,71 @@
       <div class="product-list-header">
         <ul class="product-menu">
           <li class="product-menu-item">
-            全部商品
+            <router-link
+              :to="{
+                name:'ProductList',
+                params:{
+                  group:'all'
+                }}"
+            >
+              全部商品
+            </router-link>
           </li>
           <li class="product-menu-item">
-            咖啡豆
+            <router-link
+              :to="{
+                name:'ProductList',
+                params:{
+                  group:'coffeeBeans'
+                }}"
+            >
+              咖啡豆
+            </router-link>
           </li>
           <li class="product-menu-item">
-            沖煮設備
+            <router-link
+              :to="{
+                name:'ProductList',
+                params:{
+                  group:'accessories'
+                }}"
+            >
+              沖煮設備
+            </router-link>
           </li>
         </ul>
       </div>
-      <ProductList :product-data="productData" />
+      <router-view
+        :product-data="productData"
+        @clicked-product-id="getClickedProductId"
+        @show-product-card="showProductCard"
+      />
     </section>
+    <!-- <div
+      class="product-modal"
+      v-show="isShowProductCard"
+    >
+      <ProductCard :clicked-product-info="clickedProductInfo" />
+    </div> -->
   </div>
 </template>
 
 <script>
-// import ProductMenu from '@/components/shop/ProductMenu.vue'
-// import ProductExhibit from '@/components/shop/ProductExhibit.vue'
-// import ProductLightbox from '@/components/shop/ProductLightbox.vue'
 import DropdownMenu from '@/components/DropdownMenu.vue'
-import ProductList from '@/components/ProductList.vue'
+// import ProductCard from '@/components/ProductCard.vue'
 
-import { computed, reactive } from 'vue'
+import { ref, computed, reactive } from 'vue'
+// import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
 export default {
   components: {
-    DropdownMenu,
-    ProductList
+    DropdownMenu
+    // ProductCard
   },
   setup () {
     // 取得商品資料
+    // const route = useRoute()
     const store = useStore()
     const productData = computed(() => {
       return store.getters.productData
@@ -68,10 +104,31 @@ export default {
     const filterProduct = (str) => {
       console.log('1', str)
     }
+    let clickedProductId = ref()
+    const getClickedProductId = (id) => {
+      clickedProductId = id
+    }
+    const isShowProductCard = ref()
+    const showProductCard = (bool) => {
+      console.log(isShowProductCard.value)
+      isShowProductCard.value = bool
+      console.log(isShowProductCard.value)
+    }
+    let clickedProductInfo = reactive([])
+    const setClickedProductInfo = () => {
+      clickedProductInfo = productData.value.filter((item) => {
+        return item.id === clickedProductId
+      })
+    }
     return {
       productData,
       filterProductTitleData,
-      filterProduct
+      filterProduct,
+      showProductCard,
+      isShowProductCard,
+      getClickedProductId,
+      clickedProductInfo,
+      setClickedProductInfo
     }
   }
 }

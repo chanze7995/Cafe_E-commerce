@@ -13,7 +13,27 @@ const routes = [
   {
     path: '/shop',
     name: 'Shop',
-    component: () => import(/* webpackChunkName: "Shop" */ '../views/Shop.vue')
+    redirect: '/shop/all',
+    component: () => import(/* webpackChunkName: "Shop" */ '../views/Shop.vue'),
+    children: [
+      {
+        path: ':group',
+        name: 'ProductList',
+        component: () => import(/* webpackChunkName: "ProductList" */ '../components/ProductList.vue'),
+        props (route) {
+          return {
+            group: route.params.group
+          }
+        },
+        children: [
+          {
+            path: ':id',
+            name: 'ProductCard',
+            component: () => import(/* webpackChunkName: "ProductCard" */ '../components/ProductCard.vue')
+          }
+        ]
+      }
+    ]
   },
   {
     path: '/location',
