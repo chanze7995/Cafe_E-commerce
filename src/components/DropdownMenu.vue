@@ -45,14 +45,14 @@ export default {
   setup (props, { emit }) {
     const dropdownTitle = ref(props.dropdownTitle)
     const filterTitle = computed(() => {
-      console.log(dropdownTitle.value)
+      // console.log(dropdownTitle.value)
       return dropdownTitle.value
     })
     const isDropdownMenuOpen = ref(false)
     const toggleDropdownMenu = () => {
       isDropdownMenuOpen.value = !isDropdownMenuOpen.value
     }
-    console.log(props.dropdownItems)
+    // console.log(props.dropdownItems)
     const filterOption = (e) => {
       dropdownTitle.value = e.target.innerText
       emit('filter-items', dropdownTitle.value)

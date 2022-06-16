@@ -60,28 +60,14 @@
           </li>
         </ul>
       </div>
-      <router-view
-        :product-data="productData"
-        @clicked-product-id="getClickedProductId"
-        @show-product-card="showProductCard"
-      />
+      <router-view />
     </section>
-    <!-- <div
-      class="product-modal"
-      v-show="isShowProductCard"
-    >
-      <ProductCard :clicked-product-info="clickedProductInfo" />
-    </div> -->
   </div>
 </template>
 
 <script>
 import DropdownMenu from '@/components/DropdownMenu.vue'
-// import ProductCard from '@/components/ProductCard.vue'
-
-import { ref, computed, reactive } from 'vue'
-// import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
+import { reactive } from 'vue'
 
 export default {
   components: {
@@ -89,12 +75,6 @@ export default {
     // ProductCard
   },
   setup () {
-    // 取得商品資料
-    // const route = useRoute()
-    const store = useStore()
-    const productData = computed(() => {
-      return store.getters.productData
-    })
     const filterProductTitleData = reactive([
       '按價格排序：低到高',
       '按價格排序：高到低',
@@ -104,31 +84,9 @@ export default {
     const filterProduct = (str) => {
       console.log('1', str)
     }
-    let clickedProductId = ref()
-    const getClickedProductId = (id) => {
-      clickedProductId = id
-    }
-    const isShowProductCard = ref()
-    const showProductCard = (bool) => {
-      console.log(isShowProductCard.value)
-      isShowProductCard.value = bool
-      console.log(isShowProductCard.value)
-    }
-    let clickedProductInfo = reactive([])
-    const setClickedProductInfo = () => {
-      clickedProductInfo = productData.value.filter((item) => {
-        return item.id === clickedProductId
-      })
-    }
     return {
-      productData,
       filterProductTitleData,
-      filterProduct,
-      showProductCard,
-      isShowProductCard,
-      getClickedProductId,
-      clickedProductInfo,
-      setClickedProductInfo
+      filterProduct
     }
   }
 }

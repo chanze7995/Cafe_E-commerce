@@ -70,18 +70,6 @@
   }
 }
 
-.product-modal{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ff72f363;
-  position: fixed;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9;
-}
-
 @media (min-width: 1024px){
   .banner-img{
     height: 640px;

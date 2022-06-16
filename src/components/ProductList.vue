@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-view />
     <div class="productList">
       <div class="productList__display">
         <div
@@ -23,12 +24,19 @@
             </div>
             <ul class="productBox__option">
               <li>
-                <div data-tip="加入購物車">
+                <router-link
+                  :to="{
+                    name:'ProductCard',
+                    params:{
+                      docId:item.docId
+                    }}"
+                  data-tip="加入購物車"
+                >
                   <SvgIcon
                     icon-name="cart"
                     icon-class="productBox__option__icon"
                   />
-                </div>
+                </router-link>
               </li>
               <li>
                 <div data-tip="喜歡">
@@ -43,11 +51,9 @@
                   :to="{
                     name:'ProductCard',
                     params:{
-                      group:item.mainGroupName,
-                      id:item.id
+                      docId:item.docId
                     }}"
                   data-tip="了解更多"
-                  @click="showProductCard(),getClickedProductId(item.id)"
                 >
                   <SvgIcon
                     icon-name="search-alt"
@@ -77,26 +83,27 @@
         </div>
       </div>
     </div>
-    <router-view />
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
   props: {
-    productData: {
-      type: Array,
-      default: () => []
-    },
     group: {
       type: String,
       default: ''
     }
   },
-  setup (props, { emit }) {
+  setup (props) {
+    const store = useStore()
+    const productData = computed(() => {
+      return store.getters.productData
+    })
     const clickedProductGroupData = computed(() => {
-      return props.productData.filter((product) => {
+      return productData.value.filter((product) => {
         if (props.group === 'coffeeBeans') {
           return product.mainGroupName === 'coffeeBeans'
         }
@@ -106,21 +113,10 @@ export default {
         return product
       })
     })
-    // 點選的商品資料
-    const getClickedProductId = (id) => {
-      emit('clicked-product-id', id)
-    }
-    const isProductCardOpen = ref(false)
-    const showProductCard = () => {
-      isProductCardOpen.value = !isProductCardOpen.value
-      emit('show-product-card', isProductCardOpen.value)
-    }
-    console.log('@', props.productData)
     return {
       props,
-      clickedProductGroupData,
-      getClickedProductId,
-      showProductCard
+      productData,
+      clickedProductGroupData
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isProductsLoaded">
     <AppHeader />
     <router-view />
     <AppFooter />
@@ -9,7 +9,7 @@
 <script>
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -23,11 +23,14 @@ export default {
     const getProductData = () => {
       return store.dispatch('getProductData')
     }
+    const isProductsLoaded = computed(() => {
+      return store.getters.isProductsLoaded
+    })
     onMounted(() => {
       getProductData()
     })
     return {
-
+      isProductsLoaded
     }
   }
 }

@@ -4,7 +4,8 @@ import db from '../firebase/firebaseInit'
 export default createStore({
   state: {
     productData: [],
-    isProductsLoaded: null
+    isProductsLoaded: null,
+    currentProductArray: null
   },
   actions: {
     async getProductData ({ commit, state }) {
@@ -32,6 +33,9 @@ export default createStore({
         }
       })
       commit('SET_PRODUCTS_LOADED')
+    },
+    setCurrentProductArray (context, docId) {
+      context.commit('SET_CURRENT_PRODUCT', docId)
     }
   },
   mutations: {
@@ -40,6 +44,11 @@ export default createStore({
     },
     SET_PRODUCTS_LOADED (state) {
       state.isProductsLoaded = true
+    },
+    SET_CURRENT_PRODUCT (state, docId) {
+      state.currentProductArray = state.productData.filter((product) => {
+        return product.docId === docId
+      })
     }
   },
   getters: {
@@ -48,6 +57,9 @@ export default createStore({
     },
     isProductsLoaded (state) {
       return state.isProductsLoaded
+    },
+    currentProductArray (state) {
+      return state.currentProductArray
     }
   }
 })

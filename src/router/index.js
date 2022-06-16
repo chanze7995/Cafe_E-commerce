@@ -27,9 +27,15 @@ const routes = [
         },
         children: [
           {
-            path: ':id',
+            path: ':docId',
             name: 'ProductCard',
-            component: () => import(/* webpackChunkName: "ProductCard" */ '../components/ProductCard.vue')
+            component: () => import(/* webpackChunkName: "ProductCard" */ '../components/ProductCard.vue'),
+            props (route) {
+              return {
+                group: route.params.group,
+                docId: route.params.docId
+              }
+            }
           }
         ]
       }
