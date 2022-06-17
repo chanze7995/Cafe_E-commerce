@@ -4,14 +4,17 @@ import db from '../firebase/firebaseInit'
 export default createStore({
   state: {
     productData: [],
+    coffeeBeanIntroData: [],
     isProductsLoaded: null,
     currentProductArray: null
   },
   actions: {
-    async getProductData ({ commit, state }) {
-      const getData = db.collection('product')
-      const results = await getData.get()
-      results.forEach((doc) => {
+    async getData ({ commit, state }) {
+      const getProductData = db.collection('product')
+      const getCoffeeBeanIntroData = db.collection('coffeeBeanIntro')
+      const productResults = await getProductData.get()
+      const coffeeBeanIntroResults = await getCoffeeBeanIntroData.get()
+      productResults.forEach((doc) => {
         if (!state.productData.some((product) => product.docId === doc.id)) {
           const data = {
             docId: doc.id,
@@ -32,6 +35,36 @@ export default createStore({
           commit('SET_PRODUCT_DATA', data)
         }
       })
+      coffeeBeanIntroResults.forEach((doc) => {
+        if (!state.coffeeBeanIntroData.some((item) => item.docId === doc.id)) {
+          const data = {
+            docId: doc.id,
+            brand: doc.data().brand,
+            name: doc.data().name,
+            id: doc.data().id,
+            color: doc.data().color,
+            sloganII: doc.data().sloganII,
+            roast_style: doc.data().roast_style,
+            varietal: doc.data().varietal,
+            processing: doc.data().processing,
+            location: doc.data().location,
+            country: doc.data().country,
+            certification: doc.data().certification,
+            description: doc.data().description,
+            description_roasting: doc.data().description_roasting,
+            description_brew: doc.data().description_brew,
+            description_story: doc.data().description_story,
+            description_score: doc.data().description_score,
+            description_name: doc.data().description_name,
+            main_img: doc.data().main_img,
+            intro_imgI: doc.data().intro_imgI,
+            intro_imgII: doc.data().intro_imgII,
+            background_imgI: doc.data().background_imgI,
+            background_imgII: doc.data().background_imgII
+          }
+          commit('SET_COFFEEBEANINTRO_DATA', data)
+        }
+      })
       commit('SET_PRODUCTS_LOADED')
     },
     setCurrentProductArray (context, docId) {
@@ -41,6 +74,9 @@ export default createStore({
   mutations: {
     SET_PRODUCT_DATA (state, data) {
       state.productData.push(data)
+    },
+    SET_COFFEEBEANINTRO_DATA (state, data) {
+      state.coffeeBeanIntroData.push(data)
     },
     SET_PRODUCTS_LOADED (state) {
       state.isProductsLoaded = true
@@ -54,6 +90,9 @@ export default createStore({
   getters: {
     productData (state) {
       return state.productData
+    },
+    coffeeBeanIntroData (state) {
+      return state.coffeeBeanIntroData
     },
     isProductsLoaded (state) {
       return state.isProductsLoaded

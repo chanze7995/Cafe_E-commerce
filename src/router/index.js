@@ -11,6 +11,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "Explore" */ '../views/Explore.vue')
   },
   {
+    path: '/explore/:name',
+    name: 'CoffeeBeanIntro',
+    component: () => import(/* webpackChunkName: "CoffeeBeanIntro" */ '../views/CoffeeBeanIntro.vue'),
+    props (route) {
+      return {
+        name: route.params.name
+      }
+    }
+  },
+  {
     path: '/shop',
     name: 'Shop',
     redirect: '/shop/all',

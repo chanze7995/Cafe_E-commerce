@@ -20,14 +20,14 @@ export default {
   },
   setup () {
     const store = useStore()
-    const getProductData = () => {
-      return store.dispatch('getProductData')
+    const getData = () => {
+      return store.dispatch('getData')
     }
     const isProductsLoaded = computed(() => {
       return store.getters.isProductsLoaded
     })
     onMounted(() => {
-      getProductData()
+      getData()
     })
     return {
       isProductsLoaded

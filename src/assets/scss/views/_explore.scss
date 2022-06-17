@@ -1,0 +1,26 @@
+.swiper {
+  padding: 6.5rem 0;
+  background: #d7d7d7;
+}
+.swiper-slide{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-slide img{
+  width: 200px;
+  filter: drop-shadow(24px 25px 15px);
+  cursor: pointer;
+}
+.swiper-slide-active{
+  transform: scale(1.3);
+  transition: .6s
+}
+.swiper-slide-next a{
+  pointer-events: none;
+  cursor: default;
+}
+.swiper-slide-prev a{
+  pointer-events: none;
+  cursor: default;
+}
