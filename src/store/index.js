@@ -43,6 +43,7 @@ export default createStore({
             name: doc.data().name,
             id: doc.data().id,
             color: doc.data().color,
+            sloganI: doc.data().sloganI,
             sloganII: doc.data().sloganII,
             roast_style: doc.data().roast_style,
             varietal: doc.data().varietal,
