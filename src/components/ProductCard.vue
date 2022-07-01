@@ -53,20 +53,22 @@
           v-if="isCoffeeBeansGroup"
           class="coffee"
         >
-          <div class="productCard__info__grind">
+          <div class="productCard__info__size">
             <h4 class="title">
               研磨度
             </h4>
             <div class="sizeContainer">
-              <div class="size">
-                原豆
-              </div>
-              <div class="size">
-                粗
-              </div>
-              <div class="size">
-                細
-              </div>
+              <select
+                v-model="grind"
+              >
+                <option
+                  v-for="option in grindSize"
+                  :key="option.value"
+                  :value="option.value"
+                >
+                  {{ option.name }}
+                </option>
+              </select>
             </div>
           </div>
           <div class="productCard__info__size">
@@ -74,15 +76,18 @@
               份量
             </h4>
             <div class="sizeContainer">
-              <div class="size">
-                250g
-              </div>
-              <div class="size">
-                500g
-              </div>
-              <div class="size">
-                1kg
-              </div>
+              <label
+                v-for="option in weightSize "
+                :key="option.value"
+              >
+                <input
+                  type="radio"
+                  :value="option.value"
+                  :id="option.name"
+                  v-model="weight"
+                >
+                <span>{{ option.name }}</span>
+              </label>
             </div>
           </div>
         </div>
@@ -94,24 +99,25 @@
             <div class="quantity">
               <div
                 class="symbol"
-                @click="calculate(-1)"
+                @click=" itemQuantityNum>1? itemQuantityNum--: itemQuantityNum=1"
               >
                 <SvgIcon
-                  icon-name="plus"
+                  icon-name="minus"
                   icon-class="symbolIcon"
                 />
               </div>
               <input
                 class="value"
-                type="text"
-                v-model="itemQuantity"
+                type="number"
+                v-model="itemQuantityNum"
+                @change="changeItemQuantityNum"
               >
               <div
                 class="symbol"
-                @click="calculate(1)"
+                @click=" itemQuantityNum++"
               >
                 <SvgIcon
-                  icon-name="minus"
+                  icon-name="plus"
                   icon-class="symbolIcon"
                 />
               </div>
@@ -119,18 +125,19 @@
           </div>
         </div>
         <div class="productCard__info__price">
-          <a
+          <div
             href="#"
             class="buy"
+            @click="addShopCart"
           >
             <SvgIcon
               icon-name="cart"
               icon-class="buyIcon"
             />
             <p>加入購物車</p>
-          </a>
+          </div>
           <div class="price">
-            <h1>{{ currentProductInfo.price }}元</h1>
+            <h1>{{ sumPrice }}元</h1>
           </div>
         </div>
       </div>
@@ -139,9 +146,10 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import Big from 'big.js'
 
 export default {
   props: {
@@ -157,6 +165,7 @@ export default {
   setup (props) {
     const store = useStore()
     const route = useRoute()
+    const router = useRouter()
     const setCurrentProductInfo = () => {
       const docId = route.params.docId
       store.dispatch('setCurrentProductArray', docId)
@@ -166,16 +175,108 @@ export default {
       return store.getters.currentProductArray[0]
     })
     const isCoffeeBeansGroup = computed(() => {
+      console.log(props.group === 'coffeeBeans')
       return props.group === 'coffeeBeans'
     })
-    const itemQuantity = ref(1)
+    const grind = ref(0)
+    const grindSize = reactive([
+      {
+        name: '原豆',
+        value: 0
+      },
+      {
+        name: '極細（義式咖啡機、愛壓樂）',
+        value: 1
+      },
+      {
+        name: '中細（摩卡壺）',
+        value: 2
+      },
+      {
+        name: '中（美式咖啡機、虹吸壺）',
+        value: 3
+      },
+      {
+        name: '中粗（手沖壺）',
+        value: 4
+      },
+      {
+        name: '粗（法式濾壓壺、冰滴）',
+        value: 5
+      }
+    ])
+    const weight = ref(1)
+    const weightSize = reactive([
+      {
+        name: '250g',
+        value: 1
+      },
+      {
+        name: '500g',
+        value: 1.9
+      },
+      {
+        name: '1000g',
+        value: 2.7
+      }
+    ])
+    const itemQuantityNum = ref(1)
+    // 商品總價
+    const sumPrice = computed(() => {
+      const itemWeight = new Big(weight.value)
+      const itemQuantity = new Big(itemQuantityNum.value)
+      const currentProductPrice = new Big(currentProductInfo.value.price)
+      const currentProductDiscount = new Big(currentProductInfo.value.discount)
+
+      const total = Math.round(itemWeight.times(itemQuantity).times(currentProductPrice).times(currentProductDiscount))
+      return total
+    })
+    // 檢查用戶輸入
+    const changeItemQuantityNum = (e) => {
+      const value = e.target.value * 1
+      if (isNaN(value) || value < 1) {
+        itemQuantityNum.value = 1
+      } else {
+        itemQuantityNum.value = parseInt(value)
+      }
+    }
+    // 加入購物車
+    const addShopCart = async () => {
+      try {
+        // 成功
+        await store.dispatch('addOrUpdateShopCart', {
+          itemId: route.params.docId,
+          itemNum: itemQuantityNum.value
+        })
+        if (isCoffeeBeansGroup.value) {
+          const clickedGrind = grindSize.filter((item) => {
+            return item.value === grind.value
+          })[0].name
+          const clickedWeight = weightSize.filter((item) => {
+            return item.value === weight.value
+          })[0].name
+          console.log(`${currentProductInfo.value.name}-${clickedWeight}-${clickedGrind}`)
+        }
+
+        router.push({ name: 'AddCartSuccess' })
+      } catch (error) {
+        // 失敗
+        alert(error.message)
+      }
+    }
     setCurrentProductInfo()
-    console.log(isCoffeeBeansGroup.value)
     return {
       props,
       currentProductInfo,
       isCoffeeBeansGroup,
-      itemQuantity
+      grind,
+      grindSize,
+      weight,
+      weightSize,
+      itemQuantityNum,
+      changeItemQuantityNum,
+      addShopCart,
+      sumPrice
     }
   }
 }

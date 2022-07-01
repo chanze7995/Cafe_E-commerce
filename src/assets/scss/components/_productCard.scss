@@ -175,32 +175,64 @@
   transition: .5s;
 }
 
+label {
+  padding: 0;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + span {
+  display: inline-block;
+  background-color: #eee;
+  padding: .5rem 1.5rem;
+  border: 1px solid gray;
+  border-radius: .5rem;
+  color: #444;
+  user-select: none; /* 防止文字被滑鼠選取反白 */
+}
+
+input[type="radio"]:checked + span {
+  background-color: #2175f5;
+  color: #fff;
+  transition: .5s;
+}
+
+
+
 .quantity {
   display: flex;
   user-select: none;
-  .symbol,
-  .value {
-      // display: inline-block;
-      font-size: 1.5rem;
-      font-weight: 600;
-      text-align: center;
-      // color: #ccc;
-  }
   .symbol {
-      width: 35px;
-      border-radius: 5px;
-      cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    .symbolIcon{
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+  .symbol:hover{
+    background-color:#888a ;
+    .symbolIcon{
+      fill: #fff;
+    }
   }
   .value {
-      width: 50px;
-      border: none;
-      background: transparent;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    width: 60px;
+    border: none;
+    background: transparent;
+
   }
 }
 .symbolIcon{
   width: 1.5rem;
   height: 1.5rem;
-
 }
 .productCard__info__price{
   padding-top: 1rem;

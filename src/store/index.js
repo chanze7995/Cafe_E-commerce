@@ -68,6 +68,9 @@ export default createStore({
       })
       commit('SET_PRODUCTS_LOADED')
     },
+    async addOrUpdateShopCart (commit, { itemId, itemNum }) {
+      console.log(itemId, itemNum)
+    },
     setCurrentProductArray (context, docId) {
       context.commit('SET_CURRENT_PRODUCT', docId)
     }
@@ -90,10 +93,10 @@ export default createStore({
   },
   getters: {
     productData (state) {
-      return state.productData
+      return state.productData || []
     },
     coffeeBeanIntroData (state) {
-      return state.coffeeBeanIntroData
+      return state.coffeeBeanIntroData || []
     },
     isProductsLoaded (state) {
       return state.isProductsLoaded
