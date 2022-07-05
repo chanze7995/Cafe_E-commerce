@@ -1,3 +1,25 @@
+.checkoutNav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  a{
+    padding: 0.5rem;
+    font-size: $big-font-size;
+    color: #ccc
+  }
+  .nav-active:hover{
+    color: #000;
+  }
+  .current{
+    color: #000;
+  }
+}
+.checkoutNav-icon{
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #ccc
+}
 .cartContainer{
   display: flex; 
   justify-content: center;
@@ -125,6 +147,9 @@
   background-color: #0a0a0a;
 }
 .cartTotalPrice-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #f5f5f5
 }
 .shippingOptions{

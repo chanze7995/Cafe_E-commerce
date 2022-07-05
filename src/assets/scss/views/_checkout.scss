@@ -1,0 +1,99 @@
+// *{
+//   outline: solid;
+// }
+h3{
+  padding-bottom: 1rem;
+}
+label {
+  font-size: $smaller-font-size;
+  margin-bottom: 6px;
+}
+abbr{
+  color: red;
+}
+.checkoutContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.checkoutNav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  a{
+    padding: 0.5rem;
+    font-size: $big-font-size;
+    color: #ccc
+  }
+  .nav-active:hover{
+    color: #000;
+  }
+  .current{
+    color: #000;
+  }
+}
+.checkoutNav-icon{
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #ccc
+}
+.billContainer{
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.billDetail,.orderReview{
+  padding: .5rem;
+}
+.billInput {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  input{
+    width: 100%;
+    height: 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px 4px;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.phoneContainer{
+  display: flex;
+}
+.addressContainer{
+  display: flex;
+}
+.orderReview-border{
+  padding: 2rem 1rem;
+  border: 2px solid #000;
+  border-radius: 1rem;
+}
+th,td{
+  padding: 0.5rem 0;
+  text-align: left;
+}
+.order-total{
+  padding: 1rem 0;
+}
+.payment_box{
+  padding: 1rem 0;
+}
+.checkboxContainer{
+  padding-bottom: 1.5rem;
+}
+
+.check-btn{
+  padding: .5rem 2rem;
+  border: 2px solid #0a0a0a;
+  border-radius: 2rem;
+  transition: .3s;
+}
+.check-btn:hover{
+  transition: .3s;
+  background-color: #FFA200;
+  color: #fff;
+}

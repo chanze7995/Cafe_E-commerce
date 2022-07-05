@@ -32,7 +32,7 @@ export default {
       return store.getters.isProductsLoaded
     })
     const isCartPage = computed(() => {
-      return route.path === '/cart'
+      return route.path === '/cart' || route.path === '/checkout' || route.path === '/login'
     })
     onMounted(() => {
       getData()
