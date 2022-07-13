@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import db from '../firebase/firebaseInit'
 
+import Auth from './Auth'
+
 export default createStore({
   state: {
     productData: [],
@@ -104,5 +106,8 @@ export default createStore({
     currentProductArray (state) {
       return state.currentProductArray
     }
+  },
+  modules: {
+    Auth
   }
 })

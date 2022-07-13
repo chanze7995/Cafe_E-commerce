@@ -11,12 +11,13 @@
           </h2>
           <div class="formInputField">
             <SvgIcon
-              icon-name="user"
+              icon-name="envelope"
               icon-class="formInputField__icon"
             />
             <input
-              type="text"
-              placeholder="使用者"
+              type="email"
+              placeholder="信箱"
+              v-model="singInData.email"
             >
           </div>
           <div class="formInputField">
@@ -27,50 +28,28 @@
             <input
               type="password"
               placeholder="密碼"
+              autocomplete="off"
+              v-model="singInData.password"
             >
           </div>
-          <input
-            type="submit"
-            value="開始品嚐"
+          <div
             class="submitBtn"
+            @click="singInAccount"
           >
+            開始品嚐
+          </div>
           <p class="socialText">
             或用社群平台登入
           </p>
           <div class="socialMediaBtnContainer">
             <a
-              href="#"
+              v-for="item in socialMedia"
+              :href="item.link"
               class="socialMediaBtn"
+              :key="item.type"
             >
               <SvgIcon
-                icon-name="facebook"
-                icon-class="socialMediaBtn__icon"
-              />
-            </a>
-            <a
-              href="#"
-              class="socialMediaBtn"
-            >
-              <SvgIcon
-                icon-name="line"
-                icon-class="socialMediaBtn__icon"
-              />
-            </a>
-            <a
-              href="#"
-              class="socialMediaBtn"
-            >
-              <SvgIcon
-                icon-name="google"
-                icon-class="socialMediaBtn__icon"
-              />
-            </a>
-            <a
-              href="#"
-              class="socialMediaBtn"
-            >
-              <SvgIcon
-                icon-name="apple"
+                :icon-name="item.type"
                 icon-class="socialMediaBtn__icon"
               />
             </a>
@@ -91,6 +70,7 @@
             <input
               type="text"
               placeholder="使用者"
+              v-model="registerData.name"
             >
           </div>
           <div class="formInputField">
@@ -101,6 +81,7 @@
             <input
               type="email"
               placeholder="信箱"
+              v-model="registerData.email"
             >
           </div>
           <div class="formInputField">
@@ -111,50 +92,28 @@
             <input
               type="password"
               placeholder="密碼"
+              autocomplete="off"
+              v-model="registerData.password"
             >
           </div>
-          <input
-            type="submit"
-            value="註冊"
+          <div
             class="submitBtn"
+            @click="registerAccount"
           >
+            加入享受
+          </div>
           <p class="socialText">
             或用社群平台註冊
           </p>
           <div class="socialMediaBtnContainer">
             <a
-              href="#"
+              v-for="item in socialMedia"
+              :href="item.link"
               class="socialMediaBtn"
+              :key="item.type"
             >
               <SvgIcon
-                icon-name="facebook"
-                icon-class="socialMediaBtn__icon"
-              />
-            </a>
-            <a
-              href="#"
-              class="socialMediaBtn"
-            >
-              <SvgIcon
-                icon-name="line"
-                icon-class="socialMediaBtn__icon"
-              />
-            </a>
-            <a
-              href="#"
-              class="socialMediaBtn"
-            >
-              <SvgIcon
-                icon-name="google"
-                icon-class="socialMediaBtn__icon"
-              />
-            </a>
-            <a
-              href="#"
-              class="socialMediaBtn"
-            >
-              <SvgIcon
-                icon-name="apple"
+                :icon-name="item.type"
                 icon-class="socialMediaBtn__icon"
               />
             </a>
@@ -205,18 +164,65 @@
 
 <script>
 import Button from '@/components/Button.vue'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import { useStore } from 'vuex'
 export default {
   name: 'Login',
   components: {
     Button
   },
   setup () {
+    const store = useStore()
+    const singInData = reactive({
+      email: '',
+      password: ''
+    })
+    const registerData = reactive({
+      name: '',
+      email: '',
+      password: ''
+    })
+    const registerAccount = () => {
+      if (registerData.name === '') {
+        alert('請輸入帳戶名')
+        return
+      }
+      return store.dispatch('Auth/registerAccount', registerData)
+    }
+    const singInAccount = () => {
+      return store.dispatch('Auth/singInAccount', singInData)
+    }
+
+    const socialMedia = reactive([{
+      type: 'facebook',
+      link: '#'
+    }, {
+      type: 'line',
+      link: '#'
+    }, {
+      type: 'google',
+      link: '#'
+    }, {
+      type: 'apple',
+      link: '#'
+    }])
     const signUpBtnMsg = ref('註冊帳號')
     const signInBtnMsg = ref('登入帳號')
+    const isFormSwitch = ref(false)
+    const switchFormHandler = () => {
+      isFormSwitch.value = !isFormSwitch.value
+    }
+
     return {
+      singInData,
+      registerData,
+      socialMedia,
       signUpBtnMsg,
-      signInBtnMsg
+      signInBtnMsg,
+      isFormSwitch,
+      switchFormHandler,
+      registerAccount,
+      singInAccount
     }
   }
 }

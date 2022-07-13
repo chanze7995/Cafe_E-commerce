@@ -134,6 +134,9 @@ form.signInForm {
 }
 
 .submitBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 150px;
   background-color: #5995fd;
   border: none;
