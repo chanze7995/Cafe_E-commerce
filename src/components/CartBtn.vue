@@ -2,29 +2,35 @@
   <div class="cartBtnContainer">
     <div class="rotate">
       <div class="cartBtn-title">
-        <h4>購物車 (4)</h4>
+        <h4>購物車 ({{ cartList.length }})</h4>
       </div>
       <ul class="cartItemContainer">
-        <li class="cartItem">
-          <a href="">
-            <img
-              :src="require('@/assets/images/coffeeDescription/pink/smallpinkcoffee0.png')"
-              alt=""
-              class="cartItem-img"
-            >
-            <div class="cartItem-name">
-              好好喝咖啡
+        <li
+          class="cartItem"
+          v-for="item in cartList"
+          :key="item.id"
+        >
+          <div class="cartItem-main">
+            <div class="cartItem-img-cut">
+              <img
+                :src="item.product_imgI"
+                alt=""
+                class="cartItem-img"
+              >
             </div>
-          </a>
+            <div class="cartItem-name">
+              {{ item.name }}
+            </div>
+          </div>
           <div class="cartItem-Price">
             <div>
-              1
+              {{ item.quantity }}
             </div>
             <div class="times">
               ×
             </div>
             <div>
-              $15
+              ${{ item.price }}
             </div>
           </div>
         </li>
@@ -33,11 +39,13 @@
             總和
           </div>
           <div>
-            $15
+            ${{ cartPriceSum }}
           </div>
         </li>
       </ul>
-      <div class="btnContainer">
+      <div
+        class="btnContainer"
+      >
         <router-link
           to="/cart"
           class="cartBtn"
@@ -50,7 +58,7 @@
             icon-class="cart__icon"
           />
           <div class="cartNum">
-            4
+            {{ cartList.length }}
           </div>
         </div>
       </div>
@@ -59,8 +67,21 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
+import { useStore } from 'vuex'
 export default {
-  name: 'Cart'
+  setup () {
+    const store = useStore()
+    const cartList = computed(() => {
+      return store.getters['Cart/cartList']
+    })
+    const cartPriceSum = computed(() => {
+      return store.getters['Cart/cartPriceSum']
+    })
+    return {
+      cartList, cartPriceSum
+    }
+  }
 }
 </script>
 

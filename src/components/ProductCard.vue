@@ -170,13 +170,13 @@ export default {
       const docId = route.params.docId
       store.dispatch('setCurrentProductArray', docId)
     }
+    // 商品資料
     const currentProductInfo = computed(() => {
-      console.log(store.getters.currentProductArray[0])
+      // console.log(store.getters.currentProductArray[0])
       return store.getters.currentProductArray[0]
     })
     const isCoffeeBeansGroup = computed(() => {
-      console.log(props.group === 'coffeeBeans')
-      return props.group === 'coffeeBeans'
+      return currentProductInfo.value.mainGroupName === 'coffeeBeans'
     })
     const grind = ref(0)
     const grindSize = reactive([
@@ -185,23 +185,23 @@ export default {
         value: 0
       },
       {
-        name: '極細（義式咖啡機、愛壓樂）',
+        name: '細研磨（義式咖啡機、愛壓樂）',
         value: 1
       },
       {
-        name: '中細（摩卡壺）',
+        name: '中細研磨（摩卡壺）',
         value: 2
       },
       {
-        name: '中（美式咖啡機、虹吸壺）',
+        name: '中研磨（美式咖啡機、虹吸壺）',
         value: 3
       },
       {
-        name: '中粗（手沖壺）',
+        name: '中粗研磨（手沖壺）',
         value: 4
       },
       {
-        name: '粗（法式濾壓壺、冰滴）',
+        name: '粗研磨（法式濾壓壺、冰滴）',
         value: 5
       }
     ])
@@ -227,7 +227,6 @@ export default {
       const itemQuantity = new Big(itemQuantityNum.value)
       const currentProductPrice = new Big(currentProductInfo.value.price)
       const currentProductDiscount = new Big(currentProductInfo.value.discount)
-
       const total = Math.round(itemWeight.times(itemQuantity).times(currentProductPrice).times(currentProductDiscount))
       return total
     })
@@ -241,13 +240,8 @@ export default {
       }
     }
     // 加入購物車
-    const addShopCart = async () => {
-      try {
-        // 成功
-        await store.dispatch('addOrUpdateShopCart', {
-          itemId: route.params.docId,
-          itemNum: itemQuantityNum.value
-        })
+    const addShopCart = () => {
+      const setCartItemName = () => {
         if (isCoffeeBeansGroup.value) {
           const clickedGrind = grindSize.filter((item) => {
             return item.value === grind.value
@@ -255,14 +249,28 @@ export default {
           const clickedWeight = weightSize.filter((item) => {
             return item.value === weight.value
           })[0].name
-          console.log(`${currentProductInfo.value.name}-${clickedWeight}-${clickedGrind}`)
+          return `${currentProductInfo.value.name}-${clickedGrind}-${clickedWeight}`
+        } else {
+          return currentProductInfo.value.name
         }
-
-        router.push({ name: 'AddCartSuccess' })
-      } catch (error) {
-        // 失敗
-        alert(error.message)
       }
+      console.log(setCartItemName())
+      const cartItem = {
+        id: route.params.docId,
+        cartId: `${route.params.docId}${grind.value}${weight.value}`,
+        itemId: currentProductInfo.value.id,
+        brand: currentProductInfo.value.brand,
+        name: setCartItemName(),
+        price: currentProductInfo.value.price,
+        discount: currentProductInfo.value.discount,
+        grind: grind.value,
+        weight: weight.value,
+        quantity: itemQuantityNum.value,
+        product_imgI: currentProductInfo.value.product_imgI
+      }
+      console.log(cartItem)
+      store.dispatch('Cart/addCart', cartItem)
+      router.push({ name: 'AddCartSuccess' })
     }
     setCurrentProductInfo()
     return {

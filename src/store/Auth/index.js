@@ -10,9 +10,12 @@ import db from '../../firebase/firebaseInit'
 export default {
   namespaced: true,
   state: {
-    isLogin: false,
+    // isLogin: false,
+    isLogin: true,
     currentUserData: {},
-    currentUserName: ''
+    currentUserName: '',
+    // currentUserId: null
+    currentUserId: 'REmluQXguRWSq61ZV3XC227Mpuo2'
   },
   actions: {
     async registerAccount ({ commit, dispatch }, { name, email, password }) {
@@ -71,11 +74,12 @@ export default {
         }
       }
       const currentUserData = auth.currentUser
-      console.log(auth)
-      console.log(currentUserData)
+      console.log('1', auth)
+      console.log('2', currentUserData)
       commit('SET_LOGIN')
       commit('SET_CURRENT_USER_DATA', currentUserData)
-      commit('SET_CURRENT_USER_NAME', currentUserData)
+      commit('SET_CURRENT_USER_NAME', currentUserData.displayName)
+      commit('SET_CURRENT_USER_ID', currentUserData.uid)
       router.push('/')
     },
     async singOutAccount ({ commit }) {
@@ -85,12 +89,12 @@ export default {
       router.push('/login')
     },
     async createNewAccountData ({ commit }, data) {
-      const dataBase = db.collection('account').doc()
+      const dataBase = db.collection('account').doc(data.uid)
       await dataBase.set({
         userId: data.uid,
         userName: data.displayName,
         cart: [],
-        like: []
+        wishList: []
       })
     }
   },
@@ -102,10 +106,11 @@ export default {
       state.currentUserData = data
     },
     SET_CURRENT_USER_NAME (state, data) {
-      console.log(data.displayName)
-      state.currentUserName = data.displayName
+      state.currentUserName = data
+    },
+    SET_CURRENT_USER_ID (state, id) {
+      state.currentUserId = id
     }
-
   },
   getters: {
     isLogin (state) {
@@ -116,6 +121,9 @@ export default {
     },
     currentUserName (state) {
       return state.currentUserName
+    },
+    currentUserId (state) {
+      return state.currentUserId
     }
   }
 }

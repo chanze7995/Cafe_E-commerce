@@ -39,7 +39,10 @@
                 </router-link>
               </li>
               <li>
-                <div data-tip="喜歡">
+                <div
+                  data-tip="喜歡"
+                  @click="addWishList(item.docId)"
+                >
                   <SvgIcon
                     icon-name="heart"
                     icon-class="productBox__option__icon"
@@ -89,6 +92,7 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
   props: {
@@ -99,6 +103,8 @@ export default {
   },
   setup (props) {
     const store = useStore()
+    const router = useRouter()
+
     const productData = computed(() => {
       return store.getters.productData
     })
@@ -113,10 +119,20 @@ export default {
         return product
       })
     })
+    const addWishList = (productId) => {
+      const isLogin = store.getters['Auth/isLogin']
+      if (isLogin) {
+        store.dispatch('WishList/addWishListProduct', { productId })
+      } else {
+        alert('尚未登入會員')
+        router.push('/login')
+      }
+    }
     return {
       props,
       productData,
-      clickedProductGroupData
+      clickedProductGroupData,
+      addWishList
     }
   }
 }

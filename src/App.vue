@@ -28,6 +28,9 @@ export default {
     const getData = () => {
       return store.dispatch('getData')
     }
+    const getCartList = () => {
+      return store.dispatch('Cart/getCartList')
+    }
     const isProductsLoaded = computed(() => {
       return store.getters.isProductsLoaded
     })
@@ -36,6 +39,7 @@ export default {
     })
     onMounted(() => {
       getData()
+      getCartList()
     })
     return {
       isProductsLoaded,

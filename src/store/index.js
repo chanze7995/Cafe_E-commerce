@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
 import db from '../firebase/firebaseInit'
 
 import Auth from './Auth'
+import Cart from './Cart'
+import WishList from './WishList'
 
 export default createStore({
   state: {
@@ -70,9 +72,6 @@ export default createStore({
       })
       commit('SET_PRODUCTS_LOADED')
     },
-    async addOrUpdateShopCart (commit, { itemId, itemNum }) {
-      console.log(itemId, itemNum)
-    },
     setCurrentProductArray (context, docId) {
       context.commit('SET_CURRENT_PRODUCT', docId)
     }
@@ -108,6 +107,8 @@ export default createStore({
     }
   },
   modules: {
-    Auth
+    Auth,
+    Cart,
+    WishList
   }
 })
