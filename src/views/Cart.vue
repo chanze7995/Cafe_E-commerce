@@ -51,71 +51,55 @@
               </tr>
             </thead>
             <tbody class="cartTable-item">
-              <tr>
+              <tr
+                v-for="item in cartList"
+                :key="item.id"
+              >
                 <td class="product-remove">
                   <SvgIcon
                     icon-name="close"
                     icon-class="close-icon"
+                    @click="removeCartItem(item.cartItemId)"
                   />
                 </td>
                 <td class="product-thumbnail">
                   <a href="">
                     <img
-                      :src="require('@/assets/images/coffeeDescription/pink/smallpinkcoffee0.png')"
+                      :src="item.product_imgI"
                       alt=""
                       class="product-thumbnail-img"
                     >
                   </a>
                 </td>
                 <td class="product-name">
-                  <a href="">好好喝咖啡</a>
-                  <dl>
-                    <dt />
-                    <dd>全豆</dd>
-                    <dt />
-                    <dd>500g</dd>
-                  </dl>
-                </td>
-                <td class="product-price">
-                  19
-                </td>
-                <td class="product-quantity">
-                  <input type="number">
-                </td>
-                <td class="product-subtotal">
-                  NT$38
-                </td>
-              </tr>
-              <tr>
-                <td class="product-remove">
-                  X
-                </td>
-                <td class="product-thumbnail">
                   <a href="">
-                    <img
-                      :src="require('@/assets/images/coffeeDescription/pink/smallpinkcoffee0.png')"
-                      alt=""
-                      class="product-thumbnail-img"
-                    >
+                    {{ item.name }}
                   </a>
                 </td>
-                <td class="product-name">
-                  <a href="">好好喝咖啡</a>
-                  <dl>
-                    <dt />
-                    <dd>全豆</dd>
-                    <dt />
-                    <dd>500g</dd>
-                  </dl>
-                </td>
                 <td class="product-price">
-                  19
+                  {{ item.price*item.discount }}
                 </td>
-                <td class="product-quantity">
-                  <input type="number">
+                <td>
+                  <div class="product-quantity">
+                    <SvgIcon
+                      icon-name="minus"
+                      icon-class="cal-icon"
+                      @click=" calQuantity(-1,item.quantity,item.cartItemId)"
+                    />
+                    <input
+                      type="number"
+                      v-model="item.quantity"
+                      @change="changeItemQuantityNum"
+                    >
+                    <SvgIcon
+                      icon-name="plus"
+                      icon-class="cal-icon"
+                      @click=" calQuantity(1,item.quantity,item.cartItemId)"
+                    />
+                  </div>
                 </td>
                 <td class="product-subtotal">
-                  38
+                  NT${{ item.price*item.discount*item.quantity }}
                 </td>
               </tr>
             </tbody>
@@ -195,7 +179,7 @@
           </div>
           <div class="totalPrice">
             <h4>全部金額</h4>
-            <h3>NT$520</h3>
+            <h3>NT${{ cartPriceSum }}</h3>
           </div>
           <div class="checkCart">
             <router-link
@@ -217,8 +201,34 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 export default {
+  setup () {
+    const store = useStore()
 
+    const cartList = computed(() => {
+      return store.getters['Cart/cartList']
+    })
+    const cartPriceSum = computed(() => {
+      return store.getters['Cart/cartPriceSum']
+    })
+    const removeCartItem = (id) => {
+      store.dispatch('Cart/removeCartItem', id)
+    }
+    const calQuantity = (val, quantity, cartItemId) => {
+      const updateQuantity = (quantity + val) > 1 ? (quantity + val) : 1
+      if (!(updateQuantity === quantity)) {
+        store.dispatch('Cart/updateCartItemQuantity', { updateQuantity, cartItemId })
+      }
+    }
+    return {
+      cartList,
+      cartPriceSum,
+      removeCartItem,
+      calQuantity
+    }
+  }
 }
 </script>
 

@@ -11,11 +11,11 @@
           :key="item.id"
         >
           <div class="cartItem-main">
-            <div class="cartItem-img-cut">
+            <div class="cartItem-thumbnail">
               <img
                 :src="item.product_imgI"
                 alt=""
-                class="cartItem-img"
+                class="cartItem-thumbnail-img"
               >
             </div>
             <div class="cartItem-name">
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 export default {
   setup () {

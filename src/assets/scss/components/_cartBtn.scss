@@ -63,7 +63,7 @@
     }
   }
 }
-.cartItem-img-cut{
+.cartItem-thumbnail{
   width: 3rem;
   height: 3rem;
   display: flex;
@@ -73,7 +73,7 @@
   background-color: #ccc;
   margin-right: 1.25rem
 }
-.cartItem-img{
+.cartItem-thumbnail-img{
   max-height: 3rem;
 }
 ::-webkit-scrollbar {

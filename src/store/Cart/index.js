@@ -2,7 +2,7 @@
 
 import db from '../../firebase/firebaseInit'
 
-import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, setDoc, deleteDoc, updateDoc } from 'firebase/firestore'
 
 export default {
   namespaced: true,
@@ -12,15 +12,16 @@ export default {
   actions: {
     async getCartList ({ commit, state, rootGetters }) {
       const querySnapshot = await getDocs(collection(db, 'account', rootGetters['Auth/currentUserId'], 'cart'))
+      state.cartList = []
       querySnapshot.forEach((doc) => {
-        if (!state.cartList.some((item) => item.cartId === doc.id)) {
+        if (!state.cartList.some((item) => item.cartItemId === doc.id)) {
           const data = doc.data()
           commit('SET_CART_LIST', data)
         }
       })
     },
-    async addCart ({ dispatch, commit, rootGetters }, cartItem) {
-      const docRef = doc(db, 'account', rootGetters['Auth/currentUserId'], 'cart', cartItem.cartId)
+    async addCartItem ({ dispatch, commit, rootGetters }, cartItem) {
+      const docRef = doc(db, 'account', rootGetters['Auth/currentUserId'], 'cart', cartItem.cartItemId)
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
         const updateQuantity = docSnap.data().quantity + cartItem.quantity
@@ -30,9 +31,15 @@ export default {
       }
       dispatch('getCartList')
     },
-    async removeCart () {
+    async removeCartItem ({ dispatch, commit, rootGetters }, cartItemId) {
+      const docRef = doc(db, 'account', rootGetters['Auth/currentUserId'], 'cart', cartItemId)
+      await deleteDoc(docRef)
+      dispatch('getCartList')
     },
-    async increaseItem () {
+    async updateCartItemQuantity ({ dispatch, rootGetters }, { updateQuantity, cartItemId }) {
+      const docRef = doc(db, 'account', rootGetters['Auth/currentUserId'], 'cart', cartItemId)
+      await updateDoc(docRef, { quantity: updateQuantity })
+      dispatch('getCartList')
     },
     async decreaseItem () {
     },
@@ -47,11 +54,8 @@ export default {
   getters: {
     cartList (state) {
       const list = state.cartList.sort((a, b) => {
-        console.log('b', b.itemId)
-        console.log('a', a.itemId)
-        return a.itemId > b.itemId ? 1 : -1
+        return a.productId > b.productId ? 1 : -1
       })
-      console.log(list)
       return list || []
     },
     cartPriceSum (state) {

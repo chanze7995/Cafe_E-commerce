@@ -257,8 +257,8 @@ export default {
       console.log(setCartItemName())
       const cartItem = {
         id: route.params.docId,
-        cartId: `${route.params.docId}${grind.value}${weight.value}`,
-        itemId: currentProductInfo.value.id,
+        cartItemId: `${route.params.docId}${grind.value}${weight.value}`,
+        productId: currentProductInfo.value.id,
         brand: currentProductInfo.value.brand,
         name: setCartItemName(),
         price: currentProductInfo.value.price,
@@ -269,7 +269,7 @@ export default {
         product_imgI: currentProductInfo.value.product_imgI
       }
       console.log(cartItem)
-      store.dispatch('Cart/addCart', cartItem)
+      store.dispatch('Cart/addCartItem', cartItem)
       router.push({ name: 'AddCartSuccess' })
     }
     setCurrentProductInfo()
