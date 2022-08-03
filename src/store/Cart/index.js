@@ -20,7 +20,7 @@ export default {
         }
       })
     },
-    async addCartItem ({ dispatch, commit, rootGetters }, cartItem) {
+    async addCartItem ({ dispatch, rootGetters }, cartItem) {
       const docRef = doc(db, 'account', rootGetters['Auth/currentUserId'], 'cart', cartItem.cartItemId)
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
@@ -31,7 +31,7 @@ export default {
       }
       dispatch('getCartList')
     },
-    async removeCartItem ({ dispatch, commit, rootGetters }, cartItemId) {
+    async removeCartItem ({ dispatch, rootGetters }, cartItemId) {
       const docRef = doc(db, 'account', rootGetters['Auth/currentUserId'], 'cart', cartItemId)
       await deleteDoc(docRef)
       dispatch('getCartList')
@@ -40,10 +40,6 @@ export default {
       const docRef = doc(db, 'account', rootGetters['Auth/currentUserId'], 'cart', cartItemId)
       await updateDoc(docRef, { quantity: updateQuantity })
       dispatch('getCartList')
-    },
-    async decreaseItem () {
-    },
-    async totalPrice () {
     }
   },
   mutations: {

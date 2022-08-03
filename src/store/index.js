@@ -3,6 +3,7 @@ import db from '../firebase/firebaseInit'
 
 import Auth from './Auth'
 import Cart from './Cart'
+import Oder from './Oder'
 import WishList from './WishList'
 
 export default createStore({
@@ -109,6 +110,7 @@ export default createStore({
   modules: {
     Auth,
     Cart,
+    Oder,
     WishList
   }
 })

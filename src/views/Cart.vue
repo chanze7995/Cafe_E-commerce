@@ -14,6 +14,7 @@
       <router-link
         to="/checkout"
         class="nav-active"
+        @click="setCartOder"
       >
         準備結帳
       </router-link>
@@ -161,7 +162,8 @@
                 <label>
                   <input
                     type="radio"
-                    name="shipping_method"
+                    v-model="billInfo.shippingMethod"
+                    value="HD"
                   >
                   一般宅配
                 </label>
@@ -170,7 +172,8 @@
                 <label>
                   <input
                     type="radio"
-                    name="shipping_method"
+                    v-model="billInfo.shippingMethod"
+                    value="COD"
                   >
                   貨到付款 : NT$30 (不支援離島地區)
                 </label>
@@ -185,7 +188,7 @@
             <router-link
               to="/checkout"
               class="check-btn"
-              href=""
+              @click="setCartOder"
             >
               前往結賬
             </router-link>
@@ -206,12 +209,20 @@ import { useStore } from 'vuex'
 export default {
   setup () {
     const store = useStore()
-
     const cartList = computed(() => {
       return store.getters['Cart/cartList']
     })
+    const billInfo = computed(() => {
+      return store.getters['Oder/billInfo']
+    })
     const cartPriceSum = computed(() => {
-      return store.getters['Cart/cartPriceSum']
+      const shippingMethod = billInfo.value.shippingMethod
+      const cartPriceSum = store.getters['Cart/cartPriceSum']
+      if (shippingMethod === 'COD') {
+        return cartPriceSum + 30
+      } else {
+        return cartPriceSum
+      }
     })
     const removeCartItem = (id) => {
       store.dispatch('Cart/removeCartItem', id)
@@ -222,11 +233,18 @@ export default {
         store.dispatch('Cart/updateCartItemQuantity', { updateQuantity, cartItemId })
       }
     }
+    const setCartOder = () => {
+      const orderList = cartList.value
+      const totalPrice = cartPriceSum.value
+      return store.dispatch('Oder/setCartOder', { orderList, totalPrice })
+    }
     return {
       cartList,
       cartPriceSum,
       removeCartItem,
-      calQuantity
+      calQuantity,
+      billInfo,
+      setCartOder
     }
   }
 }
