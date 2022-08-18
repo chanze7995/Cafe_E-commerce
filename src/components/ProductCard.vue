@@ -270,7 +270,7 @@ export default {
       }
       console.log(cartItem)
       store.dispatch('Cart/addCartItem', cartItem)
-      router.push({ name: 'AddCartSuccess' })
+      router.push({ name: 'success' })
     }
     setCurrentProductInfo()
     return {

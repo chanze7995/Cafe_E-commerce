@@ -1,0 +1,16 @@
+.successContainer{
+  position: relative;
+}
+.success_wallpaper{
+  display: flex;
+  justify-content: center;
+  img{
+    width: 300px;
+  }
+}
+.success_title{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
