@@ -1,0 +1,16 @@
+.container {
+  max-width: 1024px;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  @include xs-devices{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+.symbol-icon{
+  width: 1.5rem;
+  height: 1.5rem;
+  @include s-devices {
+    // background-color: #159;
+  }
+}

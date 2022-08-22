@@ -1,65 +1,120 @@
 <template>
-  <header>
-    <ul :class="['headerNavbar', { mobileMenuOpen: isMobileMenuOpen }]">
-      <li class="headerNavbar__item">
-        <router-link to="/">
-          首頁
-        </router-link>
-      </li>
-      <li class="headerNavbar__item">
-        <router-link to="/explore">
-          探索咖啡
-        </router-link>
-      </li>
-      <li class="headerNavbar__item">
-        <router-link to="/shop">
-          線上購物
-        </router-link>
-      </li>
-      <li class="headerNavbar__logoImg">
-        <router-link to="/">
+  <div>
+    <header class="header">
+      <nav class="nav container">
+        <router-link
+          to="/"
+          class="nav__logo"
+        >
           <img
-            src="@/assets/images/logo.svg"
+            src="@/assets/images/logo-white.png"
             alt="logo"
+            class="nav__logo__img"
           >
+          麥克咖啡因
         </router-link>
-      </li>
-      <li class="headerNavbar__item">
-        <router-link to="/location">
-          門市據點
-        </router-link>
-      </li>
-      <li class="headerNavbar__item">
-        <router-link to="/course">
-          咖啡課程
-        </router-link>
-      </li>
-      <li
-        class="headerNavbar__item"
-        v-if="isLogin"
-      >
-        <router-link to="/login">
-          {{ currentUserName }}歡迎回來
-        </router-link>
-      </li>
-      <li
-        class="headerNavbar__item"
-        v-if="!isLogin"
-      >
-        <router-link to="/login">
-          會員
-        </router-link>
-      </li>
-      <li
-        class="headerNavbar__item"
-        v-else
-      >
-        <div @click="singOutAccount">
-          登出
+        <div :class="['nav__menu',{ 'nav__menu--open' : isNavMenuOpen }]">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <router-link
+                to="/"
+                class="nav__link"
+                @click="toggleMenuOpen"
+              >
+                首頁
+              </router-link>
+            </li>
+            <li class="nav__item">
+              <router-link
+                to="/explore"
+                class="nav__link"
+                @click="toggleMenuOpen"
+              >
+                探索咖啡
+              </router-link>
+            </li>
+            <li class="nav__item">
+              <router-link
+                to="/shop"
+                class="nav__link"
+                @click="toggleMenuOpen"
+              >
+                線上購物
+              </router-link>
+            </li>
+            <li class="nav__item">
+              <router-link
+                to="/location"
+                class="nav__link"
+                @click="toggleMenuOpen"
+              >
+                門市據點
+              </router-link>
+            </li>
+            <li class="nav__item">
+              <router-link
+                to="/course"
+                class="nav__link"
+                @click="toggleMenuOpen"
+              >
+                咖啡課程
+              </router-link>
+            </li>
+            <li
+              class="nav__item"
+              v-if="isLogin"
+            >
+              <router-link
+                to="/cart"
+                class="nav__link"
+                @click="toggleMenuOpen"
+              >
+                {{ currentUserName }}歡迎回來
+              </router-link>
+            </li>
+            <li
+              class="nav__item"
+              v-if="!isLogin"
+            >
+              <router-link
+                to="/login"
+                class="nav__link"
+                @click="toggleMenuOpen"
+              >
+                會員登入
+              </router-link>
+            </li>
+            <li
+              class="nav__item"
+              v-else
+            >
+              <div @click="singOutAccount();toggleMenuOpen()">
+                登出
+              </div>
+            </li>
+          </ul>
+          <div
+            class="nav__close"
+            @click="toggleMenuOpen"
+          >
+            <SvgIcon
+              icon-name="close"
+              icon-class="symbol-icon"
+            />
+          </div>
         </div>
-      </li>
-    </ul>
-  </header>
+        <div
+          class="nav__toggle"
+          @click="toggleMenuOpen"
+        >
+          <SvgIcon
+            icon-name="menu"
+            icon-class="symbol-icon"
+          />
+        </div>
+      </nav>
+    </header>
+  </div>
 </template>
 
 <script>
@@ -69,9 +124,9 @@ export default {
   name: 'AppHeader',
   setup () {
     const store = useStore()
-    const isMobileMenuOpen = ref(false)
-    const toggleMobileMenu = () => {
-      isMobileMenuOpen.value = !isMobileMenuOpen.value
+    const isNavMenuOpen = ref(false)
+    const toggleMenuOpen = () => {
+      isNavMenuOpen.value = !isNavMenuOpen.value
     }
     const isLogin = computed(() => {
       return store.getters['Auth/isLogin']
@@ -84,8 +139,8 @@ export default {
       return store.dispatch('Auth/singOutAccount')
     }
     return {
-      isMobileMenuOpen,
-      toggleMobileMenu,
+      isNavMenuOpen,
+      toggleMenuOpen,
       isLogin,
       currentUserName,
       singOutAccount
