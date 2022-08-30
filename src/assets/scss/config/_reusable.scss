@@ -1,8 +1,20 @@
 .container {
-  max-width: 1024px;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-  @include xs-devices{
+  max-width: 1200px;
+  margin-left: 6.5rem;
+  margin-right: 6.5rem;
+  @include xl-devices{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include m-devices{
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+  }
+  @include s-devices{
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  @include xxs-devices{
     margin-left: 1rem;
     margin-right: 1rem;
   }
@@ -10,7 +22,60 @@
 .symbol-icon{
   width: 1.5rem;
   height: 1.5rem;
-  @include s-devices {
+  @include xs-devices {
     // background-color: #159;
   }
+}
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.section {
+  padding: 7rem 0 2rem;
+  @include s-devices{
+    padding: 4.5rem 0 2rem;
+  }
+}
+
+.section__title {
+  position: relative;
+  font-size: $huge-font-size;
+  padding-left: 1.75rem;
+  margin-bottom: 2.5rem;
+  @include m-devices{
+    padding-left: 1.25rem;
+  }
+  @include s-devices{
+    font-size: $large-font-size;
+  }
+  &--newline{
+    @include l-devices{
+      display: block;
+      margin-top: .5rem;
+    }
+    @include xs-devices{
+      display: inline;
+    }
+  }
+}
+
+.section__title::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 2rem;
+  top: 0;
+  left: 0;
+  background-color: $primary-color;
+  @include m-devices{
+    width: 3px;
+  }
+}
+.button{
+	display: inline-block;
+	background-color: $black-color;
+	color: #fff;
+	padding: 1rem 1.75rem;
+	border-radius: .25rem;
+	font-size: $small-font-size;
 }
