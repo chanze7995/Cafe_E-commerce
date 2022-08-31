@@ -1,154 +1,157 @@
 <template>
   <div class="coffeeDescription">
-    <section class="coffeePhotoSection">
+    <section class="key-vision container">
       <div
-        class="coffeePhotoSection__background sectionBackground"
+        class="key-vision__background section__background"
         :style="{'--clickedFlavorColor':clickedCoffeeBeanInfo.color}"
       />
-      <div class="coffeePhotoSection__container">
-        <div class="coffeePhotoSection__container__title leftSide">
+      <div class="key-vision__container  section">
+        <h1 class="key-vision__title">
           {{ clickedCoffeeBeanInfo.sloganI }}
-        </div>
+        </h1>
         <img
           :src="clickedCoffeeBeanInfo.main_img"
           alt=""
-          class="coffeePhotoSection__container__img"
+          class="key-vision__img"
         >
-        <div class="coffeePhotoSection__container__title rightSide">
+        <h1 class="key-vision__title">
           {{ clickedCoffeeBeanInfo.sloganII }}
-        </div>
+        </h1>
       </div>
     </section>
-    <section class="coffeeArticleSection sectionSize">
-      <div class="coffeeArticleSection__container">
-        <div class="coffeeArticleSection__container__title">
+    <section class="introduction section container">
+      <div class="introduction__container">
+        <h1 class="introduction__title section__bar">
           {{ clickedCoffeeBeanInfo.name }}
-        </div>
-        <div class="sectionBar" />
-        <div class="coffeeArticleSection__container__content">
+        </h1>
+        <div class="introduction__content">
           <p
-            class="coffeeArticleSection__container__content__text"
+            class="introduction__content__description"
           >
             {{ clickedCoffeeBeanInfo.description }}
           </p>
-          <p class="coffeeArticleSection__container__content__text">
-            聽起來不錯？向下滾動閱讀更多內容。
-          </p>
-          <p class="coffeeArticleSection__container__content__recommendText">
-            新鮮烤製，提供快速和免費的一流服務。<br>價格 NTD380 起
+          <p class="introduction__content__recommend">
+            聽起來不錯？向下滾動閱讀更多內容。<br>新鮮烤製，提供快速和免費的一流服務。<br>售價 NTD 520 起
           </p>
         </div>
-        <div>
+        <div class="introduction__btn__container">
           <Button
             :btn-msg="buyBtnMsg"
-            class="coffeeArticleSection__container__btn"
+            class="introduction__btn"
           />
           <Button
             :btn-msg="tasteBtnMsg"
-            class="coffeeArticleSection__container__btn"
+            class="introduction__btn"
           />
         </div>
       </div>
       <div
-        class="coffeeArticleSection__img"
+        class="introduction__img__background"
         :style="{'--clickedFlavorColor':clickedCoffeeBeanInfo.color}"
       >
         <img
           :src="clickedCoffeeBeanInfo.intro_imgI"
           alt=""
-          class="coffeeArticleSection__img__pic"
+          class="introduction__img"
         >
       </div>
     </section>
-    <section class="transitionSection sectionSize">
-      <div class="transitionSection__title1">
-        手工<br>烘培
+    <section class="transition">
+      <div class="transition__content container section__size">
+        <h1 class="transition__title transition__title--front">
+          手工<br>烘培
+        </h1>
+        <h1 class="transition__title transition__title--end">
+          小批量<br>製作
+        </h1>
       </div>
-      <div class="sectionBackground">
-        <img
-          :src="clickedCoffeeBeanInfo.background_imgI"
-          alt=""
-          class="transitionSection__img "
-        >
-      </div>
-      <div class="transitionSection__title2">
-        小批量<br>製作
-      </div>
+      <img
+        :src="clickedCoffeeBeanInfo.background_imgI"
+        alt=""
+        class="transition__img section__background"
+      >
     </section>
-    <section class="coffeeMoreInfoSection">
-      <div class="coffeeMoreInfoSection__container">
-        <div class="coffeeMoreInfoSection__container__title">
+    <section class="description section container">
+      <div class="description__container">
+        <h1 class="description__title section__bar">
           告訴我更多
-        </div>
-        <div class="sectionBar" />
-        <div class="coffeeMoreInfoSection__container__List">
+        </h1>
+        <div class="description__list">
           <div
             v-for="item in moreInfoListMsgArr"
             :key="item.title"
+            class="description__content__container"
           >
-            <div
-              class="coffeeMoreInfoSection__container__textList"
-            >
-              <div class="coffeeMoreInfoSection__container__text">
+            <div class="description__content">
+              <h2 class="description__content__title">
                 {{ item.title }}
-              </div>
+              </h2>
               <div
-                class="coffeeMoreInfoSection__container__plus"
+                class="description__content__icon"
                 @click="item.isOpen=!item.isOpen"
               >
                 <SvgIcon
                   icon-name="chevron-down"
-                  icon-class="plusIcon"
+                  icon-class="symbol-icon"
                 />
               </div>
             </div>
-            <transition name="fade">
-              <!-- <div
-              :class="['coffeeBeanDescription',{'coffeeBeanDescription-open':item.isOpen}]"
-            > -->
-              <div
-                class="coffeeBeanDescription"
+            <transition name="description__content--fade">
+              <p
+                class="description__content__description"
                 v-show="item.isOpen"
               >
                 {{ item.description }}
-              </div>
+              </p>
             </transition>
           </div>
         </div>
       </div>
       <div
-        class="coffeeMoreInfoSection__img"
+        class="introduction__img__background"
         :style="{'--clickedFlavorColor':clickedCoffeeBeanInfo.color}"
       >
         <img
           :src="clickedCoffeeBeanInfo.intro_imgII"
           alt=""
-          class="coffeeArticleSection__img__pic"
+          class="introduction__img"
         >
       </div>
     </section>
-    <section class="coffeeReviewSection sectionSize">
-      <div class="coffeeReviewSection__title1">
-        喝過此商品的評價
+    <section class="review">
+      <div class="review__content__container section__size container">
+        <h1 class="review__title">
+          喝過此商品的評價
+        </h1>
+        <p class="review__text">
+          早晨來一杯暢飲。真棒！讓我似乎還在夢中。
+        </p>
+        <div class="review__content">
+          <h2 class="review__user">
+            Alice Lee
+          </h2>
+          <h2 class="review__contact">
+            告訴我們你覺得它像的味道<br>@caffeinewithmike
+          </h2>
+        </div>
       </div>
-      <div class="coffeeReviewSection__text">
-        早晨來一杯暢飲。真棒！讓我似乎還在夢中。
-      </div>
-      <div class="coffeeReviewSection__user">
-        Alice Lee
-      </div>
-      <div class="sectionBackground">
-        <img
-          :src="clickedCoffeeBeanInfo.background_imgII"
-          alt=""
-          class="transitionSection__img "
-        >
-      </div>
-      <div class="coffeeReviewSection__title2">
-        告訴我們你覺得它像的味道<br>@caffeinewithmike
+      <img
+        :src="clickedCoffeeBeanInfo.background_imgII"
+        alt=""
+        class="transition__img section__background"
+      >
+    </section>
+    <section class="purchase container">
+      <div class="purchase__container purchase__container--bounce">
+        <SvgIcon
+          icon-name="chevron-down"
+          icon-class="symbol-icon"
+        />
+        <h1 class="purchase__title ">
+          前往購買
+        </h1>
       </div>
     </section>
-    <section class="coffeePurchaseSection sectionSize" />
   </div>
 </template>
 

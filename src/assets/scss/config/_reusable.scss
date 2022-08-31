@@ -79,3 +79,44 @@
 	border-radius: .25rem;
 	font-size: $small-font-size;
 }
+.section__size{
+  height: 100vh;
+  // outline: 1px solid;
+}
+.section__background{
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  clip-path: polygon(0% calc(0% + 30vw), 100% 0%, 100% calc(100% - 30vw), 0 100%);
+}
+.section__bar{
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: solid 3px $primary-color;
+}
+.introduction__img__background{
+  width: 40%;
+  padding: 0 2rem;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &::before{
+    content: '';
+    position: absolute;
+    width: 25vw;
+    height: 20vw;
+    margin: auto;
+    background-color: var( --clickedFlavorColor );
+    clip-path: polygon(0% calc(0% + 5vw), 100% 0%, 100% calc(100% - 5vw), 0 100%);
+    z-index: -1;
+  }
+  @include s-devices{
+    display: none;
+  }
+}
+.introduction__img{
+  width: 80%;
+  z-index: 2;
+}

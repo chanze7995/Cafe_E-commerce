@@ -1,243 +1,293 @@
-.sectionBackground{
-  position: absolute;
-  width: 100vw;
-  height: 80vh;
-  clip-path: polygon(0% calc(0% + 20vw), 100% 0%, 100% calc(100% - 20vw), 0 100%);
-  z-index: 1;
-}
-.sectionSize{
-  width: 100%;
-  height: 90vh;
-  // outline: 1px solid;
-}
-.sectionBar{
-  width: 300px;
-  padding-top: 1rem;
-  margin-top: 2rem;
-  border-top: solid 5px;
-}
 .coffeeDescription{
   background-color: #333;
-
-}
-.coffeePhotoSection{
-  display: flex;
-  justify-content: center;
+  padding-top: 2rem;
+  margin-bottom: 5rem;
   overflow: hidden;
 }
-.coffeePhotoSection__background{
+.key-vision{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 95vh;
+}
+.key-vision__background{
   background-color: var( --clickedFlavorColor );
 }
-.coffeePhotoSection__container{
+.key-vision__container{
   display: flex;
+  justify-content: center;
   align-items: center;
-  z-index: 2
+  z-index: 1
 }
-.coffeePhotoSection__container__img{
-  padding: 5rem;
-  width: auto;
+.key-vision__img{
+  padding: 0 5rem;
+  width: 60%;
   max-height: 776px;
   filter: drop-shadow(-2px 15px 20px black);
+  @include s-devices{
+    padding: 0 3rem;
+  }
+  @include xs-devices{
+    padding: 0 1.5rem;
+  }
 }
-.coffeePhotoSection__container__title{
+.key-vision__title{
   font-size: 4.5rem;
   color:#fffd;
   writing-mode: vertical-lr;
-  text-shadow:  -5px 5px 8px black
+  text-shadow:  -5px 5px 8px black;
+  @include s-devices {
+    font-size: 3rem;
+  }
+  @include xs-devices{
+    font-size: 2.5rem;
+  }
 }
-.coffeeArticleSection{
+.introduction{
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  @include s-devices{
+    flex-direction: column
+    ;
+  }
 }
-.coffeeArticleSection__container{
+.introduction__container{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5rem;
+  width: 55%;
+  @include s-devices{
+    width: 80%;
+  }
+  @include xs-devices{
+    width: 100%;
+    text-align: center;
+  }
 }
-.coffeeArticleSection__container__title{
-  padding: 1rem 0;
-  font-size: 5rem;
+.introduction__title{
+  font-size: $grand-font-size;
   color: #fff;
+  @include xs-devices{
+    font-size: $huge-font-size;
+  }
 }
-.coffeeArticleSection__container__content{
+.introduction__content{
   padding: 2rem 0;
+  &__description{
+    font-size: $big-font-size;
+    line-height: 2rem;
+    color: #fff;
+    white-space: pre-wrap;
+    @include xs-devices{
+      font-size: $normal-font-size;
+    }
+  }
+  &__recommend{
+    font-size: $big-font-size;
+    line-height: 150%;
+    padding-top: 2rem;
+    color: #fff;
+    @include xs-devices{
+      font-size: $normal-font-size;
+    }
+  }
 }
-.coffeeArticleSection__container__content__text {
-  line-height: 2rem;
-  font-size: 1rem;
-  color: #fff;
-  white-space: pre-wrap;
+.introduction__btn__container{
+  @include xs-devices{
+    display: flex;
+    flex-direction: column;
+  }
 }
-.coffeeArticleSection__container__content__recommendText{
-  padding-top: 2rem;
-  color: #fff;
-}
-.coffeeArticleSection__container__btn{
-  margin-top: 2rem;
+.introduction__btn{
+  color: $primary-color;
+  margin-top: .5rem;
   margin-right: 2rem;
+  @include xs-devices{
+    margin: auto;
+    margin-top: 1rem;
+  }
 }
-.coffeeArticleSection__img{
-  width: 450px;
-  padding: 1rem;
-  z-index: 1;
-  display: flex;
+.transition{
+  position: relative;
+}
+.transition__content{
+  display: grid;
   justify-content: center;
   align-items: center;
+  grid-template-rows: repeat(2, 1fr);
 }
-.coffeeArticleSection__img::before{
-  content: '';
-  position: absolute;
-  width: 25vw;
-  height: 20vw;
-  margin: auto;
-  background-color: var( --clickedFlavorColor );
-  clip-path: polygon(0% calc(0% + 5vw), 100% 0%, 100% calc(100% - 5vw), 0 100%);
-  z-index: -1;
-}
-.coffeeArticleSection__img__pic{
-  width: 100%;
-  z-index: 2;
-}
-.transitionSection{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-}
-.transitionSection__title1{
+.transition__title{
   font-size: 4rem;
   color: #fff;
   z-index: 2;
-  grid-column: 2;
-  grid-row: 2;
+  &--front{
+    padding-right: 25rem;
+    padding-left: 1rem;
+    @include s-devices {
+      padding-right: 15rem;
+    }
+  }
+  &--end{
+    text-align: end;
+    padding-right: 1rem;
+    padding-left: 25rem;
+    @include s-devices {
+      padding-left: 15rem;
+    }
+  }
+  @include s-devices {
+    font-size: 3.5rem;
+  }
+  @include xs-devices{
+    font-size: 3rem;
+  }
 }
-.transitionSection__title2{
-  font-size: 4rem;
-  text-align: end;
-  color: #fff;
-  z-index: 2;
-  grid-column: 3;
-  grid-row: 3;
-}
-.transitionSection__img{
-  width: 100%;
+.transition__img{
+  object-fit: cover;
   filter: grayscale(20%);
 }
-.coffeeMoreInfoSection{
+.description{
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
-.coffeeMoreInfoSection__container{
+.description__container{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 5rem;
+  width: 55%;
+  @include s-devices{
+    width: 80%;
+  }
+  @include xs-devices{
+    width: 100%;
+  }
 }
-.coffeeMoreInfoSection__container__title{
-  padding: 1rem 0;
-  font-size: 5rem;
+.description__title{
+  font-size: 3rem;
   color: #fff;
+  @include xs-devices{
+    font-size: $grand-font-size;
+  }
 }
-.coffeeMoreInfoSection__container__List{
-  width: 500px;
+.description__list{
+  padding: 0 1rem;
 }
-.coffeeMoreInfoSection__container__textList{
+.description__content{
   display: flex;
   justify-content:space-between;
   align-items: center;
 }
-.coffeeMoreInfoSection__container__text {
+.description__content__title {
   padding: .5rem 0;
   line-height: 2rem;
   font-size: 1rem;
   color: #fff;
 }
-.coffeeMoreInfoSection__container__plus{
+.description__content__icon{
   font-size: 1rem;
   font-weight: bold;
   color: #fff;
-}
-.plusIcon{
-  width: 1.5rem;
-  height: 1.5rem;
+  & .symbol-icon{
   fill: #fff;
-
+  }
 }
-.coffeeBeanDescription{
-  // display: none;
+.description__content__description{
+  padding: 0 1rem;
+  line-height: 1.5;
+  font-size: $normal-font-size;
   color: #fff;
-  // opacity: 0;
-  // transition: .3s;
+  @include xs-devices{
+    font-size: $small-font-size;
+  }
 }
-// .coffeeBeanDescription-open{
-//   display: block;
-//   opacity: 1;
-//   transition: 1s;
-// }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .3s;
+.description__content--fade-enter-active{
+  transition: opacity .5s , height .3s ease;
 }
-.fade-enter, .fade-leave-to {
+.description__content--fade-leave-active {
+  transition: opacity .3s, height .5s ease;
+}
+.description__content--fade-enter-from, .description__content--fade-leave-to {
   opacity: 0;
+  height: 0;
 }
-.coffeeMoreInfoSection__img{
-  width: 450px;
-  padding: 1rem;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.description__content--fade-enter-to, .description__content--fade-leave-from {
+  opacity: 1;
+  max-height: 600px
 }
-.coffeeMoreInfoSection__img::before{
-  content: '';
-  position: absolute;
-  width: 25vw;
-  height: 20vw;
+.review{
+  position: relative;
+}
+.review__content__container{
+  width: 60%;
   margin: auto;
-  background-color: var( --clickedFlavorColor );
-  clip-path: polygon(0% calc(0% + 5vw), 100% 0%, 100% calc(100% - 5vw), 0 100%);
-  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include s-devices{
+    width: 80%;
+  }
 }
-.coffeeMoreInfoSection__img__pic{
-  width: 100%;
-  z-index: 2;
-}
-.coffeeReviewSection{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-}
-.coffeeReviewSection__title1{
+.review__title{
+  margin-bottom: 3rem;
   font-size: 4rem;
   color: #fff;
   z-index: 2;
-  grid-column: 2 / 4;
-  grid-row: 2;
+  @include s-devices {
+    font-size: 3.5rem;
+  }
+  @include xs-devices{
+    font-size: 3rem;
+  }
 }
-.coffeeReviewSection__title2{
+.review__content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.review__text{
+  height: 20rem;
+  text-overflow: ellipsis;
+  color: #fff;
+  z-index: 2;
+}
+.review__contact{
   font-size: 1rem;
   text-align: end;
   color: #fff;
   z-index: 2;
-  grid-column: 3;
-  grid-row: 4;
 }
-.coffeeReviewSection__text{
+.review__user{
   color: #fff;
   z-index: 2;
-  grid-column: 2;
-  grid-row: 3;
 }
-.coffeeReviewSection__user{
-  color: #fff;
-  z-index: 2;
-  grid-column: 2;
-  grid-row: 4;
+.purchase{
+  padding: 5rem 0;
 }
-.coffeePurchaseSection{
+.purchase__container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  &--bounce{
+    animation: bounce 3s infinite;
+  }
+  & .symbol-icon{
+    width: 3rem;
+    height: 3rem;
+    fill: $primary-color;
+    transform: rotate(180deg);
+  }
+}
+@keyframes bounce {
+	0%,100% {transform: translateY(0);}
+	50%{transform: translateY(-30px);}
+}
+.purchase__title{
+  cursor: pointer;
+  margin-top: 0;
+  color: $primary-color;
 }
