@@ -273,6 +273,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss" >
 @import "@/assets/scss/views/_home.scss";
 </style>

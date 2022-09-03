@@ -1,41 +1,94 @@
-.productCardContainer{
+.product-modal__container{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #777e;
   position: fixed;
   top: 0;
   right: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9;
-  // overflow: hidden;
+  z-index: 101;
 }
-.productCard{
+.product-modal--close{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  cursor: default;
+  background-color: #777e;
+}
+.product-modal{
   display: flex;
   justify-content: center;
   align-items: center;
   width: 860px;
+  padding: 1rem;
+  @include s-devices{
+    width: 100%;
+    box-shadow: 0 0 35px 1px rgba(0, 0, 0, 0.2);
+  }
 }
-.productCard__background{
+.product-modal__background--close{
+  display: none;
+  z-index: 99;
+  cursor: pointer;
+  @include s-devices{
+    display: block;
+  }
+}
+.product-modal__background{
   position: relative;
   width: 50%;
   height: 475px;
+  padding: 1rem;
   box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1),
               0 -15px 35px rgba(0, 0, 0, 0.1),
               0 15px 35px rgba(0, 0, 0, 0.1);
   transition: .5s;
+  @include s-devices{
+    position: absolute;
+    transform: translateX(-30%);
+    opacity: 0;
+  }
+  &--show{
+    @include s-devices{
+      opacity: 1;
+      z-index: 100;
+    }
+  }
 }
-.colorCard{
+.product-modal__color{
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
-  background-color: #FFEFB4dd;
-  // background-color: var( --productInfoColor )
+  background-color: var( --productInfoColor )
 }
-.logoName{
+.product-modal__return-btn{
+  display: none;
+  @include s-devices{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: .5s;
+    cursor: pointer;
+    z-index: 150;
+    & .symbol-icon{
+      fill:$primary-color;
+    }
+    &:hover{
+      transform: scale(1.08);
+    }
+  }
+}
+.product-modal__logo-name{
   position: absolute;
   top: 4rem;
   left: 1rem;
@@ -45,47 +98,28 @@
   line-height: 1.1;
   color: #fff;
   opacity: .5;
+  user-select: none;
 }
-.share{
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: .5rem;
-  right: .5rem;
-  background-color: #fff;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 1.3rem;
-  text-decoration: none;
-  transition: .5s;
-}
-.shareIcon{
-  width: 1.5rem;
-  height: 1.5rem;
-  fill:#666;
-  // transition: all .3s;
-  cursor: pointer;
-}
-.share:hover{
-  transform: scale(1.1);
-}
-.product-img{
-
+.product-modal__img{
   position: absolute;
   width: 500px;
   top: 5rem;
-  left: -2rem;
+  left: -10%;
+  @include xs-devices{
+  width: 90vw;
+  }
 }
-.product-img-coffeeBeans{
+.product-modal__img__coffee-beans{
   position: absolute;
   width: 300px;
   top: -8rem;
   left: 4rem;
   transform: rotate(-5deg);
+  @include s-devices{
+  }
 }
-.productCard__info{
+
+.product-modal__content{
   width: 50%;
   background-color: #fff;
   z-index: 1;
@@ -93,174 +127,139 @@
   box-shadow: 15px 0 35px rgba(0, 0, 0, 0.1),
   0 -15px 35px rgba(0, 0, 0, 0.1),
   0 15px 35px rgba(0, 0, 0, 0.1);
+  @include s-devices{
+    width: 80%;
+    padding: 1.5rem 2rem;
+  }
 }
-.productCard-closeBtn{
+.product-modal__btn__container{
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  @include s-devices{
+    justify-content: space-between;
+  }
 }
-.closeIcon{
-  width: 2.5rem;
-  height: 2.5rem;
+.product-modal__img-close-btn{
+  display: none;
   cursor: pointer;
+  @include s-devices{
+    display: flex;
+    align-items: flex-end;
+    z-index: 100;
+    & .symbol-icon{
+      transition: .3s;
+    }
+    & p{
+      margin-left: 0.5rem;
+      transition: .3s;
+    }
+    &:hover .symbol-icon{
+      // transition: .3s;
+      fill: $primary-color;
+    }
+    &:hover p{
+      color: $primary-color;
+    }
+  }
 }
-.productCard__info__title{
+.product-modal__close-btn{
+  display: flex;
+  & .symbol-icon{
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+  }
+}
+.product-modal__title{
   padding: 0 0 1rem 0;
 }
-
-.product-name{
+.product-modal__title__brand{
+  font-weight: 500;
+  color: #444;
+  text-transform: capitalize;
+}
+.product-modal__title__name{
   padding-top: 1rem;
   color: #333;
   line-height: 1;
 }
 
-.product-brand{
-  font-weight: 500;
-  color: #444;
-  text-transform: capitalize;
-}
-
-.productCard__info__title, .productCard__info__description, .productCard__info__size{
+.product-modal__item{
   border-bottom: 1px solid #dadada;
 }
 
-.productCard__info__description{
+.product-modal__info{
   padding: 1rem 0;
 }
 
-.title{
+.product-modal__item-title{
   color: #3a3a3a;
   font-weight: 600;
   font-size: 1.2rem;
 }
 
-.text{
+.product-modal__description{
   white-space: pre-wrap;
   color: #666;
   font-size: 1rem;
   padding: .5rem 0;
-
 }
-
-.productCard__info__grind{
-  padding-top: 1rem
+.product-modal__coffee-only{
+  // @include s-devices{
+  //   display: flex;
+  // }
 }
-
-.productCard__info__size{
+.product-modal__option{
   padding: 1rem 0;
 }
 
-.sizeContainer{
+.product-modal__option__container{
   padding: .5rem 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
 }
 
-.size{
-  padding: .5rem 1.5rem;
-  border-radius: .5rem;
-  background-color: #eee;
-  margin: 0 .5rem;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.size.active{
-  background-color: #2175f5;
-  color: #fff;
-  transition: .5s;
-}
-
-label {
-  padding: 0;
-  margin: 0 0.5rem;
-  cursor: pointer;
-}
-input[type="radio"] {
-  display: none;
-}
-input[type="radio"] + span {
-  display: inline-block;
-  background-color: #eee;
-  padding: .5rem 1.5rem;
-  border: 1px solid gray;
-  border-radius: .5rem;
-  color: #444;
-  user-select: none; /* 防止文字被滑鼠選取反白 */
-}
-
-input[type="radio"]:checked + span {
-  background-color: #2175f5;
-  color: #fff;
-  transition: .5s;
-}
-
-
-
-.quantity {
+.product-modal__option-quantity {
   display: flex;
   user-select: none;
-  .symbol {
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    cursor: pointer;
-    .symbolIcon{
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-  }
-  .symbol:hover{
+}
+.product-modal__count{
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover{
     background-color:#888a ;
     .symbolIcon{
       fill: #fff;
     }
   }
-  .value {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-    width: 60px;
-    border: none;
-    background: transparent;
+}
+.product-modal__value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  width: 60px;
+  border: none;
+  background: transparent;
 
-  }
 }
-.symbolIcon{
-  width: 1.5rem;
-  height: 1.5rem;
-}
-.productCard__info__price{
+.product-modal__checkout{
   padding-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include xs-devices{
+    flex-direction: column-reverse;
+  }
 }
-
-.price{
-  color: #333;
-  display: flex;
-  align-items: flex-start;
-}
-
-.price h1{
-  font-size: 2.1rem;
-  font-weight: 600;
-  line-height: 1;
-}
-
-.price i{
-  font-size: 1.4rem;
-  margin-right: 1px;
-}
-
-.buy{
+.product-modal__cart-btn{
   padding: .7rem 1rem;
-  background-color: #2175f5;
+  background-color: $primary-color;
   text-decoration: none;
   color: #fff;
   letter-spacing: 1px;
@@ -271,154 +270,19 @@ input[type="radio"]:checked + span {
   justify-content: center;
   align-items: center;
   border-radius: .5rem;
-}
-
-.buy:hover{
-  transform: scale(1.1);
-}
-
-.buyIcon{
-  width: 1.5rem;
-  height: 1.5rem;
-  fill:#fff;
   cursor: pointer;
-}
-
-.buy>p{
-  padding: 0 0 0 1rem;
-}
-
-@media (max-width: 1070px){
-  .productImg{
-      width: 135%;
+  & .symbol-icon{
+    margin-right: 1rem;
+    fill:#fff;
+    cursor: pointer;
+  }
+  &:hover{
+    transform: scale(1.1);
   }
 }
-
-@media (max-width: 1000px){
-  .productCard{
-      flex-direction: column;
-      width: 100%;
-      box-shadow: 0 0 35px 1px rgba(0, 0, 0, 0.2);
-  }
-  
-  .productCard > div{
-      width: 100%;
-      box-shadow: none;
-  }
-
-  .productImg{
-      width: 100%;
-      transform: rotate(-5deg) translateY(-50%);
-      top: 55%;
-      right: 2%;
-  }
-
-  .logoName{
-      top: 20%;
-      left: 5%;
-  }
-}
-
-@media (max-width: 600px){
-  .share{
-      width: 40px;
-      height: 40px;
-  }
-
-  .share i {
-      font-size: 1rem;
-      line-height: 40px;
-  }
-
-  .logo{
-      width: 70px;
-  }
-}
-
-@media (max-width: 490px){
-  .logoName{
-      font-size: 7rem;
-  }
-
-  .productName{
-      font-size: 1.3rem;
-  }
-
-  .productGroup{
-      font-size: 1rem;
-  }
-
-  .new{
-      padding: 2px 6px;
-      font-size: .9rem;
-  }
-
-  .title{
-      font-size: .9rem;
-  }
-
-  .text{
-      font-size: .8rem;
-  }
-
-  .buy{
-      padding: .5rem .8rem;
-      font-size: .8rem;
-  }
-
-  .price h1{
-      font-size: 1.5rem;
-  }
-
-  .price i{
-      font-size: .9rem;
-  }
-
-  .size{
-      width: 30px;
-      height: 30px;
-      margin: 0 8px;
-      font-size: .9rem;
-      line-height: 30px;
-  }
-
-  .color{
-      margin: 0 6px;
-      width: 0 20px;
-      width: 20px;
-      height: 20px;
-      border-width: 4px;
-  }
-
-  .share{
-      width: 35px;
-      height: 35px;
-      top: 10px;
-      right: 10px;
-  }
-
-  .share i{
-      font-size: .8rem;
-      line-height: 35px;
-  }
-
-  .logo{
-      width: 60px;
-      top: 10px;
-      left: 10px;
-  }
-
-  .productCard__info{
-      padding: 20px;
-  }
-}
-
-@media (max-width: 400px){
-  .buy i{
-      display: none;
-  }
-
-  .container{
-      padding: 20px;
-  }
+.product-modal__price{
+  color: #333;
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 1;
 }

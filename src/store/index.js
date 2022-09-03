@@ -26,6 +26,7 @@ export default createStore({
             id: doc.data().id,
             brand: doc.data().brand,
             name: doc.data().name,
+            color: doc.data().color,
             description: doc.data().description,
             price: doc.data().price,
             isDiscount: doc.data().isDiscount,

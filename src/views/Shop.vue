@@ -1,20 +1,24 @@
 <template>
   <div>
-    <section class="banner-container">
-      <div class="banner-img">
+    <section class="banner">
+      <div class="banner__img">
         <img
           src="https://firebasestorage.googleapis.com/v0/b/caffeine-cafe.appspot.com/o/shop%2Fshop-banner.jpg?alt=media&token=5bea6dab-1332-4154-a8ef-74653c89b7a1"
           alt=""
         >
       </div>
-      <div class="banner-text-container">
-        <h1>家中最優質的咖啡</h1>
-        <h4>合適的咖啡，讓你度過完美的一整天</h4>
+      <div class="banner__content container">
+        <h1 class="banner__title">
+          心中最優質的咖啡
+        </h1>
+        <h4 class="banner__description">
+          合適的咖啡，讓你度過完美的一整天
+        </h4>
       </div>
     </section>
-    <section class="product-list-container">
+    <section class="product-list container">
       <div
-        class="sort-btn"
+        class="product-list__sort-btn"
         @click="setClickedProductInfo"
       >
         <DropdownMenu
@@ -23,43 +27,47 @@
           @filter-items="filterProduct"
         />
       </div>
-      <div class="product-list-header">
-        <ul class="product-menu">
-          <li class="product-menu-item">
-            <router-link
-              :to="{
-                name:'ProductList',
-                params:{
-                  group:'all'
-                }}"
-            >
+      <ul class="product-list__menu">
+        <li>
+          <router-link
+            :to="{
+              name:'ProductList',
+              params:{
+                group:'all'
+              }}"
+          >
+            <button class="product-list__menu__item">
               全部商品
-            </router-link>
-          </li>
-          <li class="product-menu-item">
-            <router-link
-              :to="{
-                name:'ProductList',
-                params:{
-                  group:'coffeeBeans'
-                }}"
-            >
+            </button>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{
+              name:'ProductList',
+              params:{
+                group:'coffeeBeans'
+              }}"
+          >
+            <button class="product-list__menu__item">
               咖啡豆
-            </router-link>
-          </li>
-          <li class="product-menu-item">
-            <router-link
-              :to="{
-                name:'ProductList',
-                params:{
-                  group:'accessories'
-                }}"
-            >
+            </button>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{
+              name:'ProductList',
+              params:{
+                group:'accessories'
+              }}"
+          >
+            <button class="product-list__menu__item">
               沖煮設備
-            </router-link>
-          </li>
-        </ul>
-      </div>
+            </button>
+          </router-link>
+        </li>
+      </ul>
       <router-view />
     </section>
   </div>

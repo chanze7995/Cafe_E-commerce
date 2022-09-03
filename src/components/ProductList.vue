@@ -1,86 +1,87 @@
 <template>
   <div>
     <router-view />
-    <div class="productList">
-      <div class="productList__display">
-        <div
-          class="productBox"
-          v-for="item in clickedProductGroupData"
-          :key="item.docId"
-        >
-          <div class="productBox__img">
+    <div class="product-list__container">
+      <div
+        class="product-list__item"
+        v-for="item in clickedProductGroupData"
+        :key="item.docId"
+      >
+        <div class="product-list__item__img">
+          <div
+            class="product-list__item__discount-label"
+            v-if="item.isDiscount"
+          >
+            -{{ 100-item.discount*100 }}%
+          </div>
+          <div class="product-list__item__product-img__container">
+            <img
+              :src="item.product_imgI"
+              alt=""
+              class="product-list__item__product-img"
+            >
+          </div>
+          <ul class="product-list__item__option">
+            <li class="product-list__item__option__item">
+              <router-link
+                :to="{
+                  name:'ProductCard',
+                  params:{
+                    docId:item.docId
+                  }}"
+                data-tip="加入購物車"
+                class="product-list__item__option__link"
+              >
+                <SvgIcon
+                  icon-name="cart"
+                  icon-class="symbol-icon"
+                />
+              </router-link>
+            </li>
+            <li class="product-list__item__option__item">
+              <div
+                data-tip="喜歡"
+                @click="addWishList(item.docId)"
+                class="product-list__item__option__link"
+              >
+                <SvgIcon
+                  icon-name="heart"
+                  icon-class="symbol-icon"
+                />
+              </div>
+            </li>
+            <li class="product-list__item__option__item">
+              <router-link
+                :to="{
+                  name:'ProductCard',
+                  params:{
+                    docId:item.docId
+                  }}"
+                data-tip="了解更多"
+                class="product-list__item__option__link"
+              >
+                <SvgIcon
+                  icon-name="search-alt"
+                  icon-class="symbol-icon"
+                />
+              </router-link>
+            </li>
+          </ul>
+        </div>
+        <div class="product-list__item__content">
+          <div class="product-list__item__title">
+            <h5>{{ item.brand }}</h5>
+            <h4>{{ item.name }}</h4>
+          </div>
+          <div class="product-list__item__price">
+            <div :class="['product-list__item__price--original',{'product-list__item__price--discount':item.isDiscount}]">
+              定價：{{ item.price }}元
+            </div>
             <div
-              class="productBox__discountLabel"
+              class="product-list__item__price__discount"
               v-if="item.isDiscount"
             >
-              -{{ 100-item.discount*100 }}%
-            </div>
-            <div class="product-img">
-              <img
-                :src="item.product_imgI"
-                alt=""
-                class="productBox__productImg"
-              >
-            </div>
-            <ul class="productBox__option">
-              <li>
-                <router-link
-                  :to="{
-                    name:'ProductCard',
-                    params:{
-                      docId:item.docId
-                    }}"
-                  data-tip="加入購物車"
-                >
-                  <SvgIcon
-                    icon-name="cart"
-                    icon-class="productBox__option__icon"
-                  />
-                </router-link>
-              </li>
-              <li>
-                <div
-                  data-tip="喜歡"
-                  @click="addWishList(item.docId)"
-                >
-                  <SvgIcon
-                    icon-name="heart"
-                    icon-class="productBox__option__icon"
-                  />
-                </div>
-              </li>
-              <li>
-                <router-link
-                  :to="{
-                    name:'ProductCard',
-                    params:{
-                      docId:item.docId
-                    }}"
-                  data-tip="了解更多"
-                >
-                  <SvgIcon
-                    icon-name="search-alt"
-                    icon-class="productBox__option__icon"
-                  />
-                </router-link>
-              </li>
-            </ul>
-          </div>
-          <div class="productBox__content">
-            <div class="productBox__content__Name">
-              <h5>{{ item.brand }}</h5>
-              <h4>{{ item.name }}</h4>
-            </div>
-            <div class="productBox__content__Price">
-              <div :class="['productBox__content__Price__original',{'productBox__content__Price--discount':item.isDiscount}]">
-                定價：{{ item.price }}元
-              </div>
-              <div
-                class="productBox__content__Price__discount"
-                v-if="item.isDiscount"
-              >
-                特價：{{ Math.round(item.price*item.discount) }}元
-              </div>
+              特價：{{ Math.round(item.price*item.discount) }}元
             </div>
           </div>
         </div>

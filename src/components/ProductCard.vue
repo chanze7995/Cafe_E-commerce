@@ -1,142 +1,172 @@
 <template>
-  <div class="productCardContainer">
-    <div class="productCard">
-      <div class="productCard__background">
-        <div class="colorCard" />
-        <div v-if="isCoffeeBeansGroup">
-          <h1 class="logoName">
-            Caffeine With Mike
-          </h1>
-        </div>
-        <div class="share">
+  <div class="product-modal__container">
+    <router-link
+      :to="{
+        name:'ProductList',
+      }"
+      class="product-modal--close"
+    />
+    <div class="product-modal">
+      <div
+        v-if="isImageShow"
+        class="product-modal--close product-modal__background--close"
+        @click="imageShowToggle()"
+      />
+      <div :class="['product-modal__background',{'product-modal__background--show':isImageShow}]">
+        <div
+          class="product-modal__color"
+          :style="{'--productInfoColor':productCardColor}"
+        />
+        <div
+          class="product-modal__return-btn"
+          @click="imageShowToggle()"
+        >
           <SvgIcon
-            icon-name="share"
-            icon-class="shareIcon"
+            icon-name="return"
+            icon-class="symbol-icon"
           />
         </div>
+        <h1 class="product-modal__logo-name">
+          Caffeine With Mike
+        </h1>
         <img
           :src="currentProductInfo.product_imgI"
           alt=""
-          :class="['product-img', { 'product-img-coffeeBeans': isCoffeeBeansGroup}]"
+          :class="['product-modal__img', { 'product-modal__img__coffee-beans': isCoffeeBeansGroup}]"
         >
       </div>
-      <div class="productCard__info">
-        <div class="productCard-closeBtn">
-          <router-link
-            :to="{
-              name:'ProductList',
-            }"
+      <div class="product-modal__content">
+        <div class="product-modal__btn__container">
+          <div
+            @click="imageShowToggle()"
+            class="product-modal__img-close-btn"
           >
             <SvgIcon
-              icon-name="close"
-              icon-class="closeIcon"
+              icon-name="import"
+              icon-class="symbol-icon"
             />
-          </router-link>
+            <p>查看商品</p>
+          </div>
+          <div class="product-modal__close-btn">
+            <router-link
+              :to="{
+                name:'ProductList',
+              }"
+            >
+              <SvgIcon
+                icon-name="close"
+                icon-class="symbol-icon"
+              />
+            </router-link>
+          </div>
         </div>
-        <div class="productCard__info__title">
-          <h3 class="product-brand">
+        <div class="product-modal__title product-modal__item">
+          <h3 class="product-modal__title__brand">
             {{ currentProductInfo.brand }}
           </h3>
-          <h2 class="product-name">
+          <h2 class="product-modal__title__name">
             {{ currentProductInfo.name }}
           </h2>
         </div>
-        <div class="productCard__info__description">
-          <h3 class="title">
+        <div class="product-modal__info product-modal__item">
+          <h4 class="product-modal__item-title">
             商品資訊
-          </h3>
-          <p class="text">
+          </h4>
+          <p class="product-modal__description">
             {{ currentProductInfo.description }}
           </p>
         </div>
-        <div
-          v-if="isCoffeeBeansGroup"
-          class="coffee"
-        >
-          <div class="productCard__info__size">
-            <h4 class="title">
-              研磨度
-            </h4>
-            <div class="sizeContainer">
-              <select
-                v-model="grind"
-              >
-                <option
-                  v-for="option in grindSize"
+        <div class="product-modal__select">
+          <div
+            v-if="isCoffeeBeansGroup"
+            class="product-modal__coffee-only"
+          >
+            <div class="product-modal__option product-modal__item">
+              <h4 class="product-modal__item-title">
+                研磨度
+              </h4>
+              <div class="product-modal__option__container">
+                <select
+                  v-model="grind"
+                >
+                  <option
+                    v-for="option in grindSize"
+                    :key="option.value"
+                    :value="option.value"
+                  >
+                    {{ option.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="product-modal__option product-modal__item">
+              <h4 class="product-modal__item-title">
+                份量
+              </h4>
+              <div class="product-modal__option__container">
+                <label
+                  v-for="option in weightSize "
                   :key="option.value"
-                  :value="option.value"
+                  class=""
                 >
-                  {{ option.name }}
-                </option>
-              </select>
+                  <input
+                    type="radio"
+                    :value="option.value"
+                    :id="option.name"
+                    v-model="weight"
+                  >
+                  <span>{{ option.name }}</span>
+                </label>
+              </div>
             </div>
           </div>
-          <div class="productCard__info__size">
-            <h4 class="title">
-              份量
+          <div class="product-modal__option product-modal__item">
+            <h4 class="product-modal__item-title">
+              數量
             </h4>
-            <div class="sizeContainer">
-              <label
-                v-for="option in weightSize "
-                :key="option.value"
-              >
-                <input
-                  type="radio"
-                  :value="option.value"
-                  :id="option.name"
-                  v-model="weight"
+            <div class="product-modal__option__container">
+              <div class="product-modal__option-quantity">
+                <div
+                  class="product-modal__count"
+                  @click=" itemQuantityNum>1? itemQuantityNum--: itemQuantityNum=1"
                 >
-                <span>{{ option.name }}</span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="productCard__info__size">
-          <h4 class="title">
-            數量
-          </h4>
-          <div class="sizeContainer">
-            <div class="quantity">
-              <div
-                class="symbol"
-                @click=" itemQuantityNum>1? itemQuantityNum--: itemQuantityNum=1"
-              >
-                <SvgIcon
-                  icon-name="minus"
-                  icon-class="symbolIcon"
-                />
-              </div>
-              <input
-                class="value"
-                type="number"
-                v-model="itemQuantityNum"
-                @change="changeItemQuantityNum"
-              >
-              <div
-                class="symbol"
-                @click=" itemQuantityNum++"
-              >
-                <SvgIcon
-                  icon-name="plus"
-                  icon-class="symbolIcon"
-                />
+                  <SvgIcon
+                    icon-name="minus"
+                    icon-class="symbol-icon"
+                  />
+                </div>
+                <input
+                  class="product-modal__value"
+                  type="number"
+                  v-model="itemQuantityNum"
+                  @change="changeItemQuantityNum"
+                >
+                <div
+                  class="product-modal__count"
+                  @click=" itemQuantityNum++"
+                >
+                  <SvgIcon
+                    icon-name="plus"
+                    icon-class="symbol-icon"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="productCard__info__price">
+        <div class="product-modal__checkout">
           <div
             href="#"
-            class="buy"
+            class="product-modal__cart-btn"
             @click="addShopCart"
           >
             <SvgIcon
               icon-name="cart"
-              icon-class="buyIcon"
+              icon-class="symbol-icon"
             />
             <p>加入購物車</p>
           </div>
-          <div class="price">
+          <div class="product-modal__price">
             <h1>{{ sumPrice }}元</h1>
           </div>
         </div>
@@ -170,10 +200,17 @@ export default {
       const docId = route.params.docId
       store.dispatch('setCurrentProductArray', docId)
     }
+    const isImageShow = ref(false)
+    const imageShowToggle = () => {
+      isImageShow.value = !isImageShow.value
+    }
     // 商品資料
     const currentProductInfo = computed(() => {
-      // console.log(store.getters.currentProductArray[0])
+      console.log(store.getters.currentProductArray[0])
       return store.getters.currentProductArray[0]
+    })
+    const productCardColor = computed(() => {
+      return currentProductInfo.value.color === undefined ? '#df9c3a' : currentProductInfo.value.color
     })
     const isCoffeeBeansGroup = computed(() => {
       return currentProductInfo.value.mainGroupName === 'coffeeBeans'
@@ -275,7 +312,10 @@ export default {
     setCurrentProductInfo()
     return {
       props,
+      isImageShow,
+      imageShowToggle,
       currentProductInfo,
+      productCardColor,
       isCoffeeBeansGroup,
       grind,
       grindSize,
