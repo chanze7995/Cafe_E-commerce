@@ -8,7 +8,7 @@
     />
     <div class="product-modal">
       <div
-        v-if="isImageShow"
+        v-show="isImageShow"
         class="product-modal--close product-modal__background--close"
         @click="imageShowToggle()"
       />

@@ -1,82 +1,93 @@
-.storeBannerSection{
+.location-banner{
   width: 100%;
   height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
-.storeBannerSection__video{
+.location-banner__video{
   width: 200%;
   height: 100%;
   object-fit: cover;
   opacity: 0.9;
   overflow: hidden;
-
 }
-.storeBannerSection__content{
+.location-banner__content{
+  width: 80%;
   position: absolute;
-  left: 10%;
-  padding: 2rem;
-  // z-index: 1
 }
-.storeBannerSection__content__title{
+.location-banner__title{
   padding-bottom: 1rem;
   color: #fff;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: $huge-font-size;
 }
-.storeBannerSection__content__text{
+.location-banner__description{
   color: #fff;
-  font-size: 1rem;
+  font-size: $normal-font-size;
+  padding-right: 2rem;
 }
 
-.storeLocationSection{
-  padding: 3rem;
-}
-.storeLocationContainer{
+.store__card__container{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
-  padding: 2rem;
-  grid-gap: 40px;
+  grid-template-columns: repeat(3,1fr);
+  padding: 3rem 0;
+  @include l-devices{
+    justify-content: center;
+    grid-template-columns: repeat(2,45%);
+  }
+  @include m-devices{
+    grid-template-columns: repeat(2,50%);
+  }
+  @include s-devices{
+    grid-template-columns: repeat(1,65%);
+  }
+  @include xs-devices{
+    grid-template-columns: repeat(1,90%);
+  }
 }
-.storeLocationCard{
+.store__card{
+  margin: 1rem;
   background-color: #1c1b29;
   border-radius: 20px;
   box-shadow: 0 0 30px rgba(0,0,0,0.18);
 }
-.storeLocationCard__background{
+.store__card__background{
   position: relative;
   clip-path: polygon(0 0,100% 0, 100% 85%, 0 100%);
+  &:after{
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px 20px 0 0;
+    opacity: 0.7;
+  }
 }
-.storeLocationCard__background__pic{
+.store__card__pic{
   width: 100%;
   display: block;
   border-radius: 20px 20px 0 0;
   opacity: 0.7;
-
 }
-.storeLocationCard__background:after{
-  content: "";
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 20px 20px 0 0;
-  opacity: 0.7;
-}
-.storeInfoContent{
+.store__card__content{
   padding: 3rem; 
+  @include xs-devices{
+    padding: 3rem 2rem;
+  }
 }
-.storeInfoContent>h3{
+.store__card__title{
   color: #ffffff;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: $bigger-font-size;
   margin: 10px 0 15px 0;
 }
-.storeInfoContent>p{
+.store__card__description{
   color: #a0a0a0;
-  font-size: 1rem;
-  line-height: 2rem;
+  font-size: $normal-font-size;
+  line-height: 1.3;
   font-weight: 400;
 }
