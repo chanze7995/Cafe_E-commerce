@@ -17,6 +17,7 @@
 .newsLetter__button{
 	color: #fff;
 	font-size: 0.5rem;
+  line-height: 1;
   @include xs-devices{
     width: 2rem;
   }

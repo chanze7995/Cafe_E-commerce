@@ -1,9 +1,3 @@
-// *{
-//   outline: solid;
-// }
-h3{
-  padding-bottom: 1rem;
-}
 label {
   font-size: $smaller-font-size;
   margin-bottom: 6px;
@@ -11,42 +5,27 @@ label {
 abbr{
   color: red;
 }
-.checkoutContainer{
+.checkout__container{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 2rem;
 }
-.checkoutNav{
+.bill__container{
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
-  a{
-    padding: 0.5rem;
-    font-size: $big-font-size;
-    color: #ccc
-  }
-  .nav-active:hover{
-    color: #000;
-  }
-  .current{
-    color: #000;
+  @include s-devices{
+    flex-direction: column;
   }
 }
-.checkoutNav-icon{
-  width: 1.5rem;
-  height: 1.5rem;
-  fill: #ccc
-}
-.billContainer{
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
-}
-.billDetail,.orderReview{
+.bill-info,.order-review{
   padding: .5rem;
 }
-.billInput {
+.bill__title{
+  padding-left: 1rem;
+  padding-bottom: 1rem
+}
+.bill__input {
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -61,39 +40,52 @@ abbr{
     }
   }
 }
-.phoneContainer{
+.bill__item__container{
   display: flex;
+  flex-wrap: wrap;
 }
-.addressContainer{
+.order-review__container{
   display: flex;
-}
-.orderReview-border{
+  flex-direction: column;
+  align-items: center;
   padding: 2rem 1rem;
   border: 2px solid #000;
   border-radius: 1rem;
 }
-th,td{
+.order-review__title{
+  padding-bottom: 1rem;
+}
+.order-review__table{
+  width: 100%;
+}
+.order-review__item{
+  &--front{
+    padding: 0.5rem;
+    text-align: left;
+  }
+  &--hind{
+    padding: 0.5rem;
+    text-align: right;
+  }
+}
+.order-review__shipping{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 0.5rem 0;
-  text-align: left;
 }
-.order-total{
+.order-review__total{
+  padding: 1.5rem 0.5rem;
+}
+.payment__img{
+  max-width: 300px;
+  @include xs-devices{
+    width: 100%;
+  }
+}
+.payment__container{
   padding: 1rem 0;
 }
-.payment_box{
-  padding: 1rem 0;
-}
-.checkboxContainer{
+.checkbox__container{
   padding-bottom: 1.5rem;
-}
-
-.check-btn{
-  padding: .5rem 2rem;
-  border: 2px solid #0a0a0a;
-  border-radius: 2rem;
-  transition: .3s;
-}
-.check-btn:hover{
-  transition: .3s;
-  background-color: #FFA200;
-  color: #fff;
 }

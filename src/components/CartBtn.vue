@@ -1,63 +1,53 @@
 <template>
-  <div class="cartBtnContainer">
-    <div class="rotate">
-      <div class="cartBtn-title">
-        <h4>購物車 ({{ cartList.length }})</h4>
-      </div>
-      <ul class="cartItemContainer">
+  <div class="cart-Btn">
+    <div class="cart-Btn--rotate">
+      <h1 class="cartBtn__title">
+        購物車 ({{ cartList.length }})
+      </h1>
+      <ul class="cart__item__container">
         <li
-          class="cartItem"
+          class="cart__item"
           v-for="item in cartList"
           :key="item.id"
         >
-          <div class="cartItem-main">
-            <div class="cartItem-thumbnail">
+          <div class="cart__item__info">
+            <div class="cart__item__thumbnail">
               <img
                 :src="item.product_imgI"
                 alt=""
-                class="cartItem-thumbnail-img"
+                class="cart__item__img"
               >
             </div>
-            <div class="cartItem-name">
+            <div class="cart__item__name">
               {{ item.name }}
             </div>
           </div>
-          <div class="cartItem-Price">
-            <div>
-              {{ item.quantity }}
-            </div>
-            <div class="times">
-              ×
-            </div>
-            <div>
-              ${{ item.price }}
-            </div>
-          </div>
-        </li>
-        <li class="totalPrice">
-          <div>
-            總和
-          </div>
-          <div>
-            ${{ cartPriceSum }}
+          <div class="cart__item__price">
+            {{ item.quantity }} × ${{ item.price }}
           </div>
         </li>
       </ul>
-      <div
-        class="btnContainer"
-      >
+      <div class="cart__total-price">
+        <div class="cart__total-price__title">
+          總和
+        </div>
+        <div class="cart__total-price__price">
+          ${{ cartPriceSum }}
+        </div>
+      </div>
+      <div class="btnContainer">
         <router-link
           to="/cart"
-          class="cartBtn"
+          class="cart__link"
         >
           訂單詳情
         </router-link>
-        <div class="cartIcon">
+        <div class="cart__icon">
           <SvgIcon
             icon-name="cart"
-            icon-class="cart__icon"
+            icon-class="symbol-icon"
           />
-          <div class="cartNum">
+          <div class="cart__num">
             {{ cartList.length }}
           </div>
         </div>

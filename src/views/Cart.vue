@@ -1,90 +1,91 @@
 <template>
   <div>
-    <nav class="checkoutNav">
+    <div class="header-background" />
+    <nav class="checkout__nav">
       <router-link
         to="/cart"
-        class="nav-active  current"
+        class="checkout__nav__item checkout__nav__item--active checkout__nav__item--current"
       >
         購物車
       </router-link>
       <SvgIcon
         icon-name="chevrons-right"
-        icon-class="checkoutNav-icon"
+        icon-class="symbol-icon"
       />
       <router-link
         to="/checkout"
-        class="nav-active"
+        class="checkout__nav__item checkout__nav__item--active"
         @click="setCartOder"
       >
         準備結帳
       </router-link>
       <SvgIcon
         icon-name="chevrons-right"
-        icon-class="checkoutNav-icon"
+        icon-class="symbol-icon"
       />
-      <a
+      <div
         href="#"
-        class=""
+        class="checkout__nav__item"
       >
         訂單完成
-      </a>
+      </div>
     </nav>
-    <div class="cartContainer">
-      <div class="cartItemInfoContainer">
-        <div class="cartTable">
-          <table>
-            <thead class="cartTable-title">
+    <div class="cart-data__container container">
+      <div class="cart-info__container">
+        <div class="cart-list__container">
+          <table class="cart-item__table">
+            <thead class="cart-item__header">
               <tr>
-                <th class="cartItem-remove" />
-                <th class="cartItem-thumbnail" />
-                <th class="cartItem-name">
+                <th class="cart-item__header__title" />
+                <th class="cart-item__header__title" />
+                <th class="cart-item__header__title">
                   產品名稱
                 </th>
-                <th class="cartItem-price">
+                <th class="cart-item__header__title">
                   價格
                 </th>
-                <th class="cartItem-quantity">
+                <th class="cart-item__header__title cart-item__header__title__quantity">
                   數量
                 </th>
-                <th class="cartItem-subtotal">
+                <th class="cart-item__header__title cart-item__header__title__subtotal">
                   小計
                 </th>
               </tr>
             </thead>
-            <tbody class="cartTable-item">
+            <tbody class="cart-item__container">
               <tr
                 v-for="item in cartList"
                 :key="item.id"
               >
-                <td class="product-remove">
+                <td class="cart-item__element product__remove">
                   <SvgIcon
                     icon-name="close"
-                    icon-class="close-icon"
+                    icon-class="symbol-icon"
                     @click="removeCartItem(item.cartItemId)"
                   />
                 </td>
-                <td class="product-thumbnail">
+                <td class="cart-item__element product__thumbnail">
                   <a href="">
                     <img
                       :src="item.product_imgI"
                       alt=""
-                      class="product-thumbnail-img"
+                      class="product__thumbnail__img"
                     >
                   </a>
                 </td>
-                <td class="product-name">
+                <td class="cart-item__element product__name">
                   <a href="">
                     {{ item.name }}
                   </a>
                 </td>
-                <td class="product-price">
+                <td class="cart-item__element product-price">
                   {{ item.price*item.discount }}
                 </td>
-                <td>
-                  <div class="product-quantity">
+                <td class="cart-item__element">
+                  <div class="product__quantity__input">
                     <SvgIcon
                       icon-name="minus"
-                      icon-class="cal-icon"
+                      icon-class="symbol-icon"
                       @click=" calQuantity(-1,item.quantity,item.cartItemId)"
                     />
                     <input
@@ -94,19 +95,93 @@
                     >
                     <SvgIcon
                       icon-name="plus"
-                      icon-class="cal-icon"
+                      icon-class="symbol-icon"
                       @click=" calQuantity(1,item.quantity,item.cartItemId)"
                     />
                   </div>
                 </td>
-                <td class="product-subtotal">
+                <td class="cart-item__element product__subtotal">
                   NT${{ item.price*item.discount*item.quantity }}
                 </td>
               </tr>
             </tbody>
           </table>
-          <div class="updateCart">
-            <div class="cartCoupon">
+          <table class="cart-item__table--mobile">
+            <thead class="cart-item__header">
+              <tr>
+                <th class="cart-item__header__title" />
+                <th class="cart-item__header__title">
+                  產品名稱
+                </th>
+                <th class="cart-item__header__title">
+                  價格
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              v-for="item in cartList"
+              :key="item.id"
+              class="cart-item__container"
+            >
+              <tr>
+                <td class="cart-item__element product__thumbnail cart-item--mobile--line-none">
+                  <a href="">
+                    <img
+                      :src="item.product_imgI"
+                      alt=""
+                      class="product__thumbnail__img"
+                    >
+                  </a>
+                </td>
+                <td class="cart-item__element product__name cart-item--mobile--line-none">
+                  <a href="">
+                    {{ item.name }}
+                  </a>
+                </td>
+                <td class="cart-item__element product-price cart-item--mobile--line-none">
+                  {{ item.price*item.discount }}
+                </td>
+              </tr>
+              <tr>
+                <td class="cart-item__element product__remove">
+                  <SvgIcon
+                    icon-name="close"
+                    icon-class="symbol-icon"
+                    @click="removeCartItem(item.cartItemId)"
+                  />
+                </td>
+                <td class="cart-item__element">
+                  <div class="product__quantity__container">
+                    <h5 class="product__quantity__title">
+                      數量：
+                    </h5>
+                    <div class="product__quantity__input">
+                      <SvgIcon
+                        icon-name="minus"
+                        icon-class="symbol-icon"
+                        @click=" calQuantity(-1,item.quantity,item.cartItemId)"
+                      />
+                      <input
+                        type="number"
+                        v-model="item.quantity"
+                        @change="changeItemQuantityNum"
+                      >
+                      <SvgIcon
+                        icon-name="plus"
+                        icon-class="symbol-icon"
+                        @click=" calQuantity(1,item.quantity,item.cartItemId)"
+                      />
+                    </div>
+                  </div>
+                </td>
+                <td class="cart-item__element product__subtotal">
+                  NT${{ item.price*item.discount*item.quantity }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="cart-update__container">
+            <div class="cart-update__coupon">
               <input
                 type="text"
                 placeholder="輸入優惠碼"
@@ -115,19 +190,19 @@
                 使用
               </button>
             </div>
-            <button class="button">
+            <button class="cart__button">
               更新購物車
             </button>
           </div>
         </div>
-        <div class="cartProductRecommend">
+        <div class="product-recommend__container">
           <h4>你可能會有興趣...</h4>
           <ul>
             <li>
-              <div class="productRecommend-img">
+              <div class="product-recommend__img">
                 <SvgIcon
                   icon-name="heart"
-                  icon-class="wish-icon"
+                  icon-class="symbol-icon"
                 />
                 <a href="">
                   <img
@@ -137,25 +212,25 @@
                   >
                 </a>
               </div>
-              <h4 class="productRecommend-price">
+              <h4 class="product-recommend__price">
                 NT$520
               </h4>
-              <div class="addCart">
+              <div class="product-recommend__link">
                 <a
-                  class="check-btn"
+                  class="button"
                   href=""
-                >加入購物車</a>
+                >前往購買</a>
               </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="cartTotalPrice">
-        <h3 class="cartTotalPrice-title">
+      <div class="total-price__container">
+        <h3 class="total-price__title">
           總計
         </h3>
-        <div class="cartTotalPrice-container">
-          <div class="shippingOptions">
+        <div class="total-price__content">
+          <div class="total-price__option">
             <h4>運送方式</h4>
             <ul>
               <li>
@@ -180,14 +255,14 @@
               </li>
             </ul>
           </div>
-          <div class="totalPrice">
+          <div class="total-price__price">
             <h4>全部金額</h4>
             <h3>NT${{ cartPriceSum }}</h3>
           </div>
-          <div class="checkCart">
+          <div class="total-price__checkout">
             <router-link
               to="/checkout"
-              class="check-btn"
+              class="button"
               @click="setCartOder"
             >
               前往結賬
@@ -196,6 +271,7 @@
           <img
             :src="require('@/assets/images/pay.svg')"
             alt=""
+            class="total-price__img"
           >
         </div>
       </div>

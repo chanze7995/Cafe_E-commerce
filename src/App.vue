@@ -6,7 +6,7 @@
   >
     <AppHeader :is-scroll="isScroll" />
     <router-view />
-    <!-- <CartBtn v-if="!isCartPage" /> -->
+    <CartBtn v-if="!isCartPage" />
     <AppFooter />
   </div>
 </template>
@@ -14,7 +14,7 @@
 <script>
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
-// import CartBtn from '@/components/CartBtn.vue'
+import CartBtn from '@/components/CartBtn.vue'
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
@@ -23,8 +23,8 @@ export default {
   name: 'App',
   components: {
     AppHeader,
-    AppFooter
-    // CartBtn
+    AppFooter,
+    CartBtn
   },
   setup () {
     const store = useStore()

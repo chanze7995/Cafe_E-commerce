@@ -1,3 +1,11 @@
+.header-background{
+  width: 100%;
+  height: 5rem;
+  background-color: #000;
+  @include s-devices{
+    height: 3.5rem;
+  }
+}
 .container {
   max-width: 1200px;
   margin-left: 6.5rem;
@@ -22,9 +30,6 @@
 .symbol-icon{
   width: 1.5rem;
   height: 1.5rem;
-  @include xs-devices {
-    // background-color: #159;
-  }
 }
 .grid {
   display: grid;
@@ -71,14 +76,6 @@
     width: 3px;
   }
 }
-.button{
-	display: inline-block;
-	background-color: $black-color;
-	color: #fff;
-	padding: 1rem 1.75rem;
-	border-radius: .25rem;
-	font-size: $small-font-size;
-}
 .section__size{
   height: 100vh;
   // outline: 1px solid;
@@ -120,3 +117,51 @@
   width: 80%;
   z-index: 2;
 }
+// .button{
+// 	display: inline-block;
+// 	background-color: $black-color;
+// 	color: #fff;
+// 	padding: 1rem 1.75rem;
+// 	border-radius: .25rem;
+// 	font-size: $small-font-size;
+// }
+.button{
+  line-height: 1;
+  padding: .5rem 2rem;
+  border: 2px solid #0a0a0a;
+  border-radius: 2rem;
+  transition: .3s;
+  &:hover{
+    transition: .3s;
+    background-color: #FFA200;
+    color: #fff;
+  }
+}
+.checkout__nav{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 0 3rem;
+  & .symbol-icon{
+    fill: #ccc
+  }
+}
+.checkout__nav__item{
+  padding: 0.5rem;
+  font-size: $big-font-size;
+  color: #ccc;
+  &--active{
+    cursor: pointer;
+    &:hover{
+      color: $primary-color;
+    }
+  }
+  &--current{
+    color: #000;
+  }
+  @include xs-devices{
+    padding: 0rem;
+  }
+}
+
