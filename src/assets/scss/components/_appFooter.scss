@@ -3,10 +3,10 @@
 	justify-content: space-between;
   align-items: center;
 	padding: 1.5rem;
-	background-color: #4B4B4A;
+	background-color: $black-color-light;
 }
 .newsLetter__description{
-	color: #fff;
+	color: $white-color;
 	font-size: 0.5rem;
   &--newline{
     @include xs-devices{
@@ -15,7 +15,7 @@
   }
 }
 .newsLetter__button{
-	color: #fff;
+	color: $white-color;
 	font-size: 0.5rem;
   line-height: 1;
   @include xs-devices{
@@ -35,12 +35,12 @@
   padding: 3rem;
 }
 .info__title{
-  font-size: 1.5rem;
+  font-size: $bigger-font-size;
   padding-bottom: 1rem;
 }
 .info__data{
   font-family: $fix-font;
-  font-size: 1rem;
+  font-size: $normal-font-size;
   line-height: 1.5rem;
 }
 .copyright{

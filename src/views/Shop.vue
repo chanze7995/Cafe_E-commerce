@@ -1,8 +1,9 @@
 <template>
   <div>
     <section class="banner">
-      <div class="banner__img">
+      <div class="banner__img__container">
         <img
+          class="banner__img"
           src="https://firebasestorage.googleapis.com/v0/b/caffeine-cafe.appspot.com/o/shop%2Fshop-banner.jpg?alt=media&token=5bea6dab-1332-4154-a8ef-74653c89b7a1"
           alt=""
         >

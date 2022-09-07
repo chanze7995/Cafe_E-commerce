@@ -17,7 +17,7 @@
               <h3 class="home__data-title">
                 評價
               </h3>
-              <p>
+              <p class="home__data-description">
                 來自信任我們的各種客戶推薦。
               </p>
             </div>
@@ -29,7 +29,7 @@
               <h3 class="home__data-title">
                 獨家商品
               </h3>
-              <p>
+              <p class="home__data-description">
                 使用優質咖啡豆進行專業製作
               </p>
             </div>

@@ -10,7 +10,7 @@
   width: 35%;
   padding: 2.5rem;
   margin: 1rem;
-  border: 1px solid #000;
+  border: 1px solid $black-color;
   border-radius: 1rem;
   @include m-devices{
     width: 40%;
@@ -58,10 +58,10 @@
   padding: .5rem;
   top: 12px;
   right: 12px;
-  background-color: $orange;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
+  background-color: $primary-color-light;
+  color: $white-color;
+  font-size: $normal-font-size;
+  font-weight: $font-semibold;
   z-index: 3;
 }
 .product-list__item__product-img__container{
@@ -90,16 +90,13 @@
   & .symbol-icon{
     width: 1.8rem;
     height: 1.8rem;
-    fill:#fff;
+    fill:$white-color;
     transition: all .3s;
     cursor: pointer;
     &:hover{
-      fill:$red;
+      fill:$primary-color-light;
       transition: all .3s;
     }
-  }
-  @include xs-devices{
-    // padding: 0.5rem 0
   }
 }
 .product-list__item__option__link{
@@ -108,7 +105,7 @@
   content: '';
     display: none;
     position: absolute;
-    background: linear-gradient(-45deg, #fff 49%, transparent 50%);
+    background: linear-gradient(-45deg, $white-color 49%, transparent 50%);
     width: 0.5rem;
     height: 0.5rem;
     padding: 0.25rem 0.75rem;
@@ -120,15 +117,15 @@
     content: attr(data-tip);
     display: none;
     position: absolute;
-    background-color: #fff;
+    background-color: $white-color;
     padding: 0.25rem 0.75rem;
     border-radius: 0.5rem;
     transform: translateY(-50%);
     top: 10%;
     left: 3rem;
-    font-size: 0.85rem;
+    font-size: $smaller-font-size;
     white-space: nowrap;
-    color: #333;
+    color: $black-color-light;
   }
   &:hover{
     &::before,&::after{
@@ -149,16 +146,16 @@ padding-bottom:1rem ;
 .product-list__item__price{
   display: flex;
   &--original{
-    font-weight: 600;
+    font-weight: $font-semibold;
     margin-right: 0.5rem;
   }
   &--discount{
     text-decoration: line-through;
-    text-decoration-color: $darkred;
+    text-decoration-color: $alert-color;
   }
 }
 .product-list__item__price__discount{
   padding-left: 0.5rem;
-  color: $darkred;
-  font-weight: 500;
+  color: $alert-color;
+  font-weight: $font-medium;
 }

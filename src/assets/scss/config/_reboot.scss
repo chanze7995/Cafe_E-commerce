@@ -18,8 +18,8 @@ textarea {
 }
 
 body {
-  background-color: $darkWhite;
-  color: $darkGray;
+  background-color: $white-color-dark;
+  color: $text-color;
 }
 
 input:focus {
@@ -54,11 +54,9 @@ ul {
 a {
   line-height: 0;
   text-decoration: none;
-  color: $darkGray;
+  color: $text-color;
   &:hover {
     text-decoration: none;
-    // color: $brown;
-    // transition: all .3s;
   }
 }
 
@@ -85,8 +83,3 @@ label {
   margin: 0 0.5rem;
   cursor: pointer;
 }
-
-// img {
-//   max-width: 100%;
-//   height: auto;
-// }

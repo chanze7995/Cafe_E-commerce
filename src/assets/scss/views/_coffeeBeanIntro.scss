@@ -1,5 +1,5 @@
 .coffeeDescription{
-  background-color: #333;
+  background-color: $black-color-light;
   padding-top: 2rem;
   margin-bottom: 5rem;
   overflow: hidden;
@@ -33,14 +33,14 @@
 }
 .key-vision__title{
   font-size: 4.5rem;
-  color:#fffd;
+  color:$white-color-dark;
   writing-mode: vertical-lr;
   text-shadow:  -5px 5px 8px black;
   @include s-devices {
     font-size: 3rem;
   }
   @include xs-devices{
-    font-size: 2.5rem;
+    font-size: $grand-font-size;
   }
 }
 .introduction{
@@ -68,7 +68,7 @@
 }
 .introduction__title{
   font-size: $grand-font-size;
-  color: #fff;
+  color: $white-color;
   @include xs-devices{
     font-size: $huge-font-size;
   }
@@ -78,7 +78,7 @@
   &__description{
     font-size: $big-font-size;
     line-height: 2rem;
-    color: #fff;
+    color: $white-color;
     white-space: pre-wrap;
     @include xs-devices{
       font-size: $normal-font-size;
@@ -88,7 +88,7 @@
     font-size: $big-font-size;
     line-height: 150%;
     padding-top: 2rem;
-    color: #fff;
+    color: $white-color;
     @include xs-devices{
       font-size: $normal-font-size;
     }
@@ -120,7 +120,7 @@
 }
 .transition__title{
   font-size: 4rem;
-  color: #fff;
+  color: $white-color;
   z-index: 2;
   &--front{
     padding-right: 25rem;
@@ -168,7 +168,7 @@
 }
 .description__title{
   font-size: 3rem;
-  color: #fff;
+  color: $white-color;
   @include xs-devices{
     font-size: $grand-font-size;
   }
@@ -184,22 +184,22 @@
 .description__content__title {
   padding: .5rem 0;
   line-height: 2rem;
-  font-size: 1rem;
-  color: #fff;
+  font-size: $normal-font-size;
+  color: $white-color;
 }
 .description__content__icon{
-  font-size: 1rem;
+  font-size: $normal-font-size;
   font-weight: bold;
-  color: #fff;
+  color: $white-color;
   & .symbol-icon{
-  fill: #fff;
+  fill: $white-color;
   }
 }
 .description__content__description{
   padding: 0 1rem;
   line-height: 1.5;
   font-size: $normal-font-size;
-  color: #fff;
+  color: $white-color;
   @include xs-devices{
     font-size: $small-font-size;
   }
@@ -234,7 +234,7 @@
 .review__title{
   margin-bottom: 3rem;
   font-size: 4rem;
-  color: #fff;
+  color: $white-color;
   z-index: 2;
   @include s-devices {
     font-size: 3.5rem;
@@ -251,17 +251,17 @@
 .review__text{
   height: 20rem;
   text-overflow: ellipsis;
-  color: #fff;
+  color: $white-color;
   z-index: 2;
 }
 .review__contact{
-  font-size: 1rem;
+  font-size: $normal-font-size;
   text-align: end;
-  color: #fff;
+  color: $white-color;
   z-index: 2;
 }
 .review__user{
-  color: #fff;
+  color: $white-color;
   z-index: 2;
 }
 .purchase{

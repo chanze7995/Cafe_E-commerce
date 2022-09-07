@@ -3,16 +3,16 @@ input[type="radio"] {
 }
 input[type="radio"] + span {
   display: inline-block;
-  background-color: #eee;
+  background-color: $gray-color-light;
   padding: .5rem 1.5rem;
-  border: 1px solid gray;
+  border: 1px solid $gray-color;
   border-radius: .5rem;
-  color: #444;
+  color: $black-color-light;
   user-select: none;  //防止文字被滑鼠選取反白
 }
 input[type="radio"]:checked + span {
   background-color: $primary-color;
-  color: #fff;
+  color: $white-color;
   transition: .5s;
 }
 .product-modal__container{
@@ -32,7 +32,7 @@ input[type="radio"]:checked + span {
   position: absolute;
   top: 0;
   cursor: default;
-  background-color: #777e;
+  background-color: $gray-color-dark-opacity;
 }
 .product-modal{
   display: flex;
@@ -89,7 +89,7 @@ input[type="radio"]:checked + span {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: $white-color;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -113,7 +113,7 @@ input[type="radio"]:checked + span {
   font-size: 9rem;
   text-transform: uppercase;
   line-height: 1.1;
-  color: #fff;
+  color: $white-color;
   opacity: .5;
   user-select: none;
 }
@@ -138,7 +138,7 @@ input[type="radio"]:checked + span {
 
 .product-modal__content{
   width: 50%;
-  background-color: #fff;
+  background-color: $white-color;
   z-index: 1;
   padding: 2rem 2.5rem;
   box-shadow: 15px 0 35px rgba(0, 0, 0, 0.1),
@@ -192,18 +192,18 @@ input[type="radio"]:checked + span {
   padding: 0 0 1rem 0;
 }
 .product-modal__title__brand{
-  font-weight: 500;
-  color: #444;
+  font-weight: $font-medium;
+  color: $black-color-light;
   text-transform: capitalize;
 }
 .product-modal__title__name{
   padding-top: 1rem;
-  color: #333;
+  color: $black-color-light;
   line-height: 1;
 }
 
 .product-modal__item{
-  border-bottom: 1px solid #dadada;
+  border-bottom: 1px solid $gray-color;
 }
 
 .product-modal__info{
@@ -211,15 +211,14 @@ input[type="radio"]:checked + span {
 }
 
 .product-modal__item-title{
-  color: #3a3a3a;
-  font-weight: 600;
-  font-size: 1.2rem;
+  color: $black-color-light;
+  font-weight: $font-semibold;
+  font-size: $big-font-size;
 }
 
 .product-modal__description{
   white-space: pre-wrap;
-  color: #666;
-  font-size: 1rem;
+  font-size: $normal-font-size;
   padding: .5rem 0;
 }
 .product-modal__coffee-only{
@@ -248,17 +247,18 @@ input[type="radio"]:checked + span {
   display: flex;
   align-items: center;
   border-radius: 5px;
+  transition: .3s;
   cursor: pointer;
   &:hover{
-    background-color:#888a ;
-    .symbolIcon{
-      fill: #fff;
+    background-color:$gray-color-dark ;
+    .symbol-icon{
+      fill: $white-color;
     }
   }
 }
 .product-modal__value {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: $bigger-font-size;
+  font-weight: $font-semibold;
   text-align: center;
   width: 60px;
   border: none;
@@ -278,10 +278,10 @@ input[type="radio"]:checked + span {
   padding: .7rem 1rem;
   background-color: $primary-color;
   text-decoration: none;
-  color: #fff;
+  color: $white-color;
   letter-spacing: 1px;
-  font-weight: 500;
-  font-size: 1.1rem;
+  font-weight: $font-medium;
+  font-size: $normal-font-size;
   transition: .5s;
   display: flex;
   justify-content: center;
@@ -290,16 +290,10 @@ input[type="radio"]:checked + span {
   cursor: pointer;
   & .symbol-icon{
     margin-right: 1rem;
-    fill:#fff;
+    fill:$white-color;
     cursor: pointer;
   }
   &:hover{
     transform: scale(1.1);
   }
-}
-.product-modal__price{
-  color: #333;
-  font-size: 2.1rem;
-  font-weight: 600;
-  line-height: 1;
 }

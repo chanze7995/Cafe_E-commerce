@@ -1,22 +1,21 @@
 // color
-$black-color: hsl(206, 12%, 12%);
-$text-color-light: hsl(206, 4%, 75%);
 $primary-color: hsl(36, 72%, 48%);
 $primary-color-light: hsl(36, 96%, 61%);
-$body-color: hsl(206, 4%, 97%);
-$title-color: hsl(206, 12%, 12%);
-$text-color: hsl(206, 4%, 42%);
-$container-color: #fff;
-$card-color: hsl(0, 0%, 90%);
+$primary-color-light-opacity: hsla(36, 96%, 61%,.1);
+$primary-color-lighter: hsl(36, 53%, 80%);
+$primary-color-lightest: hsl(36, 28%, 91%);
+$alert-color:hsl(0, 90%, 55%);
+$alert-color-light:hsl(0, 95%, 65%);
 
 
-$cyan:#6dc7eb;
-$yellow: #fcf9ea;
-$orange: #FBB13Cdd;
-$brown: #D18A4D;
-$lightWhite: #fff;
-$darkWhite: #FAFAFA;
-$lightGray:#707070;
-$darkGray: #505050;
-$red: #FF4E4E;
-$darkred:#F22424;
+$text-color: hsl(206, 1%, 36%);
+$text-color-light: hsl(206, 3%, 64%);
+
+$black-color: hsl(206, 12%, 12%);
+$black-color-light: hsl(206, 1%, 29%);
+$gray-color-dark:hsl(206, 0%, 46%);
+$gray-color-dark-opacity:hsla(206, 0%, 46%,.9);
+$gray-color: hsl(0, 0%, 85%);
+$gray-color-light: hsl(0, 5%, 95%);
+$white-color-dark: hsl(0, 0%, 97%);
+$white-color: hsl(0, 0%, 100%);

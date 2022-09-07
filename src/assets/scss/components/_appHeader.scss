@@ -6,11 +6,11 @@
     left: 0;
     z-index: 100;
   &--scroll{
-    background-color: $body-color;
+    background-color: $white-color-dark;
     box-shadow: 0 1px 4px hsla(0,4%,15%,.1);
   }
   &--scroll .nav__logo{
-    color: $title-color;
+    color: $black-color;
   }
   &--scroll .nav__link{
     color: $text-color;
@@ -19,7 +19,7 @@
     }
   }
   &--scroll .nav__toggle .symbol-icon{
-    fill: $title-color;
+    fill: $black-color;
   }
   &--scroll .nav__logo__img{
     mix-blend-mode: difference;
@@ -38,7 +38,7 @@
   display: flex;
   align-items: center;
   column-gap: .6rem;
-  color: #fff;
+  color: $white-color;
 }
 .nav__logo__img{
   width: 3rem;
@@ -94,7 +94,7 @@
 .nav__close .symbol-icon,
 .nav__toggle .symbol-icon{
   @include s-devices{
-    fill: #fff;
+    fill: $white-color;
   }
 }
 .nav__close .symbol-icon{

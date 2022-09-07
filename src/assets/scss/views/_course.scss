@@ -18,12 +18,12 @@
 }
 .course-banner__title{
   padding-bottom: 1rem;
-  color: #fff;
-  font-weight: 600;
+  color: $white-color;
+  font-weight: $font-semibold;
   font-size: $huge-font-size;
 }
 .course-banner__description{
-  color: #fff;
+  color: $white-color;
   font-size: $normal-font-size;
 }
 .course-info__container{
@@ -62,7 +62,7 @@
   }
 }
 .current-activity{
-  background-color: #fff5e2;
+  background-color: $primary-color-light-opacity;
   margin-bottom: 5rem;
 }
 .current-activity__content{

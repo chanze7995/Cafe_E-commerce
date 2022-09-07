@@ -4,16 +4,15 @@
   right: 5%;
   max-width: 400px;
   z-index: 9;
-  // background: #E6BEAE;
-  background: $primary-color;
+  background: $primary-color-lighter;
   border-radius: 1rem;
   clip-path: circle(2rem at 2rem 2rem);
   transform: rotate(180deg);
   transition: all .5s ease-in-out;
   &:hover {
     clip-path: circle(75%);
-    background: #EEE4E1;
-    border: 2px solid $primary-color;
+    background: $primary-color-lightest;
+    border: 2px solid $primary-color-light;
   }
   &:hover .cart__icon{
     visibility: hidden;
@@ -34,8 +33,9 @@
 }
 .cartBtn__title{
   font-size: $big-font-size;
+  color: $black-color-light;
   padding: 1.5rem 2rem;
-  border-bottom: 2px solid $primary-color;
+  border-bottom: 2px solid $primary-color-light;
 }
 
 .cart__item__container{
@@ -51,7 +51,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid $primary-color-light;
 }
 .cart__item__info{
   display: flex;
@@ -65,7 +65,7 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
-  background-color: #ccc;
+  background-color: $gray-color;
   margin-right: 1.25rem
 }
 .cart__item__img{
@@ -99,15 +99,16 @@
 }
 .cart__link{
   padding: .5rem 1rem;
-  border: 2px solid $primary-color;
+  border: 2px solid $primary-color-light;
   border-radius: .5rem;
   line-height: normal;
   cursor: pointer;
   visibility: hidden;
-  background-color: #E6BEAE;
+  background-color: $white-color-dark;
+  transition: .3s;
   &:hover{
-  border: 2px solid #E6BEAE;
-  background-color: #EEE4E1;
+  background-color: $primary-color-light;
+  color: $white-color-dark;
   }
 }
 .cart__icon{
@@ -122,7 +123,7 @@
   & .symbol-icon{
     width: 2rem;
     height: 2rem;
-    fill:#fff;
+    fill:$white-color;
     transition: fill .5s;
   }
 }
@@ -131,8 +132,8 @@
   top: 8px;
   right: 13px;
   width: 20px;
-  background-color: #fff;
+  background-color: $white-color;
   border-radius: 50%;
-  color: $primary-color;
+  color: $primary-color-light;
   text-align: center;
 }

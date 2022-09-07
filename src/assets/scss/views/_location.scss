@@ -19,12 +19,12 @@
 }
 .location-banner__title{
   padding-bottom: 1rem;
-  color: #fff;
-  font-weight: 600;
+  color: $white-color;
+  font-weight: $font-semibold;
   font-size: $huge-font-size;
 }
 .location-banner__description{
-  color: #fff;
+  color: $white-color;
   font-size: $normal-font-size;
   padding-right: 2rem;
 }
@@ -49,7 +49,7 @@
 }
 .store__card{
   margin: 1rem;
-  background-color: #1c1b29;
+  background-color: $black-color;
   border-radius: 20px;
   box-shadow: 0 0 30px rgba(0,0,0,0.18);
 }
@@ -80,14 +80,13 @@
   }
 }
 .store__card__title{
-  color: #ffffff;
-  font-weight: 600;
+  color: $white-color;
+  font-weight: $font-semibold;
   font-size: $bigger-font-size;
   margin: 10px 0 15px 0;
 }
 .store__card__description{
-  color: #a0a0a0;
+  color: $text-color-light;
   font-size: $normal-font-size;
   line-height: 1.3;
-  font-weight: 400;
 }

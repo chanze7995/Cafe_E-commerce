@@ -27,8 +27,8 @@
   }
 }
 .cart-item__header{
-  background-color: #0a0a0a;
-  color: #fefefe;
+  background-color:$black-color;
+  color: $white-color-dark;
   &__title{
     padding: 1.25rem 0;
     &__remove{
@@ -39,7 +39,7 @@
 .cart-item__element{
   padding: 1rem;
   text-align: center;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid $black-color;
   @include s-devices{
     padding: 1rem 0.5rem;
   }
@@ -61,7 +61,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background-color: #ccc;
+    background-color: $gray-color;
   }
 }
 .product__thumbnail__img{
@@ -90,7 +90,7 @@
     width: 3rem;
     padding: .5rem;
     margin: 0 0.5rem;
-    background-color: #F1F2F2;
+    background-color: $gray-color-light;
     border: none;
     border-radius: 0.5rem;
     box-shadow: none;
@@ -159,16 +159,16 @@
     right: 1px;
     width: 2rem;
     height: 2rem;
-    fill: #000;
-    background-color: #fff;
-    border: 2px solid #000;
+    fill: $black-color;
+    background-color: $white-color;
+    border: 2px solid $black-color;
     border-radius: 2rem;
     padding: 3px;
     transition: .3s;
     cursor: pointer;
     &:hover{
-      fill: #FFA200;
-      border: 2px solid #FFA200;
+      fill: $alert-color-light;
+      border: 2px solid $alert-color-light;
       transition: .3s;
     }
   }
@@ -192,14 +192,14 @@
 }
 .total-price__title{
   padding: 1rem 1.5rem;
-  color: #fefefe;
-  background-color: #0a0a0a;
+  color: $white-color-dark;
+  background-color:$black-color;
 }
 .total-price__content{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #f5f5f5
+  background-color: $gray-color-light
 }
 .total-price__option{
   padding: 1rem 1.5rem;
@@ -236,13 +236,13 @@
 
 .cart__button{
   padding: .5rem 2rem;
-  border: 2px solid #0a0a0a;
+  border: 2px solid$black-color;
   border-radius: 2rem;
   transition: .3s;
-  color: #0a0a0a;
+  color:$black-color;
   &:hover{
     transition: .3s;
-    background-color: #0a0a0a;
-    color: #fff;
+    background-color:$black-color;
+    color: $white-color;
   }
 }
