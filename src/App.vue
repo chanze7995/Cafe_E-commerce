@@ -4,6 +4,7 @@
     class="scroll"
     @scroll="scrollPage($event)"
   >
+    <Loading v-if="true" />
     <AppHeader :is-scroll="isScroll" />
     <router-view />
     <CartBtn v-if="!isCartPage" />
@@ -15,6 +16,7 @@
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import CartBtn from '@/components/CartBtn.vue'
+import Loading from '@/components/Loading.vue'
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
@@ -24,7 +26,8 @@ export default {
   components: {
     AppHeader,
     AppFooter,
-    CartBtn
+    CartBtn,
+    Loading
   },
   setup () {
     const store = useStore()
