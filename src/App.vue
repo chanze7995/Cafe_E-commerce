@@ -1,10 +1,6 @@
 <template>
-  <div
-    v-if="isProductsLoaded"
-    class="scroll"
-    @scroll="scrollPage($event)"
-  >
-    <Loading v-if="true" />
+  <Loading v-if="!isProductsLoaded" />
+  <div v-else>
     <AppHeader :is-scroll="isScroll" />
     <router-view />
     <CartBtn v-if="!isCartPage" />
@@ -17,7 +13,7 @@ import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import CartBtn from '@/components/CartBtn.vue'
 import Loading from '@/components/Loading.vue'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 
@@ -33,39 +29,37 @@ export default {
     const store = useStore()
     const route = useRoute()
     const getData = () => {
-      return store.dispatch('getData')
+      return store.dispatch('Product/getData')
     }
     const getCartList = () => {
       return store.dispatch('Cart/getCartList')
     }
     const isProductsLoaded = computed(() => {
-      return store.getters.isProductsLoaded
+      return store.getters['Product/isProductsLoaded']
     })
     const isCartPage = computed(() => {
       return route.path === '/cart' || route.path === '/checkout' || route.path === '/login'
     })
     const isScroll = ref(false)
-    const scrollPage = (e) => {
-      isScroll.value = e.srcElement.scrollTop >= 50
-      // console.log('!', isScroll.value)
+    const handleScroll = () => {
+      isScroll.value = window.scrollY >= 95
     }
     onMounted(() => {
       getData()
       getCartList()
+      window.addEventListener('scroll', handleScroll)
+    })
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll)
     })
     return {
       isProductsLoaded,
       isCartPage,
-      isScroll,
-      scrollPage
+      isScroll
     }
   }
 }
 </script>
 
 <style>
-  .scroll{
-    overflow: scroll;
-    height: 100vh;
-  }
 </style>

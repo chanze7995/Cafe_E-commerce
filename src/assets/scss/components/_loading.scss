@@ -24,18 +24,19 @@
 }
 .cup {
   position: relative;
-  width: 8.5rem;
-  height: 6.5rem;
+  width: 4.8rem;
+  height: 3.5rem;
   border: 5px solid $black-color;
   border-radius: 15% 15% 35% 35%;
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
 .cup-handle{
-  width: 1.8rem;
-  height: 2.5rem;
+  width: 1.2rem;
+  height: 1.5rem;
   border: 5px solid $black-color;
   border-left: none;
+  transform: translateY(-5px);
   border-radius: 0 20% 60% 0%;
 
 }
@@ -43,7 +44,7 @@
   display: flex;
 }
 .plate--front{
-  width: 8.5rem;
+  width: 5rem;
   height: 5px;
   margin-right: .5rem;
   border-radius: 5px;
@@ -66,19 +67,21 @@
 .coffee::after {
   content: "";
   position: absolute;
-  width: 25rem;
-  height: 25rem;
+  width: 10rem;
+  height: 10rem;
   background-color: $primary-color-lightest;
   border-radius: 40% ;
   animation: coffee 5s ease-in-out infinite;
-  // transform: translateY(-35%) rotate(0deg);
 }
 
 .loading__content{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: .5rem;
+  // margin-top: .5rem;
+  @include xxs-devices{
+    flex-direction: column;
+  }
 }
 .title{
   font-size: 1.5rem;
@@ -86,6 +89,9 @@
   font-weight: 600;
   padding: 1rem;
   animation: bounce .5s cubic-bezier(.19,.57,.3,.98) infinite alternate;
+  @include xxs-devices{
+    margin-bottom: 0.5rem;
+  }
 }
 .bounce-ball{
   display: flex;
@@ -122,7 +128,7 @@
     transform: translateY(-56%) rotate(360deg);
   }
   75% {
-    transform: translateY(-50%) rotate(360deg);
+    transform: translateY(-48%) rotate(360deg);
   }
   100% {
     transform: translateY(-35%) rotate(360deg);

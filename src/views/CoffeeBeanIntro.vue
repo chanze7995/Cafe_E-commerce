@@ -174,14 +174,17 @@ export default {
     // 取得咖啡豆資料
     const store = useStore()
     const allCoffeeBeanInfo = computed(() => {
-      console.log(props.name)
-      return store.getters.coffeeBeanIntroData
+      console.log('~', store.getters['Product/coffeeBeanIntroData'])
+      return store.getters['Product/coffeeBeanIntroData']
     })
     const setClickedCoffeeBean = computed(() => {
+      console.log('!', props.name)
+      console.log('!!', allCoffeeBeanInfo.value)
+      console.log('!!!', allCoffeeBeanInfo.value.filter(item => item.name === props.name))
       return allCoffeeBeanInfo.value.filter(item => item.name === props.name)
     })
     const clickedCoffeeBeanInfo = setClickedCoffeeBean.value[0]
-    console.log(clickedCoffeeBeanInfo)
+    // console.log(clickedCoffeeBeanInfo)
     const buyBtnMsg = ref('馬上購買')
     const tasteBtnMsg = ref('取得試飲')
     const moreInfoListMsgArr = reactive([

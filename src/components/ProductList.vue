@@ -107,7 +107,7 @@ export default {
     const router = useRouter()
 
     const productData = computed(() => {
-      return store.getters.productData
+      return store.getters['Product/productData']
     })
     const clickedProductGroupData = computed(() => {
       return productData.value.filter((product) => {

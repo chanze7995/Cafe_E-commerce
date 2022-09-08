@@ -1,5 +1,4 @@
 // import router from '../../router'
-
 import db from '../../firebase/firebaseInit'
 
 import { collection, doc, getDoc, getDocs, setDoc, deleteDoc, updateDoc } from 'firebase/firestore'

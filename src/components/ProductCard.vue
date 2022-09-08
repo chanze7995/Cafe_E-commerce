@@ -198,7 +198,7 @@ export default {
     const router = useRouter()
     const setCurrentProductInfo = () => {
       const docId = route.params.docId
-      store.dispatch('setCurrentProductArray', docId)
+      store.dispatch('Product/setCurrentProductArray', docId)
     }
     const isImageShow = ref(false)
     const imageShowToggle = () => {
@@ -206,8 +206,8 @@ export default {
     }
     // 商品資料
     const currentProductInfo = computed(() => {
-      console.log(store.getters.currentProductArray[0])
-      return store.getters.currentProductArray[0]
+      console.log('?', store.getters['Product/currentProductArray'][0])
+      return store.getters['Product/currentProductArray'][0]
     })
     const productCardColor = computed(() => {
       return currentProductInfo.value.color === undefined ? '#df9c3a' : currentProductInfo.value.color

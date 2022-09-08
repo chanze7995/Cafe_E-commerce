@@ -52,13 +52,13 @@ export default {
   setup () {
     const store = useStore()
     const coffeeBeanIntroData = computed(() => {
-      const data = store.getters.coffeeBeanIntroData
+      const data = store.getters['Product/coffeeBeanIntroData']
       const sortData = data.sort((a, b) => {
         return a.id - b.id
       })
       return sortData
     })
-    console.log(store.getters.coffeeBeanIntroData)
+    // console.log(store.getters['Product/coffeeBeanIntroData'])
     const onSwiper = (swiper) => {
       watch(coffeeBeanIntroData, () => {
         nextTick(() => {
