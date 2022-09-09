@@ -67,7 +67,7 @@ export default {
           commit('SET_COFFEEBEANINTRO_DATA', data)
         }
       })
-      commit('SET_PRODUCTS_LOADED')
+      commit('CHANGE_ISLOADING', null, { root: true })
     },
     setCurrentProductArray (context, docId) {
       context.commit('SET_CURRENT_PRODUCT', docId)
@@ -79,9 +79,6 @@ export default {
     },
     SET_COFFEEBEANINTRO_DATA (state, data) {
       state.coffeeBeanIntroData.push(data)
-    },
-    SET_PRODUCTS_LOADED (state) {
-      state.isProductsLoaded = true
     },
     SET_CURRENT_PRODUCT (state, docId) {
       state.currentProductArray = state.productData.filter((product) => {

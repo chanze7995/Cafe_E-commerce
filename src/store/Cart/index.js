@@ -44,6 +44,9 @@ export default {
   mutations: {
     SET_CART_LIST (state, data) {
       state.cartList.push(data)
+    },
+    CLEAR_CART_LIST (state) {
+      state.cartList = []
     }
   },
   getters: {

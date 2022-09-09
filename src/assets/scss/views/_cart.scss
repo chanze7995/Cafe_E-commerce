@@ -6,10 +6,20 @@
   }
 }
 .cart-info__container{
+  width: 80%;
+  @include s-devices{
+    width: 100%;
+  }
   // padding: 0 1rem; //e93
 }
 .cart-list__container{
   margin-bottom: 1rem;
+  @include s-devices{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
 }
 .cart-item__table{
   // width: 100%;
@@ -137,6 +147,15 @@
     opacity: 1;
   }
 }
+.cart--empty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart--empty{
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
 .product-recommend__container{
   ul{
     display: flex;
@@ -226,7 +245,6 @@
 }
 .total-price__img{
   // width: 100%;
-
   @include s-devices{
     width: 70%;
     margin: auto;

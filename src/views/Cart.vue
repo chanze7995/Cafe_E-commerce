@@ -32,7 +32,10 @@
     </nav>
     <div class="cart-data__container container">
       <div class="cart-info__container">
-        <div class="cart-list__container">
+        <div
+          v-if="!(cartList.length === 0)"
+          class="cart-list__container"
+        >
           <table class="cart-item__table">
             <thead class="cart-item__header">
               <tr>
@@ -195,6 +198,12 @@
             </button>
           </div>
         </div>
+        <div
+          v-else
+          class="cart--empty"
+        >
+          <h3>尚未加入商品</h3>
+        </div>
         <div class="product-recommend__container">
           <h4>你可能會有興趣...</h4>
           <ul>
@@ -286,6 +295,7 @@ export default {
   setup () {
     const store = useStore()
     const cartList = computed(() => {
+      console.log(store.getters['Cart/cartList'].length === 0)
       return store.getters['Cart/cartList']
     })
     const billInfo = computed(() => {

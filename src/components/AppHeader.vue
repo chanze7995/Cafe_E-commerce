@@ -60,16 +60,25 @@
             </router-link>
           </li>
           <li
-            class="nav__item"
+            class="nav__item account__container"
             v-if="isLogin"
           >
             <router-link
+              class="account__content nav__link"
               to="/cart"
-              class="nav__link"
               @click="toggleMenuOpen"
             >
-              {{ currentUserName }}歡迎回來
+              <div class="account__name">
+                {{ currentUserName }}
+              </div>
+              <div>歡迎回來</div>
             </router-link>
+            <div
+              class="logout__btn nav__link"
+              @click="singOutAccount();toggleMenuOpen()"
+            >
+              登出
+            </div>
           </li>
           <li
             class="nav__item"
@@ -82,14 +91,6 @@
             >
               會員登入
             </router-link>
-          </li>
-          <li
-            class="nav__item"
-            v-else
-          >
-            <div @click="singOutAccount();toggleMenuOpen()">
-              登出
-            </div>
           </li>
         </ul>
         <div

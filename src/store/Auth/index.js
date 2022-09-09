@@ -10,12 +10,10 @@ import db from '../../firebase/firebaseInit'
 export default {
   namespaced: true,
   state: {
-    // isLogin: false,
-    isLogin: true,
+    isLogin: false,
     currentUserData: {},
     currentUserName: '',
-    // currentUserId: null
-    currentUserId: 'REmluQXguRWSq61ZV3XC227Mpuo2'
+    currentUserId: null
   },
   actions: {
     async registerAccount ({ commit, dispatch }, { name, email, password }) {
@@ -49,7 +47,8 @@ export default {
       commit('SET_CURRENT_USER_NAME', currentUserData)
       router.push('/')
     },
-    async singInAccount ({ commit }, { email, password }) {
+    async singInAccount ({ commit, dispatch }, { email, password }) {
+      commit('CHANGE_ISLOADING', null, { root: true })
       const auth = getAuth()
       try {
         await signInWithEmailAndPassword(auth, email, password)
@@ -80,13 +79,18 @@ export default {
       commit('SET_CURRENT_USER_DATA', currentUserData)
       commit('SET_CURRENT_USER_NAME', currentUserData.displayName)
       commit('SET_CURRENT_USER_ID', currentUserData.uid)
+      dispatch('Cart/getCartList', null, { root: true })
       router.push('/')
+      commit('CHANGE_ISLOADING', null, { root: true })
     },
     async singOutAccount ({ commit }) {
+      commit('CHANGE_ISLOADING', null, { root: true })
       const auth = getAuth()
       await signOut(auth)
       commit('SET_LOGIN')
+      commit('Cart/CLEAR_CART_LIST', null, { root: true })
       router.push('/login')
+      commit('CHANGE_ISLOADING', null, { root: true })
     },
     async createNewAccountData ({ commit }, data) {
       const dataBase = db.collection('account').doc(data.uid)

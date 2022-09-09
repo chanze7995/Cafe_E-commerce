@@ -8,13 +8,22 @@ import Product from './Product'
 
 export default createStore({
   state: {
-    isLoading: false
+    isLoading: true
   },
   actions: {
   },
   mutations: {
+    CHANGE_ISLOADING (state) {
+      // setTimeout(() => {
+      //   state.isLoading = !state.isLoading
+      // }, 1500)
+      state.isLoading = !state.isLoading
+    }
   },
   getters: {
+    isLoading (state) {
+      return state.isLoading
+    }
   },
   modules: {
     Auth,

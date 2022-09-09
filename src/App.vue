@@ -1,5 +1,5 @@
 <template>
-  <Loading v-if="!isProductsLoaded" />
+  <Loading v-if="isLoading" />
   <div v-else>
     <AppHeader :is-scroll="isScroll" />
     <router-view />
@@ -31,11 +31,9 @@ export default {
     const getData = () => {
       return store.dispatch('Product/getData')
     }
-    const getCartList = () => {
-      return store.dispatch('Cart/getCartList')
-    }
-    const isProductsLoaded = computed(() => {
-      return store.getters['Product/isProductsLoaded']
+
+    const isLoading = computed(() => {
+      return store.getters.isLoading
     })
     const isCartPage = computed(() => {
       return route.path === '/cart' || route.path === '/checkout' || route.path === '/login'
@@ -46,14 +44,13 @@ export default {
     }
     onMounted(() => {
       getData()
-      getCartList()
       window.addEventListener('scroll', handleScroll)
     })
     onUnmounted(() => {
       window.removeEventListener('scroll', handleScroll)
     })
     return {
-      isProductsLoaded,
+      isLoading,
       isCartPage,
       isScroll
     }
