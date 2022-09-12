@@ -75,7 +75,7 @@
             </router-link>
             <div
               class="logout__btn nav__link"
-              @click="singOutAccount();toggleMenuOpen()"
+              @click="signOutAccount();toggleMenuOpen()"
             >
               登出
             </div>
@@ -137,11 +137,10 @@ export default {
       return store.getters['Auth/isLogin']
     })
     const currentUserName = computed(() => {
-      console.log(!(store.getters['Auth/currentUserName'] === ''))
       return store.getters['Auth/currentUserName']
     })
-    const singOutAccount = () => {
-      return store.dispatch('Auth/singOutAccount')
+    const signOutAccount = () => {
+      return store.dispatch('Auth/signOutAccount')
     }
     return {
       props,
@@ -149,7 +148,7 @@ export default {
       toggleMenuOpen,
       isLogin,
       currentUserName,
-      singOutAccount
+      signOutAccount
     }
   }
 }

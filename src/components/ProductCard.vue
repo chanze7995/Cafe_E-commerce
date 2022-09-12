@@ -206,7 +206,6 @@ export default {
     }
     // 商品資料
     const currentProductInfo = computed(() => {
-      console.log('?', store.getters['Product/currentProductArray'][0])
       return store.getters['Product/currentProductArray'][0]
     })
     const productCardColor = computed(() => {
@@ -260,11 +259,11 @@ export default {
     const itemQuantityNum = ref(1)
     // 商品總價
     const sumPrice = computed(() => {
-      const itemWeight = new Big(weight.value)
-      const itemQuantity = new Big(itemQuantityNum.value)
       const currentProductPrice = new Big(currentProductInfo.value.price)
       const currentProductDiscount = new Big(currentProductInfo.value.discount)
-      const total = Math.round(itemWeight.times(itemQuantity).times(currentProductPrice).times(currentProductDiscount))
+      const itemWeight = new Big(weight.value)
+      const itemQuantity = new Big(itemQuantityNum.value)
+      const total = (((currentProductPrice.times(currentProductDiscount)).round(0, 3)).times(itemWeight).round(0, 3)).times(itemQuantity)
       return total
     })
     // 檢查用戶輸入
@@ -291,7 +290,13 @@ export default {
           return currentProductInfo.value.name
         }
       }
-      console.log(setCartItemName())
+      const discountPrice = () => {
+        const currentProductPrice = new Big(currentProductInfo.value.price)
+        const currentProductDiscount = new Big(currentProductInfo.value.discount)
+        const itemWeight = new Big(weight.value)
+        const result = parseFloat(((currentProductPrice.times(currentProductDiscount)).round(0, 3)).times(itemWeight).round(0, 3))
+        return result
+      }
       const cartItem = {
         id: route.params.docId,
         cartItemId: `${route.params.docId}${grind.value}${weight.value}`,
@@ -300,14 +305,14 @@ export default {
         name: setCartItemName(),
         price: currentProductInfo.value.price,
         discount: currentProductInfo.value.discount,
+        discountPrice: discountPrice(),
         grind: grind.value,
         weight: weight.value,
         quantity: itemQuantityNum.value,
         product_imgI: currentProductInfo.value.product_imgI
       }
-      console.log(cartItem)
       store.dispatch('Cart/addCartItem', cartItem)
-      router.push({ name: 'success' })
+      router.push({ name: 'Success' })
     }
     setCurrentProductInfo()
     return {

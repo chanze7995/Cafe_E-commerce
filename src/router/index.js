@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store/index'
 const routes = [
   {
     path: '/',
@@ -79,7 +80,15 @@ const routes = [
   {
     path: '/checkout',
     name: 'Checkout',
-    component: () => import(/* webpackChunkName: "Checkout" */ '../views/Checkout.vue')
+    component: () => import(/* webpackChunkName: "Checkout" */ '../views/Checkout.vue'),
+    beforeEnter: (to, from, next) => {
+      const totalPrice = store.getters['Oder/billInfo'].totalPrice
+      if (totalPrice === null || totalPrice === 0) {
+        next({ name: 'Cart' })
+      } else {
+        next()
+      }
+    }
   }
 ]
 
@@ -87,14 +96,17 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior (to, from, savedPosition) {
-    if (!savedPosition) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ top: 0, left: 0, behavior: 'smooth' })
-        }, 100)
-      })
-    } else {
-      return savedPosition
+    const isProductCardPage = to.name === 'ProductCard' || from.name === 'ProductCard'
+    if (!isProductCardPage) {
+      if (!savedPosition) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({ top: 0, left: 0, behavior: 'smooth' })
+          }, 100)
+        })
+      } else {
+        return savedPosition
+      }
     }
     // return { top: 0, behavior: 'smooth' }
   }

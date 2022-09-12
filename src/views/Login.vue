@@ -19,7 +19,7 @@
               <input
                 type="email"
                 placeholder="信箱"
-                v-model="singInData.email"
+                v-model="signInData.email"
               >
             </div>
             <div class="form__input">
@@ -31,12 +31,12 @@
                 type="password"
                 placeholder="密碼"
                 autocomplete="off"
-                v-model="singInData.password"
+                v-model="signInData.password"
               >
             </div>
             <div
               class="submit__btn"
-              @click="singInAccount"
+              @click="signInAccount"
             >
               開始品嚐
             </div>
@@ -178,7 +178,7 @@ export default {
   name: 'Login',
   setup () {
     const store = useStore()
-    const singInData = reactive({
+    const signInData = reactive({
       email: '',
       password: ''
     })
@@ -194,8 +194,8 @@ export default {
       }
       return store.dispatch('Auth/registerAccount', registerData)
     }
-    const singInAccount = () => {
-      return store.dispatch('Auth/singInAccount', singInData)
+    const signInAccount = () => {
+      return store.dispatch('Auth/signInAccount', signInData)
     }
 
     const socialMedia = reactive([{
@@ -219,7 +219,7 @@ export default {
     }
 
     return {
-      singInData,
+      signInData,
       registerData,
       socialMedia,
       signUpBtnMsg,
@@ -227,7 +227,7 @@ export default {
       isFormSwitch,
       switchFormHandler,
       registerAccount,
-      singInAccount
+      signInAccount
     }
   }
 }

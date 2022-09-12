@@ -18,7 +18,7 @@ abbr{
     flex-direction: column;
   }
 }
-.bill-info,.order-review{
+.bill-info,.oder-review{
   padding: .5rem;
 }
 .bill__title{
@@ -44,7 +44,7 @@ abbr{
   display: flex;
   flex-wrap: wrap;
 }
-.order-review__container{
+.oder-review__container{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,13 +52,13 @@ abbr{
   border: 2px solid $black-color;
   border-radius: 1rem;
 }
-.order-review__title{
+.oder-review__title{
   padding-bottom: 1rem;
 }
-.order-review__table{
+.oder-review__table{
   width: 100%;
 }
-.order-review__item{
+.oder-review__item{
   &--front{
     padding: 0.5rem;
     text-align: left;
@@ -68,13 +68,13 @@ abbr{
     text-align: right;
   }
 }
-.order-review__shipping{
+.oder-review__shipping{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0.5rem 0;
 }
-.order-review__total{
+.oder-review__total{
   padding: 1.5rem 0.5rem;
 }
 .payment__img{

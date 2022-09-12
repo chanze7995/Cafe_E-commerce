@@ -17,6 +17,7 @@ export default {
   },
   actions: {
     async registerAccount ({ commit, dispatch }, { name, email, password }) {
+      commit('CHANGE_ISLOADING', null, { root: true })
       const auth = getAuth()
       try {
         await createUserWithEmailAndPassword(auth, email, password)
@@ -44,15 +45,16 @@ export default {
       dispatch('createNewAccountData', currentUserData)
       commit('SET_LOGIN')
       commit('SET_CURRENT_USER_DATA', currentUserData)
-      commit('SET_CURRENT_USER_NAME', currentUserData)
+      commit('SET_CURRENT_USER_NAME', currentUserData.displayName)
+      commit('CHANGE_ISLOADING', null, { root: true })
       router.push('/')
     },
-    async singInAccount ({ commit, dispatch }, { email, password }) {
+    async signInAccount ({ commit, dispatch }, { email, password }) {
       commit('CHANGE_ISLOADING', null, { root: true })
       const auth = getAuth()
       try {
         await signInWithEmailAndPassword(auth, email, password)
-        console.log('Successfully sing in!')
+        console.log('Successfully sign in!')
         console.log(auth.currentUser.displayName, '你回來了')
         console.log(auth.currentUser.uid)
       } catch (error) {
@@ -71,10 +73,10 @@ export default {
             alert('電子信箱或密碼錯誤')
             break
         }
+        commit('CHANGE_ISLOADING', null, { root: true })
       }
+      dispatch('Cart/clearCartList', null, { root: true })
       const currentUserData = auth.currentUser
-      console.log('1', auth)
-      console.log('2', currentUserData)
       commit('SET_LOGIN')
       commit('SET_CURRENT_USER_DATA', currentUserData)
       commit('SET_CURRENT_USER_NAME', currentUserData.displayName)
@@ -83,21 +85,20 @@ export default {
       router.push('/')
       commit('CHANGE_ISLOADING', null, { root: true })
     },
-    async singOutAccount ({ commit }) {
+    async signOutAccount ({ dispatch, commit }) {
       commit('CHANGE_ISLOADING', null, { root: true })
       const auth = getAuth()
       await signOut(auth)
       commit('SET_LOGIN')
-      commit('Cart/CLEAR_CART_LIST', null, { root: true })
       router.push('/login')
+      dispatch('Cart/clearCartList', null, { root: true })
       commit('CHANGE_ISLOADING', null, { root: true })
     },
-    async createNewAccountData ({ commit }, data) {
+    async createNewAccountData (data) {
       const dataBase = db.collection('account').doc(data.uid)
       await dataBase.set({
         userId: data.uid,
         userName: data.displayName,
-        cart: [],
         wishList: []
       })
     }
@@ -127,7 +128,7 @@ export default {
       return state.currentUserName
     },
     currentUserId (state) {
-      return state.currentUserId
+      return state.currentUserId || ''
     }
   }
 }

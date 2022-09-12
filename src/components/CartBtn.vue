@@ -2,7 +2,7 @@
   <div class="cart-Btn">
     <div class="cart-Btn--rotate">
       <h1 class="cartBtn__title">
-        購物車 ({{ cartList.length }})
+        購物車 ({{ cartQuantity }})
       </h1>
       <ul class="cart__item__container">
         <li
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="cart__item__price">
-            {{ item.quantity }} × ${{ item.price }}
+            {{ item.quantity }} × ${{ item.discountPrice }}
           </div>
         </li>
       </ul>
@@ -48,7 +48,7 @@
             icon-class="symbol-icon"
           />
           <div class="cart__num">
-            {{ cartList.length }}
+            {{ cartQuantity }}
           </div>
         </div>
       </div>
@@ -68,8 +68,13 @@ export default {
     const cartPriceSum = computed(() => {
       return store.getters['Cart/cartPriceSum']
     })
+    const cartQuantity = computed(() => {
+      return store.getters['Cart/cartQuantity']
+    })
     return {
-      cartList, cartPriceSum
+      cartList,
+      cartPriceSum,
+      cartQuantity
     }
   }
 }

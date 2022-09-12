@@ -81,7 +81,7 @@
               class="product-list__item__price__discount"
               v-if="item.isDiscount"
             >
-              特價：{{ Math.round(item.price*item.discount) }}元
+              特價：{{ Math.ceil(item.price*item.discount) }}元
             </div>
           </div>
         </div>
@@ -107,6 +107,7 @@ export default {
     const router = useRouter()
 
     const productData = computed(() => {
+      console.log(store.getters['Product/productData'])
       return store.getters['Product/productData']
     })
     const clickedProductGroupData = computed(() => {

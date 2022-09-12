@@ -58,7 +58,6 @@ export default {
       })
       return sortData
     })
-    // console.log(store.getters['Product/coffeeBeanIntroData'])
     const onSwiper = (swiper) => {
       watch(coffeeBeanIntroData, () => {
         nextTick(() => {

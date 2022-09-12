@@ -5,7 +5,7 @@
     flex-direction: column;
   }
 }
-.cart-info__container{
+.cart-info__container--cart-empty{
   width: 80%;
   @include s-devices{
     width: 100%;
@@ -147,14 +147,12 @@
     opacity: 1;
   }
 }
-.cart--empty{
+.cart-empty{
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.cart--empty{
-  padding-top: 2rem;
-  padding-bottom: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
 }
 .product-recommend__container{
   ul{

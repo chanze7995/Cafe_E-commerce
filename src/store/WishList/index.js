@@ -18,9 +18,8 @@ export default {
     //   })
     // },
     async addWishListProduct ({ commit, state, rootGetters }, { productId }) {
-      console.log(productId)
-      console.log(rootGetters['Auth/currentUserId'])
-      const dataBase = db.collection('account').doc(rootGetters['Auth/currentUserId'])
+      const currentUserId = rootGetters['Auth/currentUserId']
+      const dataBase = db.collection('account').doc(currentUserId)
       await dataBase.update({
         wishList: arrayUnion(productId)
       })

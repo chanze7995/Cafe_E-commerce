@@ -59,8 +59,9 @@
               </label>
               <input
                 required
-                type="number"
+                type="tel"
                 id="billing-phone"
+                pattern="[0-9]{10}"
                 v-model="billInfo.phone"
               >
             </div>
@@ -69,7 +70,6 @@
                 市內電話 (選填)
               </label>
               <input
-                required
                 type="number"
                 id="billing-telephone"
                 v-model="billInfo.telephone"
@@ -169,18 +169,18 @@
             >
           </div>
         </div>
-        <div class="order-review">
-          <div class="order-review__container">
-            <h3 class="order-review__title">
+        <div class="oder-review">
+          <div class="oder-review__container">
+            <h3 class="oder-review__title">
               您的訂單
             </h3>
-            <table class="order-review__table">
+            <table class="oder-review__table">
               <thead>
                 <tr>
-                  <th class="order-review__item--front">
+                  <th class="oder-review__item--front">
                     商品
                   </th>
-                  <th class="order-review__item--hind">
+                  <th class="oder-review__item--hind">
                     小計
                   </th>
                 </tr>
@@ -190,7 +190,7 @@
                   v-for="item in cartList"
                   :key="item.cartItemId"
                 >
-                  <td class="order-review__item--front">
+                  <td class="oder-review__item--front">
                     <div>
                       {{ item.name }}&nbsp;
                       <strong class="product-quantity">
@@ -198,10 +198,10 @@
                       </strong>
                     </div>
                   </td>
-                  <td class="order-review__item--hind">
+                  <td class="oder-review__item--hind">
                     <div>
                       <span class="Price-amount">
-                        NT$&nbsp;{{ item.price * item.quantity }}
+                        NT$&nbsp;{{ item.discountPrice * item.quantity }}
                       </span>
                     </div>
                   </td>
@@ -209,19 +209,19 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th class="order-review__item--front">
+                  <th class="oder-review__item--front">
                     <h5>小計</h5>
                   </th>
-                  <td class="order-review__item--hind">
+                  <td class="oder-review__item--hind">
                     <h5>NT$&nbsp;{{ cartPriceSum }}</h5>
                   </td>
                 </tr>
                 <tr>
                   <td
-                    class="order-review__item--front"
+                    class="oder-review__item--front"
                     colspan="2"
                   >
-                    <div class="order-review__shipping">
+                    <div class="oder-review__shipping">
                       <h5>運送方式：</h5>
                       <div v-if="billInfo.shippingMethod ==='HD'">
                         一般宅配
@@ -233,12 +233,12 @@
                   </td>
                 </tr>
                 <tr>
-                  <th class="order-review__item--front order-review__total">
+                  <th class="oder-review__item--front oder-review__total">
                     <h4>
                       總計
                     </h4>
                   </th>
-                  <td class="order-review__item--hind">
+                  <td class="oder-review__item--hind">
                     <h4>
                       NT$&nbsp;{{ billInfo.totalPrice }}
                     </h4>
@@ -306,7 +306,6 @@ export default {
       return store.getters['Cart/cartList']
     })
     const cartPriceSum = computed(() => {
-      console.log(store.getters['Cart/cartPriceSum'])
       return store.getters['Cart/cartPriceSum']
     })
     const billInfo = computed(() => {

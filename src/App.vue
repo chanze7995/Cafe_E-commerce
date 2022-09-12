@@ -31,7 +31,9 @@ export default {
     const getData = () => {
       return store.dispatch('Product/getData')
     }
-
+    const getCartList = () => {
+      return store.dispatch('Cart/getCartList')
+    }
     const isLoading = computed(() => {
       return store.getters.isLoading
     })
@@ -44,6 +46,7 @@ export default {
     }
     onMounted(() => {
       getData()
+      getCartList()
       window.addEventListener('scroll', handleScroll)
     })
     onUnmounted(() => {

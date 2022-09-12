@@ -31,7 +31,7 @@
       </div>
     </nav>
     <div class="cart-data__container container">
-      <div class="cart-info__container">
+      <div :class="[{'cart-info__container--cart-empty':cartList.length === 0}]">
         <div
           v-if="!(cartList.length === 0)"
           class="cart-list__container"
@@ -82,7 +82,7 @@
                   </a>
                 </td>
                 <td class="cart-item__element product-price">
-                  {{ item.price*item.discount }}
+                  {{ item.discountPrice }}
                 </td>
                 <td class="cart-item__element">
                   <div class="product__quantity__input">
@@ -94,7 +94,7 @@
                     <input
                       type="number"
                       v-model="item.quantity"
-                      @change="changeItemQuantityNum"
+                      @change="changeItemQuantityNum(item.quantity,item.cartItemId)"
                     >
                     <SvgIcon
                       icon-name="plus"
@@ -104,7 +104,7 @@
                   </div>
                 </td>
                 <td class="cart-item__element product__subtotal">
-                  NT${{ item.price*item.discount*item.quantity }}
+                  NT${{ item.discountPrice*item.quantity }}
                 </td>
               </tr>
             </tbody>
@@ -142,7 +142,7 @@
                   </a>
                 </td>
                 <td class="cart-item__element product-price cart-item--mobile--line-none">
-                  {{ item.price*item.discount }}
+                  {{ item.discountPrice }}
                 </td>
               </tr>
               <tr>
@@ -167,7 +167,7 @@
                       <input
                         type="number"
                         v-model="item.quantity"
-                        @change="changeItemQuantityNum"
+                        @change="changeItemQuantityNum(item.quantity,item.cartItemId)"
                       >
                       <SvgIcon
                         icon-name="plus"
@@ -178,7 +178,7 @@
                   </div>
                 </td>
                 <td class="cart-item__element product__subtotal">
-                  NT${{ item.price*item.discount*item.quantity }}
+                  NT${{ item.discountPrice*item.quantity }}
                 </td>
               </tr>
             </tbody>
@@ -200,7 +200,7 @@
         </div>
         <div
           v-else
-          class="cart--empty"
+          class="cart-empty"
         >
           <h3>尚未加入商品</h3>
         </div>
@@ -295,7 +295,6 @@ export default {
   setup () {
     const store = useStore()
     const cartList = computed(() => {
-      console.log(store.getters['Cart/cartList'].length === 0)
       return store.getters['Cart/cartList']
     })
     const billInfo = computed(() => {
@@ -310,6 +309,15 @@ export default {
         return cartPriceSum
       }
     })
+    // 檢查用戶輸入
+    const changeItemQuantityNum = (updateQuantity, cartItemId) => {
+      if (isNaN(updateQuantity) || updateQuantity < 1) {
+        updateQuantity = 1
+        store.dispatch('Cart/updateCartItemQuantity', { updateQuantity, cartItemId })
+      } else {
+        store.dispatch('Cart/updateCartItemQuantity', { updateQuantity, cartItemId })
+      }
+    }
     const removeCartItem = (id) => {
       store.dispatch('Cart/removeCartItem', id)
     }
@@ -320,13 +328,14 @@ export default {
       }
     }
     const setCartOder = () => {
-      const orderList = cartList.value
+      const oderList = cartList.value
       const totalPrice = cartPriceSum.value
-      return store.dispatch('Oder/setCartOder', { orderList, totalPrice })
+      return store.dispatch('Oder/setCartOder', { oderList, totalPrice })
     }
     return {
       cartList,
       cartPriceSum,
+      changeItemQuantityNum,
       removeCartItem,
       calQuantity,
       billInfo,
