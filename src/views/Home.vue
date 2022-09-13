@@ -106,53 +106,94 @@
           選擇我們最棒的商品
         </h2>
         <ul class="products__filters">
-          <li class="products__item products__line">
+          <li
+            class="products__item products__line"
+            @click="filterProducts('newCoffeeBeans')"
+          >
             <h3 class="products__title">
               新品<span class="products__title--newline">咖啡豆</span>
             </h3>
-            <span class="products__stock">3個產品</span>
+            <span class="products__stock">{{ newCoffeeBeansArray.length }}個產品</span>
           </li>
-          <li class="products__item products__line">
+          <li
+            class="products__item products__line"
+            @click="filterProducts('bestSellerAccessories')"
+          >
             <h3 class="products__title">
               熱賣<span class="products__title--newline">器具</span>
             </h3>
             <span class="products__stock">5個商品</span>
           </li>
-          <li class="products__item">
+          <li
+            class="products__item"
+            @click="filterProducts('onSaleProducts')"
+          >
             <h3 class="products__title">
               特價中
             </h3>
-            <span class="products__stock">3個商品</span>
+            <span class="products__stock">{{ onSaleProductsArray.length }}個商品</span>
           </li>
         </ul>
-        <div class="product__content grid">
-          <article class="products__card">
-            <div class="products__shape">
-              <img
-                src="@/assets/images/coffeeDescription/blue/smallbluecoffee0.png"
-                alt=""
-                class="products__img"
-              >
+        <swiper
+          :loop="true"
+          navigation
+          :pagination="{ clickable: true }"
+          :modules="modules"
+          :breakpoints="swiperBreakpoints"
+          @swiper="onSwiper"
+        >
+          <swiper-slide
+            v-for="item in filterProductsArray.value"
+            :key="item.id"
+          >
+            <!-- <div class="product__content grid"> -->
+            <div>
+              <article class="products__card">
+                <div class="products__shape">
+                  <img
+                    :src="item.product_imgI"
+                    alt=""
+                    class="products__img"
+                  >
+                </div>
+                <div class="products__content">
+                  <h2
+                    class="products__price--discount"
+                    v-if="item.isDiscount"
+                  >
+                    ${{ Math.ceil(item.price*item.discount) }}元
+                  </h2>
+                  <h2
+                    v-else
+                    class="products__price"
+                  >
+                    ${{ item.price }}
+                  </h2>
+
+                  <h3 class="products__name">
+                    <span class="products__brand">{{ item.brand }}</span><br>
+                    {{ item.name }}
+                  </h3>
+                  <router-link
+                    :to="{
+                      name:'ProductCard',
+                      params:{
+                        docId:item.docId,
+                        group: item.mainGroupName
+                      }}"
+                  >
+                    <button class="button products__button">
+                      <SvgIcon
+                        icon-name="bag"
+                        icon-class="symbol-icon"
+                      />
+                    </button>
+                  </router-link>
+                </div>
+              </article>
             </div>
-            <div class="products__data">
-              <h2 class="products__price">
-                $520
-              </h2>
-              <h3 class="products__brand">
-                麥克咖啡因
-              </h3>
-              <h3 class="products__name">
-                活在夢中
-              </h3>
-              <button class="button products__button">
-                <SvgIcon
-                  icon-name="bag"
-                  icon-class="symbol-icon"
-                />
-              </button>
-            </div>
-          </article>
-        </div>
+          </swiper-slide>
+        </swiper>
       </div>
     </section>
     <section class="subscription section">
@@ -268,8 +309,84 @@
 </template>
 
 <script>
-export default {
+import { computed, watch, nextTick, reactive } from 'vue'
+import { useStore } from 'vuex'
 
+import SwiperCore, { Navigation, Pagination, A11y } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
+
+import 'swiper/swiper.scss'
+import 'swiper/modules/navigation/navigation.scss'
+import 'swiper/modules/pagination/pagination.scss'
+
+SwiperCore.use([Navigation, Pagination, A11y])
+
+export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  setup () {
+    const store = useStore()
+    const onSwiper = (swiper) => {
+      watch(filterProductsArray, () => {
+        nextTick(() => {
+          swiper.update()
+        })
+      })
+    }
+    const swiperBreakpoints = reactive({
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 50
+      },
+      767: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      576: {
+        slidesPerView: 2,
+        // centeredSlides: true,
+        spaceBetween: 30
+      }
+    })
+    const newCoffeeBeansArray = computed(() => {
+      return store.getters['Product/newCoffeeBeansArray']
+    })
+    const bestSellerAccessoriesArray = computed(() => {
+      return store.getters['Product/bestSellerAccessoriesArray']
+    })
+    const onSaleProductsArray = computed(() => {
+      return store.getters['Product/onSaleProductsArray']
+    })
+    const filterProductsArray = reactive([])
+    const filterProducts = (type) => {
+      switch (type) {
+        case 'bestSellerAccessories' : {
+          filterProductsArray.value = bestSellerAccessoriesArray.value
+          break
+        }
+        case 'onSaleProducts' : {
+          filterProductsArray.value = onSaleProductsArray.value
+          break
+        }
+        default: {
+          filterProductsArray.value = newCoffeeBeansArray.value
+        }
+      }
+    }
+    filterProducts()
+    return {
+      onSwiper,
+      swiperBreakpoints,
+      modules: [Navigation, Pagination, A11y],
+      filterProducts,
+      filterProductsArray,
+      newCoffeeBeansArray,
+      bestSellerAccessoriesArray,
+      onSaleProductsArray
+    }
+  }
 }
 </script>
 

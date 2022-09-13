@@ -1,3 +1,4 @@
+import { toRaw } from 'vue'
 import db from '../../firebase/firebaseInit'
 
 export default {
@@ -100,6 +101,32 @@ export default {
     },
     currentProductArray (state) {
       return state.currentProductArray || []
+    },
+    newCoffeeBeansArray (state) {
+      const coffeeBeans = toRaw(state.productData).filter((item) => {
+        return item.mainGroupName === 'coffeeBeans'
+      })
+      const newCoffeeBeans = coffeeBeans.slice(0, 3).sort((a, b) => {
+        return a.id - b.id
+      })
+      return newCoffeeBeans
+    },
+    bestSellerAccessoriesArray (state) {
+      const accessories = toRaw(state.productData).filter((item) => {
+        return item.mainGroupName === 'accessories'
+      })
+      const bestSellerAccessories = accessories.slice(-5).sort((a, b) => {
+        return a.id - b.id
+      })
+      return bestSellerAccessories
+    },
+    onSaleProductsArray (state) {
+      const onSaleProducts = toRaw(state.productData).filter((item) => {
+        return item.discount !== 1
+      }).sort((a, b) => {
+        return a.id - b.id
+      })
+      return onSaleProducts
     }
   }
 }
