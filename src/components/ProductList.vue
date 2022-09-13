@@ -52,6 +52,22 @@
             </li>
             <li class="product-list__item__option__item">
               <router-link
+                v-if="item.mainGroupName === 'coffeeBeans'"
+                :to="{
+                  name:'CoffeeBeanIntro',
+                  params:{
+                    name:item.name
+                  }}"
+                data-tip="了解更多"
+                class="product-list__item__option__link"
+              >
+                <SvgIcon
+                  icon-name="search-alt"
+                  icon-class="symbol-icon"
+                />
+              </router-link>
+              <router-link
+                v-else
                 :to="{
                   name:'ProductCard',
                   params:{
@@ -107,7 +123,6 @@ export default {
     const router = useRouter()
 
     const productData = computed(() => {
-      console.log(store.getters['Product/productData'])
       return store.getters['Product/productData']
     })
     const clickedProductGroupData = computed(() => {

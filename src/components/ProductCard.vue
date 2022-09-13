@@ -299,6 +299,7 @@ export default {
       }
       const cartItem = {
         id: route.params.docId,
+        mainGroupName: route.params.group,
         cartItemId: `${route.params.docId}${grind.value}${weight.value}`,
         productId: currentProductInfo.value.id,
         brand: currentProductInfo.value.brand,

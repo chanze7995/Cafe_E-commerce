@@ -95,6 +95,9 @@
   }
 }
 .introduction__btn__container{
+  a{
+    line-height: 1;
+  }
   @include xs-devices{
     display: flex;
     flex-direction: column;
@@ -272,6 +275,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  a{
+    line-height: 1;
+  }
   &--bounce{
     animation: bounce 3s infinite;
   }

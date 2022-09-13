@@ -68,18 +68,32 @@
                   />
                 </td>
                 <td class="cart-item__element product__thumbnail">
-                  <a href="">
+                  <router-link
+                    :to="{
+                      name:'ProductCard',
+                      params:{
+                        docId: item.id,
+                        group: item.mainGroupName
+                      }}"
+                  >
                     <img
                       :src="item.product_imgI"
                       alt=""
                       class="product__thumbnail__img"
                     >
-                  </a>
+                  </router-link>
                 </td>
                 <td class="cart-item__element product__name">
-                  <a href="">
+                  <router-link
+                    :to="{
+                      name:'ProductCard',
+                      params:{
+                        docId: item.id,
+                        group: item.mainGroupName
+                      }}"
+                  >
                     {{ item.name }}
-                  </a>
+                  </router-link>
                 </td>
                 <td class="cart-item__element product-price">
                   {{ item.discountPrice }}
@@ -128,18 +142,32 @@
             >
               <tr>
                 <td class="cart-item__element product__thumbnail cart-item--mobile--line-none">
-                  <a href="">
+                  <router-link
+                    :to="{
+                      name:'ProductCard',
+                      params:{
+                        docId: item.id,
+                        group: item.mainGroupName
+                      }}"
+                  >
                     <img
                       :src="item.product_imgI"
                       alt=""
                       class="product__thumbnail__img"
                     >
-                  </a>
+                  </router-link>
                 </td>
                 <td class="cart-item__element product__name cart-item--mobile--line-none">
-                  <a href="">
+                  <router-link
+                    :to="{
+                      name:'ProductCard',
+                      params:{
+                        docId: item.id,
+                        group: item.mainGroupName
+                      }}"
+                  >
                     {{ item.name }}
-                  </a>
+                  </router-link>
                 </td>
                 <td class="cart-item__element product-price cart-item--mobile--line-none">
                   {{ item.discountPrice }}

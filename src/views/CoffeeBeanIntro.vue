@@ -35,10 +35,19 @@
           </p>
         </div>
         <div class="introduction__btn__container">
-          <Button
-            :btn-msg="buyBtnMsg"
-            class="introduction__btn"
-          />
+          <router-link
+            :to="{
+              name:'ProductCard',
+              params:{
+                docId:clickedCoffeeBeanInfo.productId,
+                group: clickedCoffeeBeanInfo.mainGroupName
+              }}"
+          >
+            <Button
+              :btn-msg="buyBtnMsg"
+              class="introduction__btn"
+            />
+          </router-link>
           <Button
             :btn-msg="tasteBtnMsg"
             class="introduction__btn"
@@ -147,9 +156,18 @@
           icon-name="chevron-down"
           icon-class="symbol-icon"
         />
-        <h1 class="purchase__title ">
-          前往購買
-        </h1>
+        <router-link
+          :to="{
+            name:'ProductCard',
+            params:{
+              docId:clickedCoffeeBeanInfo.productId,
+              group: clickedCoffeeBeanInfo.mainGroupName
+            }}"
+        >
+          <h1 class="purchase__title ">
+            前往購買
+          </h1>
+        </router-link>
       </div>
     </section>
   </div>
