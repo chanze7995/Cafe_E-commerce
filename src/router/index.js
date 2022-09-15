@@ -96,7 +96,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior (to, from, savedPosition) {
-    const isProductCardPage = ((to.name === 'ProductCard') && !(from.name === 'CoffeeBeanIntro')) || from.name === 'ProductCard'
+    const isProductCardPage = ((to.name === 'ProductCard') && !(from.name === 'CoffeeBeanIntro')) || (!(to.name === 'Success') && (from.name === 'ProductCard'))
     if (!isProductCardPage) {
       if (!savedPosition) {
         return new Promise((resolve, reject) => {

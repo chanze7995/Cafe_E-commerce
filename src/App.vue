@@ -38,7 +38,7 @@ export default {
       return store.getters.isLoading
     })
     const isCartPage = computed(() => {
-      return route.path === '/cart' || route.path === '/checkout' || route.path === '/login'
+      return route.path === '/cart' || route.path === '/checkout' || route.path === '/login' || route.path === '/success'
     })
     const isScroll = ref(false)
     const handleScroll = () => {
