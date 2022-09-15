@@ -1,39 +1,39 @@
-.swiper {
+.swiper.explore-swiper {
   padding: 11rem 0;
   background: linear-gradient(180deg, $gray-color-dark -4%, $gray-color 100%);
   margin-bottom: 2rem;
 }
-.swiper-slide{
+.swiper-slide.explore-slide{
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.swiper-slide img{
-  width: 200px;
-  filter: drop-shadow(24px 25px 15px);
-  cursor: pointer;
-  @include m-devices{
-    width: 150px;
+  & img{
+    width: 200px;
+    filter: drop-shadow(24px 25px 15px);
+    cursor: pointer;
+    @include m-devices{
+      width: 150px;
+    }
+    @include s-devices{
+      width: 120px;
+    }
+    @include xs-devices{
+      width: 90px;
+    }
+    @include xxs-devices{
+      width: 80px;
+    }
   }
-  @include s-devices{
-    width: 120px;
+  &.swiper-slide-active{
+    transform: scale(1.3);
+    transition: .6s
   }
-  @include xs-devices{
-    width: 90px;
+  &.swiper-slide-next a{
+    pointer-events: none;
+    cursor: default;
   }
-  @include xxs-devices{
-    width: 80px;
+  &.swiper-slide-prev a{
+    pointer-events: none;
+    cursor: default;
   }
-}
-.swiper-slide-active{
-  transform: scale(1.3);
-  transition: .6s
-}
-.swiper-slide-next a{
-  pointer-events: none;
-  cursor: default;
-}
-.swiper-slide-prev a{
-  pointer-events: none;
-  cursor: default;
 }

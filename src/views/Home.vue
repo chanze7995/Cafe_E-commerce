@@ -141,12 +141,13 @@
           :modules="modules"
           :breakpoints="swiperBreakpoints"
           @swiper="onSwiper"
+          class="filterProducts-swiper"
         >
           <swiper-slide
             v-for="item in filterProductsArray.value"
             :key="item.id"
+            class="filterProducts-slide"
           >
-            <!-- <div class="product__content grid"> -->
             <div>
               <article class="products__card">
                 <div class="products__shape">

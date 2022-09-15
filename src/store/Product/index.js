@@ -127,6 +127,21 @@ export default {
         return a.id - b.id
       })
       return onSaleProducts
+    },
+    recommendProductsArray (state) {
+      let products = toRaw(state.productData).slice(0)
+      // console.log('!', products)
+      const randomProducts = []
+      for (let i = 0; i < 6; i++) {
+        const index = Math.floor(Math.random() * products.length)
+        randomProducts.push(products[index])
+        products.splice(index, 1)
+      }
+      products = toRaw(state.productData).slice(0)
+      // console.log('!', products.length)
+      // console.log('!!', randomProducts)
+
+      return randomProducts
     }
   }
 }

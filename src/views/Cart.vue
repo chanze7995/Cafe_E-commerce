@@ -234,32 +234,73 @@
         </div>
         <div class="product-recommend__container">
           <h4>你可能會有興趣...</h4>
-          <ul>
-            <li>
-              <div class="product-recommend__img">
-                <SvgIcon
-                  icon-name="heart"
-                  icon-class="symbol-icon"
-                />
-                <a href="">
-                  <img
-                    :src="require('@/assets/images/coffeeDescription/pink/smallpinkcoffee0.png')"
-                    alt=""
-                    class="product-img"
-                  >
-                </a>
+          <swiper
+            :loop="true"
+            navigation
+            :pagination="{ clickable: true }"
+            :modules="modules"
+            :breakpoints="swiperBreakpoints"
+            @swiper="onCartSwiper"
+            class="cart-swiper"
+          >
+            <swiper-slide
+              v-for="item in recommendProductsArray"
+              :key="item.id"
+              class="cart-slide"
+            >
+              <div>
+                <article class="product-recommend__card">
+                  <div class="product-recommend__shape">
+                    <img
+                      :src="item.product_imgI"
+                      alt=""
+                      class="product-recommend__img"
+                    >
+                  </div>
+                  <div class="product-recommend__content">
+                    <h2
+                      class="product-recommend__price--discount"
+                      v-if="item.isDiscount"
+                    >
+                      ${{ Math.ceil(item.price*item.discount) }}元
+                    </h2>
+                    <h2
+                      v-else
+                      class="product-recommend__price"
+                    >
+                      ${{ item.price }}
+                    </h2>
+
+                    <h3 class="product-recommend__name">
+                      <span class="product-recommend__brand">{{ item.brand }}</span><br>
+                      {{ item.name }}
+                    </h3>
+                    <a>
+                      <button class="button product-recommend__button">
+                        <SvgIcon
+                          icon-name="heart"
+                          icon-class="symbol-icon"
+                        />
+                      </button>
+                    </a>
+                    <div class="product-recommend__link">
+                      <router-link
+                        :to="{
+                          name:'ProductCard',
+                          params:{
+                            docId:item.docId,
+                            group: item.mainGroupName
+                          }}"
+                        class="button"
+                      >
+                        前往購買
+                      </router-link>
+                    </div>
+                  </div>
+                </article>
               </div>
-              <h4 class="product-recommend__price">
-                NT$520
-              </h4>
-              <div class="product-recommend__link">
-                <a
-                  class="button"
-                  href=""
-                >前往購買</a>
-              </div>
-            </li>
-          </ul>
+            </swiper-slide>
+          </swiper>
         </div>
       </div>
       <div class="total-price__container">
@@ -317,11 +358,51 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, reactive, watch, nextTick } from 'vue'
 import { useStore } from 'vuex'
+
+import SwiperCore, { Navigation, Pagination, A11y } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
+
+import 'swiper/swiper.scss'
+import 'swiper/modules/navigation/navigation.scss'
+import 'swiper/modules/pagination/pagination.scss'
+
+SwiperCore.use([Navigation, Pagination, A11y])
+
 export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   setup () {
     const store = useStore()
+
+    const swiperBreakpoints = reactive({
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 50
+      },
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      576: {
+        slidesPerView: 2,
+        spaceBetween: 30
+      }
+    })
+    const recommendProductsArray = computed(() => {
+      console.log('1', store.getters['Product/recommendProductsArray'])
+      return store.getters['Product/recommendProductsArray']
+    })
+    const onCartSwiper = (swiper) => {
+      watch(recommendProductsArray, () => {
+        nextTick(() => {
+          swiper.update()
+        })
+      })
+    }
     const cartList = computed(() => {
       return store.getters['Cart/cartList']
     })
@@ -361,6 +442,11 @@ export default {
       return store.dispatch('Oder/setCartOder', { oderList, totalPrice })
     }
     return {
+      onCartSwiper,
+      swiperBreakpoints,
+      modules: [Navigation, Pagination, A11y],
+      // recommendProductsArray,
+      recommendProductsArray,
       cartList,
       cartPriceSum,
       changeItemQuantityNum,

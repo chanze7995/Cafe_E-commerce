@@ -3,16 +3,16 @@
     :loop="true"
     :slides-per-view="3"
     :centered-slides="true"
-
     navigation
     :pagination="{ clickable: true }"
     :modules="modules"
-
+    class="explore-swiper"
     @swiper="onSwiper"
   >
     <swiper-slide
       v-for="item in coffeeBeanIntroData"
       :key="item.docId"
+      class="explore-slide"
     >
       <router-link
         :to="{
