@@ -54,6 +54,7 @@
 ### 商品列表 / 資訊
 
 以 Firestore Database 串接資料庫
+
 點擊產品可進入相關的產品細節，不同的商品類型顯示該相應的內容與背景顏色
 
 ![ShopList](/static/markdown-img/ShopList.png)
@@ -64,6 +65,7 @@
 ### 購物車
 
 與購物車圖標互動可隨頁查看購物車內的商品
+
 進入訂單詳情可以新增、刪除、修改商品的數量
 
 ![Cart-Small](/static/markdown-img/Cart-Small.png)
