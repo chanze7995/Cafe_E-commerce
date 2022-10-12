@@ -1,12 +1,12 @@
 # 【 Caffeine with Mike 麥克咖啡因 】電商網站
 ## [DEMO](https://chanze7995.github.io/Cafe_E-commerce/)
 
-##簡介
+## 簡介
 
 ---
 以 Vue3.js 練習開發 SPA 電商網頁，搭配使用 Firebase。
 
-##網頁架構
+## 網頁架構
 
 ---
 
@@ -23,7 +23,7 @@
 - 會員註冊 / 登入
     - 帳號密碼驗證
 
-##使用技術
+## 使用技術
 
 ---
 
@@ -33,13 +33,13 @@
 - **RWD 製作響應式網頁**
 - **Firestore Database, Firebase Authentication**
 
-##使用套件
+## 使用套件
 
 ---
 
 - **Swiper**
 
-##作品介紹
+## 作品介紹
 
 ---
 
