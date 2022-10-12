@@ -1,5 +1,5 @@
 # 【 Caffeine with Mike 麥克咖啡因 】電商網站
-## [DEMO](https://chanze7995.github.io/Cafe_E-commerce/)
+[DEMO](https://chanze7995.github.io/Cafe_E-commerce/)
 
 ## 簡介
 
