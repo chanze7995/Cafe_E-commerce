@@ -40,7 +40,7 @@
 ![HomePage](/static/markdown-img/HomePage.png)
 ### 會員登入 / 註冊
 
-利用 Firebase Authentication 做登入與驗證
+利用 Firebase Authentication 做登入、註冊與驗證
 
 ![SignIn](/static/markdown-img/SignIn.png)
 ![SignUp](/static/markdown-img/SignUp.png)
