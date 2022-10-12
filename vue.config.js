@@ -1,5 +1,5 @@
 const path = require('path')
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
 
@@ -33,5 +33,8 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]' // 設定svg中symbol中id的值
       })
-  }
+  },
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/Cafe_E-commerce/'
+    : '/'
 }
